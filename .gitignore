@@ -1,0 +1,23 @@
+# data — raw files are large and reproducible; never commit them
+data/raw/
+data/processed/
+data/external/
+
+# keep external/ in git if files are small enough (<1MB), otherwise add here
+# data/external/
+
+# credentials
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+*.egg-info/
+dist/
+.venv/
+venv/
+
+# OS
+.DS_Store
+Thumbs.db
