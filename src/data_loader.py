@@ -14,8 +14,6 @@ Usage:
   dl.fetch_all(start="2019-01-01", end="2024-12-31")
 """
 
-from entsoe.entsoe import EntsoePandasClient
-
 
 import os
 import time
@@ -136,7 +134,7 @@ class DataLoader:
         log.info("Fetching ENTSO-E generation  %s → %s …", start.date(), end.date())
 
         # ENTSO-E API has a 1-year limit per request — chunk by year
-        chunks = []
+        chunks: list[pd.DataFrame] = []
         for year_start, year_end in self._year_chunks(start, end):
             log.info("  chunk %s …", year_start.year)
             df_chunk = self._entsoe_client.query_generation(
@@ -166,7 +164,7 @@ class DataLoader:
 
         log.info("Fetching ENTSO-E load  %s → %s …", start.date(), end.date())
 
-        chunks = []
+        chunks: list[pd.DataFrame] = []
         for year_start, year_end in self._year_chunks(start, end):
             log.info("  chunk %s …", year_start.year)
             df_chunk = self._entsoe_client.query_load(
@@ -196,7 +194,7 @@ class DataLoader:
 
         log.info("Fetching ENTSO-E day-ahead prices  %s → %s …", start.date(), end.date())
 
-        chunks = []
+        chunks: list[pd.Series] = []
         for year_start, year_end in self._year_chunks(start, end):
             log.info("  chunk %s …", year_start.year)
             s_chunk = self._entsoe_client.query_day_ahead_prices(
