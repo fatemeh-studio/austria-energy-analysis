@@ -248,7 +248,10 @@ class DataLoader:
                 "precipitation",
                 "cloudcover",
             ]),
-            "timezone": "Europe/Vienna",
+            #"timezone": "Europe/Vienna",
+            #"timezone": "UTC",          # was: "Europe/Vienna"
+            #"timezone": "GMT",          # was: "Europe/Vienna"
+            # TODO: change time zone to UTC
         }
 
         resp = requests.get(url, params=params, timeout=60)
