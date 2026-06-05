@@ -1,23 +1,35 @@
-# data — raw files are large and reproducible; never commit them
-data/raw/
-data/processed/
-data/external/
-
-# keep external/ in git if files are small enough (<1MB), otherwise add here
-# data/external/
-
-# credentials
+# ── Secrets ─────────────────────────────────────────────
+# Never commit your ENTSO-E key. Share the *shape* via .env.example instead.
 .env
 
-# Python
+# ── Data — re-fetchable by running notebooks/01_data_collection.ipynb ──
+# Code is committed; data is regenerated. Keeps the repo lean and the
+# reproducibility story clean ("clone → run 01 → data appears").
+data/raw/*
+data/processed/*
+data/external/*
+# ...but keep the folder structure so the repo clones with the right layout:
+!data/raw/.gitkeep
+!data/processed/.gitkeep
+!data/external/.gitkeep
+
+# ── Python ──────────────────────────────────────────────
 __pycache__/
 *.py[cod]
-.ipynb_checkpoints/
 *.egg-info/
-dist/
+.pytest_cache/
+.ipynb_checkpoints/
+
+# ── Environments ────────────────────────────────────────
+# Conda env (austria-energy) lives outside the repo, so nothing to ignore
+# there. These cover the case where you (or a cloner) use a local venv instead.
 .venv/
 venv/
+env/
 
-# OS
+# ── Editor / OS cruft ───────────────────────────────────
+.vscode/
+.idea/
+.cursor/
 .DS_Store
 Thumbs.db
