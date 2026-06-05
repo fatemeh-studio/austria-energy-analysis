@@ -25,7 +25,7 @@ austria-energy-analysis/
 ├── data/
 │   ├── raw/          # fetched CSVs — gitignored
 │   ├── processed/    # cleaned, merged — gitignored
-│   └── external/     # OWID CSV (committed if <1MB)
+│   └── external/     # OWID CSV — gitignored
 ├── notebooks/
 │   ├── 01_data_collection.ipynb
 │   ├── 02_cleaning_eda.ipynb
