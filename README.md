@@ -58,3 +58,19 @@ src/
 ## Tech stack
 
 Python · pandas · DuckDB · statsmodels · matplotlib · entsoe-py
+
+## License
+
+Code in this repository is licensed under the [MIT License](LICENSE).
+
+The datasets are **not** redistributed here (see `.gitignore`); notebook
+`01_data_collection.ipynb` fetches them at runtime under each source's own terms:
+
+| Source | License / terms | Attribution |
+|---|---|---|
+| ENTSO-E Transparency Platform | Open data licence (TSO data, Reg. EU 543/2013); platform T&Cs apply | © ENTSO-E Transparency Platform |
+| Open-Meteo / ERA5 | CC BY 4.0 (free API = non-commercial use) | Open-Meteo; Copernicus Climate Change Service (C3S) ERA5 |
+| Our World in Data — Energy | CC BY 4.0 (OWID); provider terms apply | OWID; Ember; Energy Institute – Statistical Review of World Energy |
+| Eurostat (env_air_gge) | Reuse permitted, Commission Decision 2011/833/EU | © European Union / Eurostat |
+
+This is a non-commercial portfolio project.
