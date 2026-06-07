@@ -59,6 +59,33 @@ austria-energy-analysis/
 
 ---
 
+## Data notes & gotchas (Phase 3 findings → README at Phase 6)
+
+1. **Timestamps — store UTC, convert at the edge.** All tables store `TIMESTAMPTZ`
+   in UTC. Sources parse cleanly (ENTSO-E carries explicit offsets; Open-Meteo
+   requested with `timezone="UTC"`). Convert to Vienna local *only* for
+   clock-dependent analysis — every hour-of-day / diurnal query uses
+   `ts_utc AT TIME ZONE 'Europe/Vienna'`. Diurnal profiles on raw UTC are shifted
+   1–2 h and smear the DST fall-back hour.
+
+2. **Completeness — verified, no imputation.** Every hourly bucket present, zero
+   nulls, zero gaps (checked in UTC). Distinction worth stating: in a time series
+   a missing hour is an *absent row*, not a null — so completeness was checked via
+   row-count-vs-expected + a `LAG` gap scan, not only null counts.
+
+3. **`prices` carries one extra hour (52,609 vs 52,608).** An orphan
+   `2025-01-01 00:00` pulled in by the day-ahead fetch window (`end + 1 day`).
+   Harmless to the price table, but it becomes NaN when joining `prices` to
+   `demand` / `weather` (Phase 4) — align or drop before joining.
+
+4. **Day-ahead price floor (−500 €/MWh).**
+   > Day-ahead prices are bounded below at −500 €/MWh (SDAC harmonised minimum
+   > clearing price, CACM Reg. (EU) 2015/1222, in force 2019–2024). The dataset
+   > reaches this floor exactly once — 2 Jul 2023, 14:00, a sunny summer Sunday —
+   > so the limit rarely binds but explains the observed `min`. Negative prices
+   > more broadly (650 h, ~1.2 %) cluster in high-solar midday hours, consistent
+   > with renewable oversupply.
+
 ## Tech Stack & Key Decisions
 
 - **Python 3.11**, conda environment (`austria-energy`)
