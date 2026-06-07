@@ -70,7 +70,7 @@ class DataLoader:
         self._api_key: str | None = entsoe_api_key or os.getenv("ENTSOE_API_KEY")
 
         if self._api_key and ENTSOE_AVAILABLE:
-            self._entsoe_client: EntsoePandasClient | None = EntsoePandasClient(api_key=self._api_key)
+            self._entsoe_client: EntsoePandasClient | None = EntsoePandasClient(api_key=self._api_key)  # pyright: ignore[reportPossiblyUnboundVariable]
             log.info("ENTSO-E client initialised.")
         else:
             self._entsoe_client = None
@@ -248,10 +248,7 @@ class DataLoader:
                 "precipitation",
                 "cloudcover",
             ]),
-            #"timezone": "Europe/Vienna",
-            #"timezone": "UTC",          # was: "Europe/Vienna"
-            #"timezone": "GMT",          # was: "Europe/Vienna"
-            # TODO: change time zone to UTC
+            "timezone": "UTC",
         }
 
         resp = requests.get(url, params=params, timeout=60)
