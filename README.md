@@ -20,6 +20,12 @@ Built as Portfolio Project 3 — demonstrating data collection, SQL-based data e
 - **Open-Meteo / ERA5** — hourly weather reanalysis for Vienna (no key needed)
 - **Our World in Data** — annual energy & CO₂ time series (public CSV)
 
+## Notes on the data
+
+ENTSO-E feeds for Austria (operated by APG) are exceptionally complete across 2019–2024: every hourly bucket contains exactly four 15-minute observations, with zero null values in generation, load, or price data. No imputation was applied. This is unusual for European TSO data, where multi-percent gap rates are common.
+
+Five fuel categories in the generation feed (Waste, Other, Geothermal, Fossil Oil, Other renewable) report constant or zero values throughout the period — likely installed-capacity placeholders rather than measured output. They are excluded from variability-driven analyses (RQ3, RQ4) but retained in the dataset for completeness.
+
 ## Setup
 
 ```bash
