@@ -46,3 +46,9 @@ def set_house_style() -> None:
         "axes.axisbelow":    True,    # gridlines behind the data
         "legend.frameon":    False,
     })
+
+def line_profile(ax, x, y, *, color, label=None):
+    """Plot one line-with-markers series on `ax` in the project profile style.
+    Call once per series; set title / labels / legend on the axis yourself."""
+    ax.plot(x, y, marker="o", ms=4, color=color, label=label)
+    return ax

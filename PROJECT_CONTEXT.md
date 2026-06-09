@@ -73,10 +73,11 @@ austria-energy-analysis/
    a missing hour is an *absent row*, not a null — so completeness was checked via
    row-count-vs-expected + a `LAG` gap scan, not only null counts.
 
-3. **`prices` carries one extra hour (52,609 vs 52,608).** An orphan
-   `2025-01-01 00:00` pulled in by the day-ahead fetch window (`end + 1 day`).
-   Harmless to the price table, but it becomes NaN when joining `prices` to
-   `demand` / `weather` (Phase 4) — align or drop before joining.
+3. **`prices` carries exactly one extra row.** A trailing orphan hour at
+   `2025-01-01 00:00 UTC` (`01:00` Vienna), one hour past the end of `demand` /
+   `weather`. All three tables share the same start. An inner join on `ts_utc`
+   drops it automatically; a left join *from* `prices` would NaN it. Restrict to
+   the shared window before Phase 4 joins.
 
 4. **Day-ahead price floor (−500 €/MWh).**
    > Day-ahead prices are bounded below at −500 €/MWh (SDAC harmonised minimum
@@ -85,6 +86,44 @@ austria-energy-analysis/
    > so the limit rarely binds but explains the observed `min`. Negative prices
    > more broadly (650 h, ~1.2 %) cluster in high-solar midday hours, consistent
    > with renewable oversupply.
+
+5. **`EXTRACT` / `date_part` on a `TIMESTAMPTZ` uses the session timezone, not UTC.**
+   So `EXTRACT(year FROM ts_utc)` returns the local-calendar year, and boundary
+   hours can fall into an adjacent year — this is why the per-year price plot
+   showed a spurious "2025" bucket (two late-Dec/early-Jan boundary hours leaking
+   across the Vienna year line). Always extract in explicit local time, e.g.
+   `EXTRACT(hour FROM ts_utc AT TIME ZONE 'Europe/Vienna')`, for deterministic
+   results that don't depend on session settings
+
+## Phase 3 — EDA key findings (complete → README at Phase 6)
+
+EDA covered distributions, missingness, and seasonal patterns across the hourly
+data (demand, prices, weather, generation). Each finding is a hook for its RQ.
+
+- **Prices → RQ4.** 2022 regime shift (median ~€224 vs ~€35 in 2019–20);
+  right-skewed (mean ≫ median). Negative prices ~1.2% of hours, rising to 3.4% in
+  2024; cluster midday 11–16h (solar oversupply) with a smaller overnight 3–5h
+  mode (wind + must-run baseload). −500 €/MWh floor touched exactly once.
+- **Demand → RQ2.** Clean, near-symmetric. Double-humped day (morning + evening
+  peaks, overnight trough), weekday > weekend, winter-peak/summer-trough.
+  Heating-driven — no summer cooling spike (little AC in AT).
+- **Temperature → RQ2.** Warm-summer / cold-winter arc (~2 °C Jan, ~22 °C Jul);
+  near-perfect inverse mirror of demand-by-month → the RQ2 relationship.
+- **Solar → RQ3.** Duck-curve driver. Summer midday avg ~1025 MW vs winter ~320 MW
+  (~3×), summer bump wider (day length). The duck curve is effectively a summer
+  phenomenon — winter solar barely dents net load.
+- **Generation mix → RQ1.** Hydro run-of-river is the baseload backbone
+  (never < ~1337 MW); fossil gas is the flexible price-setter (→ RQ4); fossil coal
+  ~85% zero = phased out (~2020); biomass near-constant (must-run). The 5
+  nominal/zero fuels are excluded from variability work.
+
+**Artifacts:** `src/viz.py` now holds `PALETTE`, `set_house_style()`,
+`line_profile()`. Notebook `02_cleaning_eda.ipynb` cells J–M produce the plots above.
+
+**Open items / next:**
+- Eurostat GHG data **not yet loaded** into DuckDB (only `owid_energy_at` is the
+  annual table) → **RQ5 is blocked** until it's ingested + examined. ← next chat.
+- `owid_energy_at` (annual mix) not yet EDA'd → quick coverage check feeds RQ1.
 
 ## Tech Stack & Key Decisions
 
