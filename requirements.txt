@@ -2,6 +2,7 @@ pandas>=2.0
 pandas-stubs>=2.0
 requests>=2.31
 entsoe-py>=0.6
+eurostat>=1.0
 python-dotenv>=1.0
 matplotlib>=3.7
 duckdb>=0.10

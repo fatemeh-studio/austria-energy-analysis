@@ -30,6 +30,13 @@ try:
 except ImportError:
     ENTSOE_AVAILABLE = False  # pyright: ignore[reportConstantRedefinition]
 
+# ── optional: eurostat (only needed for the GHG emissions fetch) ───────────────
+try:
+    import eurostat
+    EUROSTAT_AVAILABLE = True
+except ImportError:
+    EUROSTAT_AVAILABLE = False  # pyright: ignore[reportConstantRedefinition]
+
 # ── logging ────────────────────────────────────────────────────────────────────
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
@@ -102,7 +109,10 @@ class DataLoader:
         # 2. Open-Meteo weather — no credentials needed
         results["weather"] = self.fetch_weather(start=start, end=end)
 
-        # 3. ENTSO-E — skip gracefully if key is missing
+        # 3. Eurostat GHG inventory — no credentials, annual (ignores start/end)
+        results["ghg"] = self.fetch_ghg(geo=self.country)
+
+        # 4. ENTSO-E — skip gracefully if key is missing
         if self._entsoe_client:
             ts_start = pd.Timestamp(start, tz="UTC")
             ts_end   = pd.Timestamp(end,   tz="UTC") + pd.Timedelta(days=1)
@@ -294,6 +304,50 @@ class DataLoader:
         out = RAW / f"owid_energy_{country_iso}.csv"
         df_at.to_csv(out)
         log.info("  Austria slice (%d rows) → %s", len(df_at), out)
+        return out
+
+    # ── Eurostat (GHG inventory) ─────────────────────────────────────────────────
+
+    def fetch_ghg(self, geo: str = "AT") -> Path:
+        """
+        Annual greenhouse-gas emissions inventory from Eurostat (dataset
+        ``env_air_gge``) — the official UNFCCC inventory, re-published by Eurostat.
+
+        Pulls the GHG aggregate (all gases, expressed in CO2-equivalent) for every
+        source sector and every year (1990 -> latest, ~t-2), for one country.
+        We deliberately fetch *all* sectors and *all* units and pick what we need
+        at the cleaning stage — easier to inspect first than to guess the codes.
+
+        Saved to: data/raw/eurostat_ghg_{geo}.csv
+
+        Parameters
+        ----------
+        geo : str
+            Eurostat country code. Default: "AT" (Austria).
+        """
+        if not EUROSTAT_AVAILABLE:
+            raise ImportError(
+                "The 'eurostat' package is required for fetch_ghg(). "
+                "Install it with: pip install eurostat"
+            )
+
+        log.info("Fetching Eurostat GHG inventory (env_air_gge) for %s …", geo)
+
+        # airpol="GHG" -> the all-gases aggregate, already in CO2-equivalent.
+        # unit and src_crf left unfiltered so we can see every available unit
+        # (absolute Mt, index, per-capita) and every sector before choosing.
+        df = eurostat.get_data_df(
+            "env_air_gge",
+            filter_pars={"geo": geo, "airpol": "GHG"},
+        )
+        if df is None or df.empty:
+            raise RuntimeError(
+                f"Eurostat returned no data for env_air_gge / geo={geo}."
+            )
+
+        out = RAW / f"eurostat_ghg_{geo}.csv"
+        df.to_csv(out, index=False)
+        log.info("  Saved %d rows x %d cols → %s", df.shape[0], df.shape[1], out)
         return out
 
     # ── helpers ────────────────────────────────────────────────────────────────

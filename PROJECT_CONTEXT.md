@@ -1,7 +1,9 @@
 # Project Context — Austria Energy & Climate Analysis
 
 ## Goal
-End-to-end data analysis of Austrian electricity generation, demand, pricing, and climate trends (2019–2024).  
+End-to-end data analysis of Austrian electricity generation, demand, pricing, and
+climate trends. Hourly electricity data spans 2019–2024; the annual emissions
+inventory spans 1990–2024.
 Portfolio Project 3 for a data science job search in Austria (Physics MSc → DS transition).
 
 ---
@@ -14,7 +16,14 @@ Portfolio Project 3 for a data science job search in Austria (Physics MSc → DS
 | RQ2 | Does temperature explain electricity demand, and does that vary seasonally? | OLS regression, STL decomposition |
 | RQ3 | What is the solar "duck curve" signature, and how has it grown? | Diurnal profiles, year-over-year comparison |
 | RQ4 | Do higher renewables shares push down day-ahead prices? (merit-order effect) | Correlation, partial regression |
-| RQ5 | Is Austria on track for 100% renewable electricity by 2030? | Log-linear trend, extrapolation |
+| RQ5 | Is Austria on track for 100% renewable **electricity** by 2030? | Log-linear trend, extrapolation |
+| RQ6 | Is Austria's total **GHG emissions** trajectory on track for its 2030 target? | Trend analysis, target-gap vs ESR −48%/2005 |
+
+**RQ5 vs RQ6 (resolved):** two different questions, kept separate. RQ5 = renewable
+share of *electricity* vs the national 100%-by-2030 goal (Renewable Expansion Act /
+EAG), using ENTSO-E generation + OWID. RQ6 = *economy-wide* GHG emissions vs the binding
+EU Effort Sharing target, using Eurostat + EEA. GHG was added as a **new RQ6** rather
+than replacing RQ5.
 
 ---
 
@@ -24,7 +33,7 @@ Portfolio Project 3 for a data science job search in Austria (Physics MSc → DS
 austria-energy-analysis/
 ├── data/
 │   ├── raw/          # fetched CSVs — gitignored
-│   ├── processed/    # cleaned, merged — gitignored
+│   ├── processed/    # DuckDB database — gitignored
 │   └── external/     # OWID CSV — gitignored
 ├── notebooks/
 │   ├── 01_data_collection.ipynb
@@ -33,10 +42,11 @@ austria-energy-analysis/
 │   ├── 04_rq2_temperature_demand.ipynb
 │   ├── 05_rq3_duck_curve.ipynb
 │   ├── 06_rq4_merit_order.ipynb
-│   └── 07_rq5_ghg_target.ipynb
+│   ├── 07_rq5_renewable_electricity.ipynb
+│   └── 08_rq6_ghg_target.ipynb
 ├── src/
 │   ├── __init__.py
-│   ├── data_loader.py   # DataLoader class (Phase 1)
+│   ├── data_loader.py   # DataLoader class (Phase 1) — one fetch method per source
 │   ├── clean.py         # cleaning transforms (Phase 2)
 │   └── viz.py           # shared plot helpers (Phase 3)
 ├── .env                 # ENTSOE_API_KEY — gitignored
@@ -52,10 +62,11 @@ austria-energy-analysis/
 
 | Source | Data | Granularity | Credentials | Status |
 |---|---|---|---|---|
-| ENTSO-E Transparency Platform | Generation by fuel type, total load, day-ahead prices (AT) | Hourly | API key (free, email request) | ✅ Ready |
-| Open-Meteo / ERA5 | Temperature, solar radiation, wind speed, precipitation (Vienna) | Hourly | None | ✅ Ready |
-| Our World in Data | Energy mix, renewables share, CO₂ intensity | Annual | None (public CSV) | ✅ Ready |
-| Eurostat (env_air_gge) | GHG emissions by sector | Annual | None (REST API) | ⏳ Not yet fetched |
+| ENTSO-E Transparency Platform | Generation by fuel type, total load, day-ahead prices (AT) | Hourly | API key (free) | ✅ Loaded |
+| Open-Meteo / ERA5 | Temperature, solar radiation, wind speed, precipitation (Vienna) | Hourly | None | ✅ Loaded |
+| Our World in Data | Energy mix, renewables share, CO₂ intensity | Annual | None (public CSV) | ✅ Loaded (EDA pending) |
+| Eurostat (`env_air_gge`) | GHG emissions by CRF sector | Annual | None (`eurostat` pkg) | ✅ Loaded → `ghg_emissions` |
+| EEA — Effort Sharing (ESR) | Non-ETS emissions vs the 2030 target path | Annual | None | ⏳ Not yet fetched (RQ6) |
 
 ---
 
@@ -93,12 +104,20 @@ austria-energy-analysis/
    showed a spurious "2025" bucket (two late-Dec/early-Jan boundary hours leaking
    across the Vienna year line). Always extract in explicit local time, e.g.
    `EXTRACT(hour FROM ts_utc AT TIME ZONE 'Europe/Vienna')`, for deterministic
-   results that don't depend on session settings
+   results that don't depend on session settings.
+
+6. **`ghg_emissions` is a hierarchy + totals in one column.** The table holds the
+   top-level CRF sectors (CRF1–CRF6) *and* the national totals (`TOTX4_MEMO` excl.
+   LULUCF, `TOTXMEMO` incl. LULUCF) in the same `mt_co2e` column. Never `SUM` the
+   whole column — it double-counts. Filter to `TOTX4_MEMO` for the headline total,
+   or to the `CRF*` set for a sector decomposition (which sums back to `TOTX4_MEMO`).
+   LULUCF (CRF4) is a *negative* sink — exclude it from emissions stacks.
 
 ## Phase 3 — EDA key findings (complete → README at Phase 6)
 
 EDA covered distributions, missingness, and seasonal patterns across the hourly
-data (demand, prices, weather, generation). Each finding is a hook for its RQ.
+data (demand, prices, weather, generation), plus a first look at the annual GHG
+inventory. Each finding is a hook for its RQ.
 
 - **Prices → RQ4.** 2022 regime shift (median ~€224 vs ~€35 in 2019–20);
   right-skewed (mean ≫ median). Negative prices ~1.2% of hours, rising to 3.4% in
@@ -116,14 +135,36 @@ data (demand, prices, weather, generation). Each finding is a hook for its RQ.
   (never < ~1337 MW); fossil gas is the flexible price-setter (→ RQ4); fossil coal
   ~85% zero = phased out (~2020); biomass near-constant (must-run). The 5
   nominal/zero fuels are excluded from variability work.
+- **GHG → RQ6.** Total emissions (excl. LULUCF) peaked ~93 Mt in 2005, fell to
+  66.6 Mt in 2024 (≈ −28% vs 2005), most of the drop after 2019. Energy (CRF1) is
+  the dominant and most-declining sector. NB the −28% is *total*; the −48% target
+  is non-ETS only (see RQ5/RQ6 section).
 
 **Artifacts:** `src/viz.py` now holds `PALETTE`, `set_house_style()`,
-`line_profile()`. Notebook `02_cleaning_eda.ipynb` cells J–M produce the plots above.
+`line_profile()`. Notebook `02_cleaning_eda.ipynb` cells J–M produce the electricity
+plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
+
+## RQ5 / RQ6 — targets & scope (decided)
+
+**RQ5 — renewable electricity.** Austria's Renewable Expansion Act (EAG, 2021) targets
+100% renewable electricity (national balance) by 2030. Track the renewable share of
+generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolation.
+
+**RQ6 — GHG emissions.**
+- Headline series: `ghg_emissions` filtered to `TOTX4_MEMO` (total excl. LULUCF).
+- Binding 2030 target: EU Effort Sharing Regulation **−48% vs 2005, non-ETS sectors
+  only** (Reg 2018/842, raised from −36% by Reg 2023/857 under Fit-for-55).
+- Scope catch: the −48% applies to the ~63% non-ETS slice, NOT the total, and that
+  slice **cannot** be derived from `env_air_gge`'s CRF sectors (ETS/non-ETS cuts
+  across them).
+- **Option A (chosen):** also pull the EEA ESR-scope series so the −48% target line
+  is apples-to-apples.
 
 **Open items / next:**
-- Eurostat GHG data **not yet loaded** into DuckDB (only `owid_energy_at` is the
-  annual table) → **RQ5 is blocked** until it's ingested + examined. ← next chat.
+- EEA ESR-scope series **not yet fetched** → RQ6 target line pending. ← next.
 - `owid_energy_at` (annual mix) not yet EDA'd → quick coverage check feeds RQ1.
+- Build RQ5 notebook (07_rq5_renewable_electricity) and RQ6 notebook
+  (08_rq6_ghg_target) — Phase 4.
 
 ## Tech Stack & Key Decisions
 
@@ -131,14 +172,16 @@ data (demand, prices, weather, generation). Each finding is a hook for its RQ.
 - **pandas** — data wrangling
 - **DuckDB** — SQL layer for cleaning and aggregation (learning SQL through the project)
 - **entsoe-py** — ENTSO-E API client
+- **eurostat** — Eurostat REST client for the GHG inventory (`env_air_gge`)
 - **statsmodels** — regression and time-series decomposition
 - **matplotlib** — all visualisation
 - **jupyter lab** in **Cursor** IDE on Ubuntu
 
 **Key design decisions:**
-- DuckDB chosen over SQLite/PostgreSQL: file-based, no server, excellent pandas interop, analytical SQL (window functions, CTEs)
+- DuckDB chosen over SQLite/PostgreSQL: file-based, no server, excellent pandas interop, analytical SQL (window functions, CTEs, UNPIVOT)
 - `DataLoader` class in `src/` fetches each source independently; gracefully skips ENTSO-E if no key
 - ENTSO-E fetched in yearly chunks (API limit), with 1s sleep between requests
+- Eurostat GHG fetched once (all sectors/units for AT), reshaped wide→long in DuckDB via `UNPIVOT`, filtered to `MIO_T` + curated sectors
 - Raw data gitignored; only code and external CSVs committed
 
 ---
@@ -147,19 +190,23 @@ data (demand, prices, weather, generation). Each finding is a hook for its RQ.
 
 | Phase | Description | Status |
 |---|---|---|
-| 1 | Data collection — `DataLoader` class, `01_data_collection.ipynb` | ✅ Done |
-| 2 | DuckDB schema + cleaning — load CSVs into DB, type-cast, handle nulls | ⏳ Next |
-| 3 | EDA — distributions, missingness, seasonal patterns | ⬜ Pending |
-| 4 | RQ analysis — one notebook per question (RQ1–RQ5) | ⬜ Pending |
+| 1 | Data collection — `DataLoader`, `01_data_collection.ipynb` (incl. Eurostat GHG) | ✅ Done |
+| 2 | DuckDB schema + cleaning — load CSVs into DB, type-cast, handle nulls | ✅ Done |
+| 3 | EDA — distributions, missingness, seasonal patterns (incl. GHG, Cell O) | ✅ Done |
+| 4 | RQ analysis — one notebook per question (RQ1–RQ6) | ⏳ In progress |
 | 5 | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py` | ⬜ Pending |
 | 6 | README + polish — key findings, reproduction steps, GitHub push | ⬜ Pending |
 
-**Current status:** Phase 1 complete. Waiting for ENTSO-E API key before running full data fetch. Open-Meteo and OWID fetches can run immediately.
+**Current status:** Phases 1–3 complete. ENTSO-E API key active; all sources fetched and
+loaded into DuckDB — `generation`, `demand`, `prices`, `weather`, `owid_energy_at`,
+`ghg_emissions`, plus the two staging tables (`generation_15min`, `demand_15min`).
+Phase 4 next: RQ analysis notebooks, starting with the EEA ESR fetch (RQ6) and the
+`owid_energy_at` EDA (RQ1).
 
 ---
 
 ## SQL Learning Arc (via DuckDB)
 
 - Phase 2: `CREATE TABLE`, `INSERT`, `SELECT`, `WHERE`, type casting
-- Phase 3: `GROUP BY`, `ORDER BY`, aggregation functions, `HAVING`
+- Phase 3: `GROUP BY`, `ORDER BY`, aggregation functions, `HAVING`, `UNPIVOT` (wide→long)
 - Phase 4: Window functions (`LAG`, `OVER PARTITION BY`), CTEs, `JOIN` across tables
