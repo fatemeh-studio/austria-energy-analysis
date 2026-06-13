@@ -33,22 +33,40 @@ Five fuel categories in the generation feed (Waste, Other, Geothermal, Fossil Oi
 
 The GHG inventory (`env_air_gge`) is the official UNFCCC submission, re-published by Eurostat. It is annual (1990–2024, with the usual ~2-year reporting lag) and organised in the CRF/IPCC source-sector hierarchy. The headline total used here excludes LULUCF (`TOTX4_MEMO`); LULUCF is a separate, volatile land sink and is not part of the emissions total. Note the scope subtlety behind RQ6: the −48%/2005 target applies only to the non-ETS share (~63% of the total), which cannot be derived from the CRF sectors — hence the separate EEA series.
 
-## Setup
+### Setup
 
 ```bash
 git clone <repo>
 cd austria-energy-analysis
+```
 
-python -m venv .venv && source .venv/bin/activate
+**Option A — conda** (what the project was developed with):
+
+```bash
+conda create -n austria-energy python=3.11
+conda activate austria-energy
 pip install -r requirements.txt
+```
 
+**Option B — venv:**
+
+```bash
+python -m venv .venv && source .venv/bin/activate   # requires Python 3.11+
+pip install -r requirements.txt
+```
+
+Then, with the environment active:
+
+```bash
 cp .env.example .env
 # edit .env and add your ENTSOE_API_KEY
 
 jupyter lab
 ```
 
-Then run notebooks in order: `01_data_collection` → `02_cleaning_eda` → `03_rq1_…` through `08_rq6_…`.
+Run notebooks in order: `01_data_collection` → `02_cleaning_eda` → `03_rq1_…` through `08_rq6_…`.
+
+Notebooks also open in any Jupyter-capable editor (VS Code, Cursor, PyCharm) — JupyterLab is just the no-setup default.
 
 ## Project structure
 
