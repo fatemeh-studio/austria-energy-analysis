@@ -70,7 +70,7 @@ austria-energy-analysis/
 
 ---
 
-## Data notes & gotchas (Phase 3 findings → README at Phase 6)
+## Data notes & gotchas (Phase 3 and 4 findings → README at Phase 6)
 
 1. **Timestamps — store UTC, convert at the edge.** All tables store `TIMESTAMPTZ`
    in UTC. Sources parse cleanly (ENTSO-E carries explicit offsets; Open-Meteo
@@ -113,6 +113,17 @@ austria-energy-analysis/
    or to the `CRF*` set for a sector decomposition (which sums back to `TOTX4_MEMO`).
    LULUCF (CRF4) is a *negative* sink — exclude it from emissions stacks.
 
+7. **`owid_energy_at` — window, columns & reconciliation (RQ1).** Annual, contiguous
+   1900–2025. **RQ1 capped at 2019–2024** to match the project window — a 2025 row
+   exists and looks complete, but is excluded to keep all RQs aligned (revisit only as a
+   deliberate RQ1+RQ5 extension, with the scope docs updated). Use the *electricity*
+   column family (`*_share_elec`, per-source `*_electricity` in TWh) — **not**
+   `*_share_energy` (primary energy, folds in transport/heat). `nuclear_electricity` = 0
+   every year → `low_carbon_share_elec` ≡ `renewables_share_elec` (no nuclear in AT —
+   Zwentendorf never opened). The seven named sources
+   (hydro/wind/solar/biofuel/gas/coal/oil) sum **exactly** to `electricity_generation`
+   (residual = 0) — no hidden "other" category.
+
 ## Phase 3 — EDA key findings (complete → README at Phase 6)
 
 EDA covered distributions, missingness, and seasonal patterns across the hourly
@@ -144,6 +155,16 @@ inventory. Each finding is a hook for its RQ.
 `line_profile()`. Notebook `02_cleaning_eda.ipynb` cells J–M produce the electricity
 plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
 
+## Phase 4 — RQ findings (in progress)
+
+- **RQ1 — electricity mix.** Renewable share of electricity rose 77% → 86% (2019→2024),
+  but the gain is **back-loaded into 2023–24** and driven by solar scaling **~5×**
+  (1.7 → 8.1 TWh) alongside gas generation falling **by a third** (≈11 → 7.5 TWh); coal
+  fully phased out after 2020. Hydro stayed dominant (35–46 TWh); its weather-driven
+  **~11 TWh peak-to-trough swing** (2022 drought trough, 2024 recovery) exceeds solar's
+  entire six-year gain, so any single year's share is a noisy read of the trend.
+  Visual: absolute-TWh stacked area + renewable-share line (twin axis), notebook 03.
+
 ## RQ5 / RQ6 — targets & scope (decided)
 
 **RQ5 — renewable electricity.** Austria's Renewable Expansion Act (EAG, 2021) targets
@@ -162,9 +183,10 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 
 **Open items / next:**
 - EEA ESR-scope series **not yet fetched** → RQ6 target line pending. ← next.
-- `owid_energy_at` (annual mix) not yet EDA'd → quick coverage check feeds RQ1.
 - Build RQ5 notebook (07_rq5_renewable_electricity) and RQ6 notebook
   (08_rq6_ghg_target) — Phase 4.
+- Phase-6 figure pass: RQ1 stackplot Biomass/Wind colours are too close for colorblind
+  viewers — pick more distinct colours.
 
 ## Tech Stack & Key Decisions
 
@@ -197,11 +219,11 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 | 5 | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py` | ⬜ Pending |
 | 6 | README + polish — key findings, reproduction steps, GitHub push | ⬜ Pending |
 
-**Current status:** Phases 1–3 complete. ENTSO-E API key active; all sources fetched and
-loaded into DuckDB — `generation`, `demand`, `prices`, `weather`, `owid_energy_at`,
-`ghg_emissions`, plus the two staging tables (`generation_15min`, `demand_15min`).
-Phase 4 next: RQ analysis notebooks, starting with the EEA ESR fetch (RQ6) and the
-`owid_energy_at` EDA (RQ1).
+**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1 done** (notebook
+`03_rq1_energy_mix.ipynb`) — `owid_energy_at` EDA'd and the electricity-mix analysis
+built. Remaining Phase-4 prerequisite: the EEA ESR-scope fetch for RQ6. Next RQ: RQ2
+(temperature → demand). DuckDB holds `generation`, `demand`, `prices`, `weather`,
+`owid_energy_at`, `ghg_emissions`, plus the two staging tables.
 
 ---
 

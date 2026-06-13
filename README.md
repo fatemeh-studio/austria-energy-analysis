@@ -8,7 +8,7 @@ Built as Portfolio Project 3 — demonstrating data collection, SQL-based data e
 
 | # | Question | Methods |
 |---|---|---|
-| RQ1 | How has Austria's electricity mix shifted toward renewables? | Trend analysis, stacked area chart |
+| RQ1 | How has Austria's electricity mix shifted toward renewables since 2019? | Trend analysis, stacked area chart |
 | RQ2 | Does temperature explain electricity demand? | OLS regression, STL decomposition |
 | RQ3 | How pronounced is the solar "duck curve"? | Diurnal profiles, year-over-year comparison |
 | RQ4 | Do higher renewables shares push down prices? (merit-order effect) | Correlation, partial regression |
@@ -32,6 +32,12 @@ ENTSO-E feeds for Austria (operated by APG) are exceptionally complete across 20
 Five fuel categories in the generation feed (Waste, Other, Geothermal, Fossil Oil, Other renewable) report constant or zero values throughout the period — likely installed-capacity placeholders rather than measured output. They are excluded from variability-driven analyses (RQ3, RQ4) but retained in the dataset for completeness.
 
 The GHG inventory (`env_air_gge`) is the official UNFCCC submission, re-published by Eurostat. It is annual (1990–2024, with the usual ~2-year reporting lag) and organised in the CRF/IPCC source-sector hierarchy. The headline total used here excludes LULUCF (`TOTX4_MEMO`); LULUCF is a separate, volatile land sink and is not part of the emissions total. Note the scope subtlety behind RQ6: the −48%/2005 target applies only to the non-ETS share (~63% of the total), which cannot be derived from the CRF sectors — hence the separate EEA series.
+
+Austria has no nuclear generation (Zwentendorf never opened), so "low-carbon" and
+"renewable" electricity are identical here — the OWID `low_carbon_share_elec` and
+`renewables_share_elec` series coincide exactly. RQ1/RQ5 use the *electricity* column
+family rather than primary-energy shares, and are capped at 2024 to match the project
+window even though OWID now carries a provisional 2025 row.
 
 ### Setup
 
@@ -84,7 +90,14 @@ src/
 
 ## Key findings
 
-> _To be filled in after analysis._
+**RQ1 — Electricity mix.** Austria's renewable share of electricity rose from **77% to
+86%** (2019–2024), but the gain is back-loaded into 2023–24 and driven by solar scaling
+**~5×** (1.7 → 8.1 TWh) alongside gas generation falling **by a third** (≈11 → 7.5 TWh);
+coal was fully phased out after 2020. Hydro remained the dominant source (35–46 TWh), and
+its weather-driven **~11 TWh swing** — a 2022 drought trough, recovered by 2024 — exceeds
+solar's entire six-year gain, so any single year's share is a noisy read of the trend.
+
+_RQ2–RQ6 findings to follow as each notebook lands._
 
 ## Tech stack
 
