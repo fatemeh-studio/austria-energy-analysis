@@ -124,6 +124,12 @@ austria-energy-analysis/
    (hydro/wind/solar/biofuel/gas/coal/oil) sum **exactly** to `electricity_generation`
    (residual = 0) — no hidden "other" category.
 
+8. **Grain is chosen per question.** RQ2 aggregates to **daily** means (Vienna-local day) —
+   this removes the hour-of-day cycle *by construction* and is the right grain for a
+   seasonal/weather question and for STL. RQ3/RQ4 deliberately stay **hourly** (within-day
+   phenomena: the duck curve, the merit-order price effect). New dependency: `holidays`
+   (conda-forge) for the Austrian public-holiday dummy.
+
 ## Phase 3 — EDA key findings (complete → README at Phase 6)
 
 EDA covered distributions, missingness, and seasonal patterns across the hourly
@@ -164,6 +170,24 @@ plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
   **~11 TWh peak-to-trough swing** (2022 drought trough, 2024 recovery) exceeds solar's
   entire six-year gain, so any single year's share is a noisy read of the trend.
   Visual: absolute-TWh stacked area + renewable-share line (twin axis), notebook 03.
+- **RQ2 — temperature → demand.** Temperature is the dominant driver of daily demand, and
+  strongly **asymmetric**. A **degree-day regression** (heating/cooling degree-days about an
+  empirically estimated **balance point of 16.5 °C**) gives a steep heating slope of
+  **+105 MW per °C** below the balance point and a weak, **marginally significant** cooling
+  slope of **+16 MW per °C** above it (p ≈ 0.05 — Austria's minimal AC, plus a data-starved
+  coefficient: few hot days). Model `demand_mw ~ hdd + cdd + is_weekend + is_holiday`, daily
+  grain, **HAC / Newey–West** standard errors (residuals strongly autocorrelated,
+  Durbin–Watson ≈ 0.65). R² = **0.79**; weekend −1230 MW, holiday −1156 MW. Visual:
+  degree-day curve over a calendar-adjusted scatter (notebook 04, Cell G).
+- **RQ2 — STL cross-check + a trend the regression misses.** An independent STL
+  decomposition (daily, period 365, robust) confirms the **seasonal demand swing is the
+  mirror of the temperature cycle** — found *without* using temperature, so corroboration,
+  not proof. It also exposes what the flat-intercept regression cannot: a **multi-year
+  baseline decline (~7250 → ~6650 MW)** — post-COVID rebound hump (~2021), then sustained
+  energy-crisis demand destruction (2022→), levelling 2024 — and a **heteroskedastic
+  remainder** (residual variance balloons 2020–2023). Temperature explains the seasonal +
+  day-to-day swing, *not* the structural trend. (Extension hook: a year/trend term if RQ2 is
+  ever revisited; slopes are unaffected since the drift is slow and ~orthogonal to daily temp.)
 
 ## RQ5 / RQ6 — targets & scope (decided)
 
@@ -219,11 +243,11 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 | 5 | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py` | ⬜ Pending |
 | 6 | README + polish — key findings, reproduction steps, GitHub push | ⬜ Pending |
 
-**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1 done** (notebook
-`03_rq1_energy_mix.ipynb`) — `owid_energy_at` EDA'd and the electricity-mix analysis
-built. Remaining Phase-4 prerequisite: the EEA ESR-scope fetch for RQ6. Next RQ: RQ2
-(temperature → demand). DuckDB holds `generation`, `demand`, `prices`, `weather`,
-`owid_energy_at`, `ghg_emissions`, plus the two staging tables.
+**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1 and RQ2 done** (notebooks
+`03_rq1_energy_mix`, `04_rq2_temperature_demand`). Next RQ: **RQ3** (solar duck curve —
+hourly grain). Remaining Phase-4 prerequisite: the EEA ESR-scope fetch for RQ6. DuckDB holds
+`generation`, `demand`, `prices`, `weather`, `owid_energy_at`, `ghg_emissions`, plus the two
+staging tables.
 
 ---
 

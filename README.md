@@ -97,7 +97,19 @@ coal was fully phased out after 2020. Hydro remained the dominant source (35–4
 its weather-driven **~11 TWh swing** — a 2022 drought trough, recovered by 2024 — exceeds
 solar's entire six-year gain, so any single year's share is a noisy read of the trend.
 
-_RQ2–RQ6 findings to follow as each notebook lands._
+**RQ2 — Temperature & demand.** Temperature is the dominant driver of Austria's daily
+electricity demand, and the relationship is sharply **asymmetric**. A heating/cooling
+degree-day regression locates a **balance point at 16.5 °C**: below it, each degree colder
+adds **≈105 MW** (heating); above it, each degree warmer adds only **≈16 MW** — a weak,
+barely-significant cooling response, reflecting Austria's minimal air-conditioning.
+Temperature plus weekend and public-holiday effects explain **79%** of daily demand variance,
+with robust HAC standard errors since daily residuals are strongly autocorrelated. An
+independent STL decomposition confirms the seasonal swing is the mirror image of the
+temperature cycle, and separately reveals a multi-year **baseline decline from 2022**
+(energy-crisis demand reduction) that temperature does not explain — the weather model
+captures the seasonal and day-to-day swing, not the structural trend.
+
+_RQ3–RQ6 findings to follow…_
 
 ## Tech stack
 
