@@ -8,4 +8,5 @@ matplotlib>=3.7
 duckdb>=0.10
 statsmodels>=0.14
 scipy>=1.11
+holidays>=0.40
 jupyterlab>=4.0
