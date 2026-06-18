@@ -188,6 +188,32 @@ plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
   remainder** (residual variance balloons 2020–2023). Temperature explains the seasonal +
   day-to-day swing, *not* the structural trend. (Extension hook: a year/trend term if RQ2 is
   ever revisited; slopes are unaffected since the drift is slow and ~orthogonal to daily temp.)
+- **RQ3 — solar duck curve.** Net load = demand − solar (hourly, Vienna-local); `demand ⋈ solar`
+  is 1:1 (52,608 h, no orphan — the orphan hour is prices-only), both series national. **The duck is
+  a 2023–24 event, not a trend:** belly depth, ramp rate, and steepest-hour ramp sit flat through
+  2019–22, inflect in 2023, ~double again in 2024 — the net-load mirror of RQ1's back-loaded solar
+  ~5× build-out. Summer 2024 belly **2,524 MW** (deepest), avg evening ramp **459 MW/h**, steepest
+  single hour **785 MW/h**. **Crossover (the key tell):** summer had the *shallowest* belly in
+  low-solar years (280 MW in 2021) and the *deepest* by 2024 — the season with the most solar
+  overtook all others exactly when solar scaled, i.e. the belly is solar-carved, not a demand
+  artifact. Spring close behind (2,426 MW); winter shallowest but **more than doubled** (470→1,200).
+  **Timing:** trough migrates 15h→13h (all seasons); summer peak 18h→20h — the neck deepens *and*
+  stretches. **Corrected scope:** the duck is present in **every season** (not summer-only), deepest
+  in summer, weakest in deep winter.
+  - **Method.** Belly depth = morning shoulder (max 06–10h) − midday trough (min 11–15h), kept
+    **shoulder-relative** so the post-2022 demand-decline level shift cancels — read the *growth*, not
+    the absolute. Evening ramp = (evening peak max 17–22h − trough) / Δhours; plus steepest single-hour
+    ramp. Reusable `duck_metrics(profile)` (Phase-5 candidate → metrics module or `viz.py`), with a
+    `len < 24` guard for partial profiles.
+  - **Solar-only, justified empirically.** Solar's diurnal profile spans **0.00×–3.21×** its daily
+    mean (clock-locked); wind only **0.87×–1.10×** (flat) — netting wind shifts net-load *level*, not
+    *shape*, so we net solar only. (Wind label is `Wind Onshore`; no offshore in AT.)
+  - **Gotcha (instance of #5).** Per-(season, year) grouping needs `WHERE ts_local < TIMESTAMP
+    '2025-01-01'`: the final UTC hour spills to 2025 local and spawns a phantom 2025 group with a
+    degenerate 1-row profile, crashing `idxmin()`.
+  - Notebook `05_rq3_duck_curve`: connect → verify 1:1 join → summer-vs-winter (solar wedge) →
+    per-season avg-vs-2024 (4-panel) → wind justification → `duck_metrics` → metric table →
+    belly-depth growth → headline (summer net load, one line per year). Closing 2-sentence finding.
 
 ## RQ5 / RQ6 — targets & scope (decided)
 
@@ -243,11 +269,11 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 | 5 | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py` | ⬜ Pending |
 | 6 | README + polish — key findings, reproduction steps, GitHub push | ⬜ Pending |
 
-**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1 and RQ2 done** (notebooks
-`03_rq1_energy_mix`, `04_rq2_temperature_demand`). Next RQ: **RQ3** (solar duck curve —
-hourly grain). Remaining Phase-4 prerequisite: the EEA ESR-scope fetch for RQ6. DuckDB holds
-`generation`, `demand`, `prices`, `weather`, `owid_energy_at`, `ghg_emissions`, plus the two
-staging tables.
+**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1, RQ2, and RQ3 done** (notebooks
+`03_rq1_energy_mix`, `04_rq2_temperature_demand`, `05_rq3_duck_curve`). Next RQ: **RQ4** (merit-order
+effect — hourly grain, day-ahead prices vs renewable supply). Remaining Phase-4 prerequisite: the EEA
+ESR-scope fetch for RQ6. DuckDB holds `generation`, `demand`, `prices`, `weather`, `owid_energy_at`,
+`ghg_emissions`, plus the two staging tables.
 
 ---
 

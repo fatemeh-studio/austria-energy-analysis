@@ -109,7 +109,22 @@ temperature cycle, and separately reveals a multi-year **baseline decline from 2
 (energy-crisis demand reduction) that temperature does not explain — the weather model
 captures the seasonal and day-to-day swing, not the structural trend.
 
-_RQ3–RQ6 findings to follow…_
+**RQ3 — Solar duck curve.** "Net load" — demand minus solar generation — traces a daily
+**duck-curve** silhouette: a midday belly as solar floods in, then a steep evening ramp as the sun
+fades into the demand peak. The shape was essentially **flat through 2022 and emerged abruptly in
+2023–24**: Austria's summer midday belly deepened from **~390 MW** below the morning shoulder in
+2022 to **~2,520 MW** in 2024, the average evening ramp steepened from **~90 to ~460 MW/hour**
+(**785 MW** in the steepest single hour), and the belly's low point migrated two hours earlier
+(15h → 13h) while the summer peak pushed two hours later (18h → 20h). The clearest evidence that
+this is solar-driven is a **crossover**: in low-solar years summer had the *shallowest* belly of
+any season, but by 2024 — with the most sun — it had the *deepest*, overtaking every other season
+exactly as solar scaled. The signature is deepest in summer but now appears in **every season**
+(even winter's belly more than doubled, to ~1,200 MW), and its abrupt onset matches the ~5× solar
+build-out of RQ1 — so the duck is a solar-driven, post-2022 development, not a gradual trend.
+Netting solar only is deliberate: solar's diurnal profile swings 0–3.2× its daily mean while wind
+stays flat at 0.87–1.10×, so adding wind would shift net-load level, not shape.
+
+_RQ4–RQ6 findings to follow…_
 
 ## Tech stack
 
