@@ -214,6 +214,22 @@ plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
   - Notebook `05_rq3_duck_curve`: connect → verify 1:1 join → summer-vs-winter (solar wedge) →
     per-season avg-vs-2024 (4-panel) → wind justification → `duck_metrics` → metric table →
     belly-depth growth → headline (summer net load, one line per year). Closing 2-sentence finding.
+- **RQ4 — merit-order effect.** Higher wind+solar generation reliably depresses the day-ahead
+  price: **OLS** in levels (`price ~ vre_gw + demand_gw + C(year)`, **HAC/Newey–West** SEs,
+  maxlags=24) gives **−14.3 €/MWh per GW** of wind+solar (95% CI −16.4 to −12.3; p ≈ 4e-44),
+  holding demand and the price regime fixed. The coefficient is **stable across the
+  specification ladder** (−14.5 → −16.0 → −14.3) because VRE is near-orthogonal to demand
+  (corr 0.065) and balanced across years — controls lift R² **0.02 → 0.59** (they explain the
+  *level*, i.e. the 2022 regime) without moving the renewable *slope*: a robustness signal, not
+  a confound. Demand's coefficient (**+16.4**) ≈ |VRE|, as merit-order theory predicts —
+  validating residual load as a one-number summary, so it isn't run separately. **The effect
+  scales with the marginal fuel cost**: a `vre × year` interaction gives only ~€5/MWh per GW in
+  calm 2019–21 but **−€36/MWh per GW in the 2022 gas crisis**, settling −€12 to −17 in 2023–24
+  — renewables suppressed prices most exactly when power was dearest. Durbin–Watson ≈ 0.05 (HAC
+  essential; with autocorrelation this severe, HAC-24 likely *understates* uncertainty slightly,
+  but p≈4e-44 is unaffected). Predictor = VRE not all-renewables (reservoir/pumped hydro is
+  dispatchable → endogenous); TTF gas-price control parked as a fast-follow. Visual: VRE-slope-by-
+  year bar chart vs the 6-year average, notebook 06.
 
 ## RQ5 / RQ6 — targets & scope (decided)
 
@@ -269,11 +285,12 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 | 5 | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py` | ⬜ Pending |
 | 6 | README + polish — key findings, reproduction steps, GitHub push | ⬜ Pending |
 
-**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1, RQ2, and RQ3 done** (notebooks
-`03_rq1_energy_mix`, `04_rq2_temperature_demand`, `05_rq3_duck_curve`). Next RQ: **RQ4** (merit-order
-effect — hourly grain, day-ahead prices vs renewable supply). Remaining Phase-4 prerequisite: the EEA
-ESR-scope fetch for RQ6. DuckDB holds `generation`, `demand`, `prices`, `weather`, `owid_energy_at`,
-`ghg_emissions`, plus the two staging tables.
+**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1–RQ4 done** (notebooks
+`03_rq1_energy_mix`, `04_rq2_temperature_demand`, `05_rq3_duck_curve`, `06_rq4_merit_order`).
+Next RQ: **RQ5** (on track for 100% renewable electricity by 2030? — annual ENTSO-E/OWID,
+log-linear trend). Remaining Phase-4 prerequisite: the EEA ESR-scope fetch for RQ6. DuckDB holds
+`generation`, `demand`, `prices`, `weather`, `owid_energy_at`, `ghg_emissions`, plus the two
+staging tables.
 
 ---
 

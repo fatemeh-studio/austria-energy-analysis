@@ -128,7 +128,17 @@ build-out of RQ1 — so the duck is a solar-driven, post-2022 development, not a
 Netting solar only is deliberate: solar's diurnal profile swings 0–3.2× its daily mean while wind
 stays flat at 0.87–1.10×, so adding wind would shift net-load level, not shape.
 
-_RQ4–RQ6 findings to follow…_
+**RQ4 — Merit-order effect.** Higher wind+solar output reliably pushes Austria's day-ahead price
+down — by **€14.3/MWh for every gigawatt** of wind+solar on the grid, holding demand and the
+price regime fixed (ordinary least squares in price levels, autocorrelation-robust standard
+errors; p < 0.001). The estimate is robust: it barely moves as demand and year controls are
+added, because wind+solar is statistically independent of demand — the controls explain the 2022
+price *spike*, not the renewable *effect*. Crucially, the effect **scales with the gas price**:
+only ~€5/MWh per GW in the calm 2019–21 years, but **€36/MWh per GW during the 2022 gas crisis**,
+when each gigawatt of renewables displaced far costlier gas. Renewables suppressed prices most
+precisely when electricity was most expensive.
+
+_RQ5–RQ6 findings to follow…_
 
 ## Tech stack
 
