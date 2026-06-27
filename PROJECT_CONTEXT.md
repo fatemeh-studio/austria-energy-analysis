@@ -16,7 +16,7 @@ Portfolio Project 3 for a data science job search in Austria (Physics MSc → DS
 | RQ2 | Does temperature explain electricity demand, and does that vary seasonally? | OLS regression, STL decomposition |
 | RQ3 | What is the solar "duck curve" signature, and how has it grown? | Diurnal profiles, year-over-year comparison |
 | RQ4 | Do higher renewables shares push down day-ahead prices? (merit-order effect) | Correlation, partial regression |
-| RQ5 | Is Austria on track for 100% renewable **electricity** by 2030? | Log-linear trend, extrapolation |
+| RQ5 | Is Austria on track for 100% renewable **electricity** by 2030? | Logit (log-odds) trend, extrapolation |
 | RQ6 | Is Austria's total **GHG emissions** trajectory on track for its 2030 target? | Trend analysis, target-gap vs ESR −48%/2005 |
 
 **RQ5 vs RQ6 (resolved):** two different questions, kept separate. RQ5 = renewable
@@ -123,12 +123,28 @@ austria-energy-analysis/
    Zwentendorf never opened). The seven named sources
    (hydro/wind/solar/biofuel/gas/coal/oil) sum **exactly** to `electricity_generation`
    (residual = 0) — no hidden "other" category.
+   **RQ5 update:** the deliberate extension is now done — RQ5 fits the annual trend on
+   **2010–2025** (modern wind→solar era; the pre-2005 hydro plateau is a different,
+   no-expansion-policy regime that flattens the slope), with the provisional **2025 row
+   included** but flagged in the figure. RQ1 remains capped at 2019–2024 by design.
 
 8. **Grain is chosen per question.** RQ2 aggregates to **daily** means (Vienna-local day) —
    this removes the hour-of-day cycle *by construction* and is the right grain for a
    seasonal/weather question and for STL. RQ3/RQ4 deliberately stay **hourly** (within-day
    phenomena: the duck curve, the merit-order price effect). New dependency: `holidays`
    (conda-forge) for the Austrian public-holiday dummy.
+
+9. **ENTSO-E `generation` under-captures the national total — and the share-denominator
+   trap (RQ5).** Summed to annual TWh, the hourly `generation` feed runs **~15% below**
+   OWID's `electricity_generation` (renewables ~12% below) for every year 2019–2024 —
+   ENTSO-E "Actual Aggregation" misses sub-threshold / distributed units (rooftop solar
+   especially; the renewable gap grows in 2023–24). **The trap:** because the numerator
+   shrinks *less* than the denominator, an ENTSO-E share computed as `renewable ÷
+   ENTSO-E-own-total` comes out **higher** than OWID's — not because Austria is greener in
+   our data, but purely arithmetic. So **never validate a share by dividing each source by
+   its own total**; compare magnitudes (renewable TWh, total TWh) separately, or put both
+   renewables over a common denominator. Consequence: OWID (the national statistical total)
+   stays primary for RQ5; ENTSO-E corroborates the trend, not the level.
 
 ## Phase 3 — EDA key findings (complete → README at Phase 6)
 
@@ -230,6 +246,30 @@ plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
   but p≈4e-44 is unaffected). Predictor = VRE not all-renewables (reservoir/pumped hydro is
   dispatchable → endogenous); TTF gas-price control parked as a fast-follow. Visual: VRE-slope-by-
   year bar chart vs the 6-year average, notebook 06.
+- **RQ5 — renewable electricity vs the 2030 target.** A **logit (log-odds) trend** on the
+  OWID renewable-electricity share (primary window **2010–2025**, 16 points) projects
+  **87.5% by 2030 — ~12.5 percentage points short** of the Renewable Expansion Act's 100%
+  target. The verdict is **robust to the trend window**: every defensible fit lands in the
+  low-to-high 80s (full-history 80.3% → 2000+ 86.0% → 2010+ 87.5% → steepest 2019+ 89.9%),
+  none reaching 100%. Closing the gap needs **~3.3 pp/yr** vs the **~1.15 pp/yr** achieved
+  over 2010–2025 — **~3× the pace** — so on current momentum Austria is **off track**.
+  Method: OLS in logit space (**plain SEs** — at n=16, HAC would be false precision, unlike
+  RQ4); 100% is an **asymptote** the bound-respecting logit approaches but can't cross (a
+  log-linear foil hits 90.5% and would eventually overshoot 100%). **2025 is in the fit but
+  flagged provisional** — a weak-hydro year (37.9 TWh) pulling the share down, the mirror of
+  2024's high-hydro 45.7 TWh; spanning both averages the water-year noise rather than
+  anchoring on either. **Scope caveat:** OWID's *generation* share is a proxy for the EAG's
+  *national-net-balance* metric (annual renewable generation ≥ consumption, trade netted) —
+  tracked as the best consistent annual series, not an identical measure. Visual: share
+  history + logit fit + 95% confidence band + four-window fan + 100% target line, notebook 07
+  (`figures/rq5_renewable_electricity_2030.png`).
+- **RQ5 — ENTSO-E cross-check (provenance).** Rebuilding the annual renewable share from our
+  own hourly `generation` table corroborates OWID's **trend and shape** (both ~77→86%, same
+  2023–24 solar-driven jump) but **not its level**: ENTSO-E "Actual Aggregation" under-reports
+  national total generation by **~15%** (renewables ~12%) vs OWID's statistical total, the
+  renewable gap widening in 2023–24 (distributed rooftop solar a likely but partial cause).
+  OWID stays primary; ENTSO-E confirms the story, not the number. See gotcha #9 for the
+  share-denominator trap this exposed.
 
 ## RQ5 / RQ6 — targets & scope (decided)
 
@@ -248,9 +288,11 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
   is apples-to-apples.
 
 **Open items / next:**
-- EEA ESR-scope series **not yet fetched** → RQ6 target line pending. ← next.
-- Build RQ5 notebook (07_rq5_renewable_electricity) and RQ6 notebook
-  (08_rq6_ghg_target) — Phase 4.
+- **RQ5 done** — notebook 07 complete (logit trend, four-window sensitivity fan, headline
+  figure saved to `figures/rq5_renewable_electricity_2030.png`).
+- **RQ6 is the last Phase-4 task. ← next.** Still needs the EEA ESR-scope series fetched
+  first so the −48%/2005 target line is apples-to-apples (non-ETS only; can't be derived
+  from `env_air_gge`).
 - Phase-6 figure pass: RQ1 stackplot Biomass/Wind colours are too close for colorblind
   viewers — pick more distinct colours.
 
@@ -285,12 +327,13 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 | 5 | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py` | ⬜ Pending |
 | 6 | README + polish — key findings, reproduction steps, GitHub push | ⬜ Pending |
 
-**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1–RQ4 done** (notebooks
-`03_rq1_energy_mix`, `04_rq2_temperature_demand`, `05_rq3_duck_curve`, `06_rq4_merit_order`).
-Next RQ: **RQ5** (on track for 100% renewable electricity by 2030? — annual ENTSO-E/OWID,
-log-linear trend). Remaining Phase-4 prerequisite: the EEA ESR-scope fetch for RQ6. DuckDB holds
-`generation`, `demand`, `prices`, `weather`, `owid_energy_at`, `ghg_emissions`, plus the two
-staging tables.
+**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1–RQ5 done** (notebooks
+`03_rq1_energy_mix`, `04_rq2_temperature_demand`, `05_rq3_duck_curve`, `06_rq4_merit_order`,
+`07_rq5_renewable_electricity`). **RQ6 is the only remaining Phase-4 task**, and needs the EEA
+ESR-scope fetch first (target-line prerequisite). First committed headline figure landed:
+`figures/rq5_renewable_electricity_2030.png` (starts the per-RQ `figures/` directory early —
+a Phase-6 task). DuckDB holds `generation`, `demand`, `prices`, `weather`, `owid_energy_at`,
+`ghg_emissions`, plus the two staging tables..
 
 ---
 

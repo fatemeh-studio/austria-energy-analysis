@@ -12,7 +12,7 @@ Built as Portfolio Project 3 — demonstrating data collection, SQL-based data e
 | RQ2 | Does temperature explain electricity demand? | OLS regression, STL decomposition |
 | RQ3 | How pronounced is the solar "duck curve"? | Diurnal profiles, year-over-year comparison |
 | RQ4 | Do higher renewables shares push down prices? (merit-order effect) | Correlation, partial regression |
-| RQ5 | Is Austria on track for 100% renewable electricity by 2030? | Log-linear trend, extrapolation |
+| RQ5 | Is Austria on track for 100% renewable electricity by 2030? | Logit (log-odds) trend, extrapolation |
 | RQ6 | Is Austria's GHG trajectory on track for its 2030 emissions target? | Trend analysis, target-gap comparison |
 
 RQ5 and RQ6 are deliberately separate. RQ5 tracks the **renewable share of electricity** against Austria's national 100%-renewable-electricity-by-2030 goal (Renewable Expansion Act). RQ6 tracks **economy-wide greenhouse-gas emissions** against the binding EU Effort Sharing target (−48% vs 2005, non-ETS sectors). One is an electricity-mix question; the other is an emissions question.
@@ -31,13 +31,18 @@ ENTSO-E feeds for Austria (operated by APG) are exceptionally complete across 20
 
 Five fuel categories in the generation feed (Waste, Other, Geothermal, Fossil Oil, Other renewable) report constant or zero values throughout the period — likely installed-capacity placeholders rather than measured output. They are excluded from variability-driven analyses (RQ3, RQ4) but retained in the dataset for completeness.
 
+Summed to annual totals, the ENTSO-E hourly generation feed runs ~15% below Our World in
+Data's national generation figures (2019–2024) — ENTSO-E's "Actual Aggregation" misses
+sub-threshold and distributed units, distributed rooftop solar especially. The renewable
+*share* and its trend agree closely across the two sources, but the absolute totals do not,
+so OWID (the national statistical total) is the source of record for RQ5.
+
 The GHG inventory (`env_air_gge`) is the official UNFCCC submission, re-published by Eurostat. It is annual (1990–2024, with the usual ~2-year reporting lag) and organised in the CRF/IPCC source-sector hierarchy. The headline total used here excludes LULUCF (`TOTX4_MEMO`); LULUCF is a separate, volatile land sink and is not part of the emissions total. Note the scope subtlety behind RQ6: the −48%/2005 target applies only to the non-ETS share (~63% of the total), which cannot be derived from the CRF sectors — hence the separate EEA series.
 
-Austria has no nuclear generation (Zwentendorf never opened), so "low-carbon" and
-"renewable" electricity are identical here — the OWID `low_carbon_share_elec` and
-`renewables_share_elec` series coincide exactly. RQ1/RQ5 use the *electricity* column
-family rather than primary-energy shares, and are capped at 2024 to match the project
-window even though OWID now carries a provisional 2025 row.
+Both RQ1 and RQ5 use the *electricity* column family rather than primary-energy shares.
+RQ1 is capped at 2024 to match the project window; RQ5, an annual trend question,
+deliberately extends back to 2010 and includes OWID's provisional 2025 row (flagged as
+such in its figure) to fit the modern renewables-expansion era.
 
 ### Setup
 
@@ -138,7 +143,18 @@ only ~€5/MWh per GW in the calm 2019–21 years, but **€36/MWh per GW during
 when each gigawatt of renewables displaced far costlier gas. Renewables suppressed prices most
 precisely when electricity was most expensive.
 
-_RQ5–RQ6 findings to follow…_
+**RQ5 — On track for 2030?** A bound-respecting **logit** extrapolation of the
+renewable-electricity share (fit on 2010–2025) projects **87.5% by 2030 — about 12.5 points
+short** of the Renewable Expansion Act's 100% target. The shortfall holds across every trend
+window tested (full-history 80% up to the steepest defensible window 90% — none reach 100%),
+and closing it would require roughly **triple** the renewable-growth rate of the past 15 years
+(~3.3 vs ~1.15 percentage points per year). On current momentum, Austria is **off track**. A
+cross-check against our own ENTSO-E generation data confirms the trend, though OWID remains the
+source of record (ENTSO-E's hourly feed under-reports national generation by ~15%, mostly
+distributed solar). *Caveat: OWID's generation-share metric is a proxy for the policy target's
+national-net-balance definition.*
+
+_RQ6 findings to follow…_
 
 ## Tech stack
 
