@@ -49,9 +49,13 @@ cd austria-energy-analysis
 **Option A — conda** (what the project was developed with):
 
 ```bash
-conda create -n austria-energy python=3.11
+conda create -n austria-energy python=3.11 -y
 conda activate austria-energy
 pip install -r requirements.txt
+
+# optional: register the kernel for JupyterLab / Cursor
+python -m ipykernel install --user --name austria-energy \
+  --display-name "Python (austria-energy)"
 ```
 
 **Option B — venv:**

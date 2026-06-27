@@ -33,3 +33,6 @@ env/
 .cursor/
 .DS_Store
 Thumbs.db
+
+# personal
+plans/
