@@ -37,7 +37,7 @@ def set_house_style() -> None:
         "savefig.bbox":      "tight",
         "font.size":         11,
         "axes.titlesize":    13,
-        "axes.titleweight":  "medium",
+        "axes.titleweight":  "normal",
         "axes.grid":         True,
         "grid.alpha":        0.25,
         "grid.linewidth":    0.6,

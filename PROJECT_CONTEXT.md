@@ -34,7 +34,9 @@ austria-energy-analysis/
 ├── data/
 │   ├── raw/          # fetched CSVs — gitignored
 │   ├── processed/    # DuckDB database — gitignored
-│   └── external/     # OWID CSV — gitignored
+│   ├── external/     # OWID CSV, EEA ESR xlsx — fetched, gitignored
+│   └── reference/    # ESR AEA path CSV — hand-curated, committed
+├── figures/          # committed headline figures (one per RQ)
 ├── notebooks/
 │   ├── 01_data_collection.ipynb
 │   ├── 02_cleaning_eda.ipynb
@@ -64,9 +66,10 @@ austria-energy-analysis/
 |---|---|---|---|---|
 | ENTSO-E Transparency Platform | Generation by fuel type, total load, day-ahead prices (AT) | Hourly | API key (free) | ✅ Loaded |
 | Open-Meteo / ERA5 | Temperature, solar radiation, wind speed, precipitation (Vienna) | Hourly | None | ✅ Loaded |
-| Our World in Data | Energy mix, renewables share, CO₂ intensity | Annual | None (public CSV) | ✅ Loaded (EDA pending) |
+| Our World in Data | Energy mix, renewables share, CO₂ intensity | Annual | None (public CSV) | ✅ Loaded → `owid_energy_at` |
 | Eurostat (`env_air_gge`) | GHG emissions by CRF sector | Annual | None (`eurostat` pkg) | ✅ Loaded → `ghg_emissions` |
-| EEA — Effort Sharing (ESR) | Non-ETS emissions vs the 2030 target path | Annual | None | ⏳ Not yet fetched (RQ6) |
+| EEA — Effort Sharing (ESR) | Non-ETS emissions vs the 2030 target path | Annual | None | ⏳ ✅ Loaded → `esr_emissions` |
+| EU Effort Sharing legal acts | Austria's binding Annual Emission Allocations (AEA path) | Annual | None | ✅ Committed → data/reference/ (CSV, read in nb 08) |
 
 ---
 
@@ -146,6 +149,26 @@ austria-energy-analysis/
    renewables over a common denominator. Consequence: OWID (the national statistical total)
    stays primary for RQ5; ENTSO-E corroborates the trend, not the level.
 
+10. **EEA Effort Sharing series is heterogeneous by construction.** The
+   `esr_emissions` series (EEA dataset DAT-170-en) is not one homogeneous
+   measurement. Per the workbook's own provenance note: 2005–2012 are EEA
+   estimates, 2013–2020 are final ESD-review figures (AR4 GWPs), 2021–2023 are
+   ESR-review figures (AR5 GWPs), and 2024 is an approximated inventory. Two
+   consequences for RQ6: (a) a possible accounting step at the 2020→2021
+   ESD→ESR (AR4→AR5) boundary, distinct from the real COVID dip; (b) the
+   estimated tails (2005–2012, 2024) are softer than the reviewed middle —
+   relevant when choosing the trend window and reading the extrapolation.
+
+11. **ESR scope, the AR5 baseline, and the AEA path (RQ6).** RQ6's on-track verdict uses
+    `esr_emissions` (EEA non-ETS series, Mt CO₂-eq) — NOT `TOTX4_MEMO`. Two basis points:
+    (a) the official ESR 2005 baseline is 56.99 Mt (AR5, Annex I of CID 2020/2126), not the
+    file's 55.88 Mt (older ESD/AR4 baseyear) — every "% vs 2005" in RQ6 uses 56.99 to sit
+    on the target's basis; (b) the binding Annual Emission Allocation (AEA) path 2021–2030
+    comes from CID 2020/2126 → 2023/1319 → 2026/895, hand-curated to
+    `data/reference/austria_esr_aea.csv` (not programmatically fetchable). The 2030 AEA =
+    29.64 Mt = −48% of 56.99, confirming the path lands exactly on target. Emissions vs AEAs
+    for 2021–2024 are clean AR5-vs-AR5; pre-2021 emissions are AR4 (context only).
+
 ## Phase 3 — EDA key findings (complete → README at Phase 6)
 
 EDA covered distributions, missingness, and seasonal patterns across the hourly
@@ -177,7 +200,7 @@ inventory. Each finding is a hook for its RQ.
 `line_profile()`. Notebook `02_cleaning_eda.ipynb` cells J–M produce the electricity
 plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
 
-## Phase 4 — RQ findings (in progress)
+## Phase 4 — RQ findings (complete)
 
 - **RQ1 — electricity mix.** Renewable share of electricity rose 77% → 86% (2019→2024),
   but the gain is **back-loaded into 2023–24** and driven by solar scaling **~5×**
@@ -270,6 +293,22 @@ plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
   renewable gap widening in 2023–24 (distributed rooftop solar a likely but partial cause).
   OWID stays primary; ENTSO-E confirms the story, not the number. See gotcha #9 for the
   share-denominator trap this exposed.
+- **RQ6 — GHG emissions vs the 2030 target.** On its post-2019 trend, Austria's non-ETS
+  (Effort Sharing) emissions project to **≈36.8 Mt by 2030 (95% prediction interval
+  29.8–45.4 Mt)** — roughly **7 Mt / 12.5 pp above** the binding −48%/2005 target of
+  **29.6 Mt**, and short of it across **all four windows** (gap +2.6 Mt steepest 2021–24 →
+  +13.9 Mt full 2005–24). Closing it needs **~−6%/yr vs the ~−2.8%/yr** recent pace —
+  **~2.2× the pace**; same off-track verdict as RQ5, milder multiple. The series is **flat
+  2005–2019 then drops only post-2020**, so the verdict is **window-dependent and partly
+  shock-driven** (COVID 2020 + energy crisis 2022–23) — even the optimistic 2021–24 window
+  leans on crisis-era cuts of unproven permanence. Method: **log-linear (constant-%) OLS**
+  on `esr_emissions` (bounded-below analogue of RQ5's logit), four-window fan, **plain SEs /
+  prediction interval** (n=6 primary — HAC would be false precision, as in RQ5). **Basis
+  (apples-to-apples):** ESR non-ETS series vs the AR5 −48% target, with the binding **AEA
+  path** overlaid (Austria tracked it closely 2021–24: +0.57 over in 2021, on the line in
+  2024). Distinct from the **−28% total** (`TOTX4_MEMO`) Phase-3 figure. Visual: emissions
+  history (AR4→AR5 marked) + AEA path + 2019–24 extrapolation with band + window fan +
+  29.6 Mt target marker, notebook 08 (`figures/rq6_ghg_target_2030.png`).
 
 ## RQ5 / RQ6 — targets & scope (decided)
 
@@ -278,23 +317,21 @@ plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
 generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolation.
 
 **RQ6 — GHG emissions.**
-- Headline series: `ghg_emissions` filtered to `TOTX4_MEMO` (total excl. LULUCF).
-- Binding 2030 target: EU Effort Sharing Regulation **−48% vs 2005, non-ETS sectors
-  only** (Reg 2018/842, raised from −36% by Reg 2023/857 under Fit-for-55).
-- Scope catch: the −48% applies to the ~63% non-ETS slice, NOT the total, and that
-  slice **cannot** be derived from `env_air_gge`'s CRF sectors (ETS/non-ETS cuts
-  across them).
-- **Option A (chosen):** also pull the EEA ESR-scope series so the −48% target line
-  is apples-to-apples.
+- Verdict series: `esr_emissions` — EEA non-ETS (ESR) scope. (`TOTX4_MEMO` total is
+  context only — the −28% Phase-3 figure, not the on-track metric.)
+- Binding 2030 target: EU Effort Sharing Regulation −48% vs 2005, non-ETS sectors only
+  (Reg 2018/842, raised from −36% by Reg 2023/857), on the AR5 basis = 29.64 Mt.
+- Scope catch: the −48% applies to the ~63% non-ETS slice and cannot be derived from
+  `env_air_gge`'s CRF sectors (ETS/non-ETS cuts across them).
+- Option A (done): EEA ESR series fetched → `esr_emissions`; binding AEA path
+  hand-curated → `data/reference/austria_esr_aea.csv`.
 
 **Open items / next:**
-- **RQ5 done** — notebook 07 complete (logit trend, four-window sensitivity fan, headline
-  figure saved to `figures/rq5_renewable_electricity_2030.png`).
-- **RQ6 is the last Phase-4 task. ← next.** Still needs the EEA ESR-scope series fetched
-  first so the −48%/2005 target line is apples-to-apples (non-ETS only; can't be derived
-  from `env_air_gge`).
-- Phase-6 figure pass: RQ1 stackplot Biomass/Wind colours are too close for colorblind
-  viewers — pick more distinct colours.
+- **Phase 4 complete — RQ1–RQ6 done.** Next: **Phase 5** — refactor the duplicated
+  year-chunk/retry fetch logic into a shared helper on `DataLoader`.
+- Phase-6 polish: embed the headline figures in the README; fix the RQ1 stackplot
+  Biomass/Wind colours (too close for colorblind viewers — note RQ5/RQ6 figures already
+  use a colorblind-safe scheme); document the `data/reference/` tier and the AR4/AR5 basis.
 
 ## Tech Stack & Key Decisions
 
@@ -306,13 +343,18 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 - **statsmodels** — regression and time-series decomposition
 - **matplotlib** — all visualisation
 - **jupyter lab** in **Cursor** IDE on Ubuntu
+- **openpyxl** — reads the EEA .xlsx workbook
 
 **Key design decisions:**
 - DuckDB chosen over SQLite/PostgreSQL: file-based, no server, excellent pandas interop, analytical SQL (window functions, CTEs, UNPIVOT)
 - `DataLoader` class in `src/` fetches each source independently; gracefully skips ENTSO-E if no key
 - ENTSO-E fetched in yearly chunks (API limit), with 1s sleep between requests
 - Eurostat GHG fetched once (all sectors/units for AT), reshaped wide→long in DuckDB via `UNPIVOT`, filtered to `MIO_T` + curated sectors
-- Raw data gitignored; only code and external CSVs committed
+- All fetched data gitignored (raw/processed/external); only code + the hand-curated AEA reference CSV (data/reference/) committed. The repo regenerates data by running notebook 01 ("clone → run 01 → data appears").
+- EEA Effort Sharing fetched as a Nextcloud-share zip, extracted in-memory — the datahub
+"direct download" link resolves to a JavaScript page, not the file (`fetch_esr`).
+- AEA path hand-curated from EU legal annexes (not programmatically fetchable) → committed
+`data/reference/` tier, distinct from the gitignored auto-fetched `external/`.
 
 ---
 
@@ -323,17 +365,12 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 | 1 | Data collection — `DataLoader`, `01_data_collection.ipynb` (incl. Eurostat GHG) | ✅ Done |
 | 2 | DuckDB schema + cleaning — load CSVs into DB, type-cast, handle nulls | ✅ Done |
 | 3 | EDA — distributions, missingness, seasonal patterns (incl. GHG, Cell O) | ✅ Done |
-| 4 | RQ analysis — one notebook per question (RQ1–RQ6) | ⏳ In progress |
+| 4 | RQ analysis — one notebook per question (RQ1–RQ6) | ✅ Done |
 | 5 | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py` | ⬜ Pending |
 | 6 | README + polish — key findings, reproduction steps, GitHub push | ⬜ Pending |
 
-**Current status:** Phases 1–3 complete; Phase 4 underway. **RQ1–RQ5 done** (notebooks
-`03_rq1_energy_mix`, `04_rq2_temperature_demand`, `05_rq3_duck_curve`, `06_rq4_merit_order`,
-`07_rq5_renewable_electricity`). **RQ6 is the only remaining Phase-4 task**, and needs the EEA
-ESR-scope fetch first (target-line prerequisite). First committed headline figure landed:
-`figures/rq5_renewable_electricity_2030.png` (starts the per-RQ `figures/` directory early —
-a Phase-6 task). DuckDB holds `generation`, `demand`, `prices`, `weather`, `owid_energy_at`,
-`ghg_emissions`, plus the two staging tables..
+**Current status:** Phases 1–4 complete; Phase 5 next. RQ1–RQ6 done (notebooks 03_rq1_energy_mix … 08_rq6_ghg_target). Two committed headline figures so far: figures/rq5_renewable_electricity_2030.png
+and figures/rq6_ghg_target_2030.png. DuckDB holds generation, demand, prices, weather, owid_energy_at, ghg_emissions, esr_emissions, plus the two staging tables.
 
 ---
 

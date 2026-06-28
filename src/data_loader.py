@@ -4,9 +4,11 @@ data_loader.py
 Fetchers for all three data sources in the Austria Energy & Climate project.
 
 Sources:
-  1. ENTSO-E Transparency Platform  — hourly generation, load, prices (AT)
+  1. Our World in Data              — annual energy & CO2 time series
   2. Open-Meteo / ERA5              — hourly weather (Vienna by default)
-  3. Our World in Data              — annual energy & CO2 time series
+  3. Eurostat (env_air_gge)         — annual GHG emissions by CRF sector
+  4. EEA Effort Sharing (DAT-170)   — annual non-ETS emissions & 2030 target
+  5. ENTSO-E Transparency Platform  — hourly generation, load, prices (AT)
 
 Usage:
   from src.data_loader import DataLoader
@@ -19,6 +21,8 @@ import os
 import time
 import logging
 from pathlib import Path
+import io
+import zipfile
 
 import pandas as pd
 import requests
@@ -69,6 +73,13 @@ class DataLoader:
     OWID_URL = (
         "https://raw.githubusercontent.com/owid/energy-data/master/owid-energy-data.csv"
     )
+    EEA_ESR_URL = (
+            # EEA datahub serves this dataset via a Nextcloud share; its /download
+            # endpoint returns a ZIP of the (single-file) folder, so we unzip it.
+            # The share token is pinned to this dataset version — it changes on the
+            # next annual release (2005-2025), at which point this URL goes stale.
+            "https://sdi.eea.europa.eu/datashare/s/NRLMznfmje62ggJ/download"
+    )
 
     def __init__(self, entsoe_api_key: str | None = None, country: str = "AT"):
         self.country: str = country
@@ -111,8 +122,11 @@ class DataLoader:
 
         # 3. Eurostat GHG inventory — no credentials, annual (ignores start/end)
         results["ghg"] = self.fetch_ghg(geo=self.country)
+        
+        # 4. EEA Effort Sharing (non-ETS) — no credentials, annual
+        results["esr"] = self.fetch_esr()
 
-        # 4. ENTSO-E — skip gracefully if key is missing
+        # 5. ENTSO-E — skip gracefully if key is missing
         if self._entsoe_client:
             ts_start = pd.Timestamp(start, tz="UTC")
             ts_end   = pd.Timestamp(end,   tz="UTC") + pd.Timedelta(days=1)
@@ -348,6 +362,67 @@ class DataLoader:
         out = RAW / f"eurostat_ghg_{geo}.csv"
         df.to_csv(out, index=False)
         log.info("  Saved %d rows x %d cols → %s", df.shape[0], df.shape[1], out)
+        return out
+
+    # ── EEA (Effort Sharing emissions & targets) ─────────────────────────────────
+
+    def fetch_esr(self) -> Path:
+        """
+        Annual non-ETS (Effort Sharing) greenhouse-gas emissions and targets from
+        the European Environment Agency — dataset DAT-170-en, "Greenhouse gas
+        emissions under the Effort Sharing Legislation, 2005-2024".
+
+        This is the apples-to-apples source for RQ6: the EEA reconciles the
+        non-ETS emission series, the 2005 base-year and the Annual Emission
+        Allocations (AEAs) / 2030 target onto one accounting basis — something
+        that *cannot* be derived from Eurostat ``env_air_gge`` (the ETS/non-ETS
+        split cuts across the CRF sectors).
+
+        Accounting basis (carried into RQ6): the file spans two regimes — the
+        Effort Sharing Decision for 2013-2020 (AR4 global-warming potentials,
+        excl. NF3) and the Effort Sharing Regulation for 2021-2030 (AR5 GWPs,
+        incl. NF3). 2005-2012 and the latest year are EEA estimates.
+
+        The full multi-country workbook is saved as-is; we filter to Austria and
+        pick the columns we need at the cleaning stage (same approach as
+        ``fetch_ghg`` — inspect first, don't guess the layout).
+
+        Source is CC-BY 4.0 (© European Commission, EEA) — acknowledge in README.
+
+        Saved to: data/external/eea_esr_effort_sharing.xlsx
+        """
+        log.info("Fetching EEA Effort Sharing emissions (DAT-170-en) …")
+
+        # The datahub link resolves to a Nextcloud share whose /download endpoint
+        # returns a ZIP of the folder (one .xlsx inside), not the bare workbook —
+        # so we fetch the archive and extract the spreadsheet in-memory.
+        resp = requests.get(
+            self.EEA_ESR_URL,
+            timeout=120,
+            headers={"User-Agent": "austria-energy-analysis/1.0 (+research)"},
+        )
+        resp.raise_for_status()
+
+        # Fail loudly if we got an HTML page instead of a zip (e.g. URL went stale)
+        if resp.content[:2] != b"PK":
+            raise RuntimeError(
+                "EEA download was not a ZIP archive — the share URL may have changed. "
+                f"First bytes: {resp.content[:16]!r}"
+            )
+
+        with zipfile.ZipFile(io.BytesIO(resp.content)) as zf:
+            members = [n for n in zf.namelist()
+                       if n.lower().endswith((".xlsx", ".xls"))]
+            if not members:
+                raise RuntimeError(
+                    f"No spreadsheet in EEA archive; contents: {zf.namelist()}"
+                )
+            xlsx_bytes = zf.read(members[0])
+
+        out = EXTERNAL / "eea_esr_effort_sharing.xlsx"
+        out.write_bytes(xlsx_bytes)  # pyright: ignore[reportUnusedCallResult]
+        log.info("  Extracted %s (%.0f KB) → %s",
+                 members[0], len(xlsx_bytes) / 1024, out)
         return out
 
     # ── helpers ────────────────────────────────────────────────────────────────

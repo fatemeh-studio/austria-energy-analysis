@@ -23,7 +23,8 @@ RQ5 and RQ6 are deliberately separate. RQ5 tracks the **renewable share of elect
 - **Open-Meteo / ERA5** — hourly weather reanalysis for Vienna (no key needed)
 - **Our World in Data** — annual energy & CO₂ time series (public CSV)
 - **Eurostat (`env_air_gge`)** — annual national GHG emissions inventory by sector, 1990–2024 (no key; fetched via the `eurostat` package)
-- **EEA Effort Sharing** — non-ETS (ESR) emissions vs the 2030 target path, for RQ6's apples-to-apples comparison
+- **- **EEA Effort Sharing** — non-ETS (ESR) emissions 2005–2024 vs the 2030 target path, for RQ6's apples-to-apples comparison
+- **EU Effort Sharing legal acts** — Austria's binding Annual Emission Allocations (Commission Implementing Decisions 2020/2126, 2023/1319, 2026/895); hand-curated to `data/reference/` (the one committed dataset)
 
 ## Notes on the data
 
@@ -38,6 +39,8 @@ sub-threshold and distributed units, distributed rooftop solar especially. The r
 so OWID (the national statistical total) is the source of record for RQ5.
 
 The GHG inventory (`env_air_gge`) is the official UNFCCC submission, re-published by Eurostat. It is annual (1990–2024, with the usual ~2-year reporting lag) and organised in the CRF/IPCC source-sector hierarchy. The headline total used here excludes LULUCF (`TOTX4_MEMO`); LULUCF is a separate, volatile land sink and is not part of the emissions total. Note the scope subtlety behind RQ6: the −48%/2005 target applies only to the non-ETS share (~63% of the total), which cannot be derived from the CRF sectors — hence the separate EEA series.
+
+The non-ETS (Effort Sharing) series for RQ6 comes from the EEA's Effort Sharing dataset, not the Eurostat CRF inventory — the ETS/non-ETS split cuts across CRF sectors and can't be reconstructed from them. It is heterogeneous by construction (EEA estimates for 2005–2012, reviewed figures for 2013–2023, an approximated 2024) and spans two accounting regimes (AR4 global-warming potentials for the 2013–2020 Effort Sharing Decision, AR5 for the 2021–2030 Effort Sharing Regulation). RQ6 anchors every reduction to the official AR5 2005 baseline (56.99 Mt, from the EU allocation decision) rather than the file's older AR4 baseyear, so emissions and the −48% target share one basis; the binding annual allocation path is taken from the EU legal acts and lands exactly on −48% in 2030.
 
 Both RQ1 and RQ5 use the *electricity* column family rather than primary-energy shares.
 RQ1 is capped at 2024 to match the project window; RQ5, an annual trend question,
@@ -88,9 +91,11 @@ Notebooks also open in any Jupyter-capable editor (VS Code, Cursor, PyCharm) —
 ```
 data/
   raw/          # fetched CSVs — gitignored
-  processed/    # cleaned, merged data (DuckDB)
-  external/     # OWID CSV
+  processed/    # DuckDB database — gitignored
+  external/     # OWID CSV, EEA ESR xlsx — fetched, gitignored
+  reference/    # ESR AEA path CSV — hand-curated, committed
 notebooks/      # one notebook per phase / research question (01–08)
+figures/        # committed headline figures (one per RQ)
 src/
   data_loader.py   # DataLoader class — one fetch method per source
   clean.py         # cleaning transforms (Phase 2+)
@@ -154,7 +159,17 @@ source of record (ENTSO-E's hourly feed under-reports national generation by ~15
 distributed solar). *Caveat: OWID's generation-share metric is a proxy for the policy target's
 national-net-balance definition.*
 
-_RQ6 findings to follow…_
+**RQ6 — On track for the 2030 emissions target?** On its post-2019 trend, Austria's non-ETS (Effort Sharing) greenhouse-gas emissions project to **≈36.8 Mt by 2030** (95% prediction interval 29.8–45.4 Mt) — about **7 Mt above** the binding −48%-vs-2005 Effort Sharing target of 29.6 Mt, and short of it across every trend window tested (gap +2.6 to +13.9 Mt). Closing it would require cutting emissions at roughly −6%/yr, **about 2.2× the recent pace.** The catch: the series was essentially flat from 2005 to 2019 and only fell sharply after 2020, so the steeper recent windows lean heavily on COVID- and energy-crisis-driven reductions whose permanence is unproven — Austria has tracked its binding annual allocation closely through 2024, but the budget falls far faster than the trend from here. On current momentum, Austria is **off track.** *!(Economy-wide non-ETS emissions question, distinct from RQ5's renewable-electricity question; the −48% target is the EU Effort Sharing scope, not the −28% total-emissions trajectory.)!*
+
+![Austria non-ETS emissions vs 2030 target](figures/rq6_ghg_target_2030.png)
+
+**Methodological note.** The −48% target is defined on the AR5 accounting basis, so
+the comparison is anchored to the official ESR 2005 baseline (56.99 Mt, Commission
+Implementing Decision 2020/2126) rather than the older AR4 figure in the source data.
+The binding Annual Emission Allocation path (2021–2030) is overlaid directly — Austria
+tracked it closely through 2024, but the budget steepens afterward while the emissions
+trend does not. Sources: EEA Effort Sharing dataset (DAT-170-en, CC-BY 4.0) and the
+Commission Implementing Decisions, both acknowledged below.
 
 ## Tech stack
 
@@ -164,8 +179,7 @@ Python · pandas · DuckDB · statsmodels · matplotlib · entsoe-py · eurostat
 
 Code in this repository is licensed under the [MIT License](LICENSE).
 
-The datasets are **not** redistributed here (see `.gitignore`); notebook
-`01_data_collection.ipynb` fetches them at runtime under each source's own terms:
+The datasets are not redistributed here (see .gitignore), with one exception — Austria's ESR Annual Emission Allocations (data/reference/), a small table hand-compiled from EU legal annexes that can't be fetched programmatically. Everything else, notebook 01_data_collection.ipynb fetches at runtime under each source's own terms:
 
 | Source | License / terms | Attribution |
 |---|---|---|
@@ -174,5 +188,6 @@ The datasets are **not** redistributed here (see `.gitignore`); notebook
 | Our World in Data — Energy | CC BY 4.0 (OWID); provider terms apply | OWID; Ember; Energy Institute – Statistical Review of World Energy |
 | Eurostat (env_air_gge) | Reuse permitted, Commission Decision 2011/833/EU | © European Union / Eurostat |
 | EEA — Effort Sharing | EEA reuse policy (attribution required) | © European Environment Agency |
+| EU Effort Sharing legal acts (CID 2020/2126, 2023/1319, 2026/895) | Reuse permitted, Commission Decision 2011/833/EU | © European Union |
 
 This is a non-commercial portfolio project.

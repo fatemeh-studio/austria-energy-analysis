@@ -12,6 +12,7 @@ requests>=2.31
 entsoe-py>=0.6
 eurostat>=1.0
 python-dotenv>=1.0
+openpyxl>=3.1
 
 # notebook tooling
 jupyterlab>=4.0

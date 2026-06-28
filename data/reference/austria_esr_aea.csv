@@ -1,0 +1,17 @@
+# Austria Effort Sharing (non-ETS) Annual Emission Allocations (AEAs), 2021-2030
+# Unit: Mt CO2-equivalent, AR5 basis. ESR 2005 baseline = 56.991984 Mt (Annex I, CID 2020/2126).
+# 2030 AEA = -48% vs 2005 (Reg 2018/842 as amended by 2023/857). Path is linear from 2023.
+# Sources: CID 2020/2126 (2021-22, kept), CID 2023/1319 (2023-25), CID 2026/895 (2026-30,
+#   linear trajectory from the fixed 2025 allocation to the 2030 target).
+# Hand-compiled from EUR-Lex; not programmatically re-fetchable. (c) EU, CC-BY 4.0.
+year,aea_mt_co2e,source
+2021,48.768448,2020/2126
+2022,47.402495,2020/2126
+2023,45.181662,2023/1319
+2024,42.960829,2023/1319
+2025,40.739996,2023/1319
+2026,38.519163,2026/895
+2027,36.298330,2026/895
+2028,34.077497,2026/895
+2029,31.856664,2026/895
+2030,29.635831,2026/895
