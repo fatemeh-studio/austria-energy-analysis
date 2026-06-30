@@ -4,25 +4,26 @@ data_loader.py
 Fetchers for all three data sources in the Austria Energy & Climate project.
 
 Sources:
-  1. Our World in Data              — annual energy & CO2 time series
-  2. Open-Meteo / ERA5              — hourly weather (Vienna by default)
-  3. Eurostat (env_air_gge)         — annual GHG emissions by CRF sector
-  4. EEA Effort Sharing (DAT-170)   — annual non-ETS emissions & 2030 target
-  5. ENTSO-E Transparency Platform  — hourly generation, load, prices (AT)
+    1. Our World in Data              — annual energy & CO2 time series
+    2. Open-Meteo / ERA5              — hourly weather (Vienna by default)
+    3. Eurostat (env_air_gge)         — annual GHG emissions by CRF sector
+    4. EEA Effort Sharing (DAT-170)   — annual non-ETS emissions & 2030 target
+    5. ENTSO-E Transparency Platform  — hourly generation, load, prices (AT)
 
 Usage:
-  from src.data_loader import DataLoader
-  dl = DataLoader(entsoe_api_key="YOUR_KEY")
-  dl.fetch_all(start="2019-01-01", end="2024-12-31")
+    from src.data_loader import DataLoader
+    dl = DataLoader(entsoe_api_key="YOUR_KEY")
+    dl.fetch_all(start="2019-01-01", end="2024-12-31")
 """
 
 
+import io
+import logging
 import os
 import time
-import logging
-from pathlib import Path
-import io
 import zipfile
+from collections.abc import Callable
+from pathlib import Path
 
 import pandas as pd
 import requests
@@ -145,96 +146,44 @@ class DataLoader:
 
     # ── ENTSO-E ────────────────────────────────────────────────────────────────
 
-    def fetch_generation(
-        self, start: pd.Timestamp, end: pd.Timestamp
-    ) -> Path | None:
+    def fetch_generation(self, start: pd.Timestamp, end: pd.Timestamp) -> Path | None:
         """
         Hourly actual generation per production type (MW).
         Saved to: data/raw/entsoe_generation_AT.csv
         """
-        if not self._entsoe_client:
-            return None
-
-        log.info("Fetching ENTSO-E generation  %s → %s …", start.date(), end.date())
-
-        # ENTSO-E API has a 1-year limit per request — chunk by year
-        chunks: list[pd.DataFrame] = []
-        for year_start, year_end in self._year_chunks(start, end):
-            log.info("  chunk %s …", year_start.year)
-            df_chunk = self._entsoe_client.query_generation(
-                self.country, start=year_start, end=year_end
-            )
-            chunks.append(df_chunk)
-            time.sleep(1)   # be polite to the API
-
-        df = pd.concat(chunks)
-        df = df[~df.index.duplicated(keep="first")]   # remove overlap rows
-        df.sort_index(inplace=True)
-
-        out = RAW / f"entsoe_generation_{self.country}.csv"
-        df.to_csv(out)
-        log.info("  Saved %d rows → %s", len(df), out)
-        return out
-
-    def fetch_load(
-        self, start: pd.Timestamp, end: pd.Timestamp
-    ) -> Path | None:
+        return self._year_chunked_fetch(
+            label="generation",
+            query=lambda s, e: self._entsoe_client.query_generation(self.country, start=s, end=e),  # pyright: ignore[reportOptionalMemberAccess]
+            out_name=f"entsoe_generation_{self.country}.csv",
+            start=start, end=end,
+        )
+    
+    
+    def fetch_load(self, start: pd.Timestamp, end: pd.Timestamp) -> Path | None:
         """
         Hourly actual total load / electricity demand (MW).
         Saved to: data/raw/entsoe_load_AT.csv
         """
-        if not self._entsoe_client:
-            return None
-
-        log.info("Fetching ENTSO-E load  %s → %s …", start.date(), end.date())
-
-        chunks: list[pd.DataFrame] = []
-        for year_start, year_end in self._year_chunks(start, end):
-            log.info("  chunk %s …", year_start.year)
-            df_chunk = self._entsoe_client.query_load(
-                self.country, start=year_start, end=year_end
-            )
-            chunks.append(df_chunk)
-            time.sleep(1)
-
-        df = pd.concat(chunks)
-        df = df[~df.index.duplicated(keep="first")]
-        df.sort_index(inplace=True)
-
-        out = RAW / f"entsoe_load_{self.country}.csv"
-        df.to_csv(out)
-        log.info("  Saved %d rows → %s", len(df), out)
-        return out
-
-    def fetch_prices(
-        self, start: pd.Timestamp, end: pd.Timestamp
-    ) -> Path | None:
+        return self._year_chunked_fetch(
+            label="load",
+            query=lambda s, e: self._entsoe_client.query_load(self.country, start=s, end=e),  # pyright: ignore[reportOptionalMemberAccess]
+            out_name=f"entsoe_load_{self.country}.csv",
+            start=start, end=end,
+        )
+    
+    
+    def fetch_prices(self, start: pd.Timestamp, end: pd.Timestamp) -> Path | None:
         """
         Hourly day-ahead electricity prices (€/MWh).
         Saved to: data/raw/entsoe_prices_AT.csv
         """
-        if not self._entsoe_client:
-            return None
-
-        log.info("Fetching ENTSO-E day-ahead prices  %s → %s …", start.date(), end.date())
-
-        chunks: list[pd.Series] = []
-        for year_start, year_end in self._year_chunks(start, end):
-            log.info("  chunk %s …", year_start.year)
-            s_chunk = self._entsoe_client.query_day_ahead_prices(
-                self.country, start=year_start, end=year_end
-            )
-            chunks.append(s_chunk)
-            time.sleep(1)
-
-        s = pd.concat(chunks)
-        s = s[~s.index.duplicated(keep="first")]
-        s.sort_index(inplace=True)
-
-        out = RAW / f"entsoe_prices_{self.country}.csv"
-        s.to_csv(out, header=["price_eur_mwh"])
-        log.info("  Saved %d rows → %s", len(s), out)
-        return out
+        return self._year_chunked_fetch(
+            label="day-ahead prices",
+            query=lambda s, e: self._entsoe_client.query_day_ahead_prices(self.country, start=s, end=e),  # pyright: ignore[reportOptionalMemberAccess]
+            out_name=f"entsoe_prices_{self.country}.csv",
+            start=start, end=end,
+            to_csv_kwargs={"header": ["price_eur_mwh"]},
+        )
 
     # ── Open-Meteo (ERA5 reanalysis) ───────────────────────────────────────────
 
@@ -249,11 +198,11 @@ class DataLoader:
         Hourly weather from Open-Meteo ERA5 reanalysis — no API key needed.
 
         Variables fetched:
-          temperature_2m          °C
-          shortwave_radiation      W/m²  (proxy for solar generation potential)
-          windspeed_10m            km/h
-          precipitation            mm
-          cloudcover               %
+            temperature_2m          °C
+            shortwave_radiation      W/m²  (proxy for solar generation potential)
+            windspeed_10m            km/h
+            precipitation            mm
+            cloudcover               %
 
         Saved to: data/raw/weather_vienna.csv
         """
@@ -299,8 +248,8 @@ class DataLoader:
         Austria slice to data/raw/ so analysts can re-filter without re-downloading.
 
         Saved to:
-          data/external/owid_energy_full.csv   (full dataset)
-          data/raw/owid_energy_AUT.csv          (Austria only)
+            data/external/owid_energy_full.csv   (full dataset)
+            data/raw/owid_energy_AUT.csv          (Austria only)
         """
         log.info("Fetching OWID energy dataset …")
 
@@ -445,3 +394,96 @@ class DataLoader:
             chunks.append((cursor, year_end))
             cursor = year_end
         return chunks
+
+    @staticmethod
+    def _call_with_backoff(
+        query: "Callable[[pd.Timestamp, pd.Timestamp], pd.DataFrame | pd.Series]",
+        start: pd.Timestamp,
+        end: pd.Timestamp,
+        *,
+        attempts: int = 4,
+        base_delay: float = 2.0,
+    ) -> "pd.DataFrame | pd.Series":
+        """
+        Call one ENTSO-E chunk query with exponential backoff on *transient* errors.
+
+        Retries network hiccups and rate-limit / server errors (HTTP 429, 5xx),
+        doubling the wait each time (base_delay, 2×, 4×, …). Anything else — a 4xx
+        other than 429, or entsoe-py's NoMatchingDataError — is a real failure and is
+        re-raised at once rather than retried.
+        """
+        retryable_status = {429, 500, 502, 503, 504}
+        for attempt in range(1, attempts + 1):
+            try:
+                return query(start, end)
+            except requests.exceptions.RequestException as exc:
+                # HTTPError carries a .response; a non-retryable status fails fast.
+                status = getattr(getattr(exc, "response", None), "status_code", None)
+                if status is not None and status not in retryable_status:
+                    raise
+                if attempt == attempts:
+                    log.error("  chunk %s failed after %d attempts", start.year, attempts)
+                    raise
+                wait = base_delay * 2 ** (attempt - 1)
+                log.warning(
+                    "  chunk %s attempt %d/%d failed (%s) — retrying in %.0fs",
+                    start.year, attempt, attempts, status or type(exc).__name__, wait,
+                )
+                time.sleep(wait)
+        raise RuntimeError("retry loop exited without returning")  # unreachable; satisfies type-checkers
+
+
+    def _year_chunked_fetch(
+        self,
+        *,
+        label: str,
+        query: "Callable[[pd.Timestamp, pd.Timestamp], pd.DataFrame | pd.Series]",
+        out_name: str,
+        start: pd.Timestamp,
+        end: pd.Timestamp,
+        to_csv_kwargs: dict | None = None,
+    ) -> Path | None:
+        """
+        Shared fetch shape for ENTSO-E series: chunk the range by calendar year (the
+        API rejects >~1-year requests), retry each chunk on transient errors, then
+        concatenate → drop year-boundary overlap → sort → save CSV.
+
+        Parameters
+        ----------
+        label : str
+            Human-readable name for logging, e.g. "generation".
+        query : callable
+            Takes (start, end) timestamps and returns one chunk — a DataFrame
+            (generation, load) or a Series (prices).
+        out_name : str
+            CSV filename under data/raw/, e.g. "entsoe_generation_AT.csv".
+        start, end : pd.Timestamp
+            UTC range, end-exclusive.
+        to_csv_kwargs : dict, optional
+            Extra kwargs forwarded to ``.to_csv`` — prices uses this to set
+            ``header=["price_eur_mwh"]`` on its unnamed Series.
+
+        Returns
+        -------
+        Path | None
+            Saved CSV path, or None if no ENTSO-E client is configured.
+        """
+        if not self._entsoe_client:
+            return None
+
+        log.info("Fetching ENTSO-E %s  %s → %s …", label, start.date(), end.date())
+
+        chunks: list[pd.DataFrame | pd.Series] = []
+        for year_start, year_end in self._year_chunks(start, end):
+            log.info("  chunk %s …", year_start.year)
+            chunks.append(self._call_with_backoff(query, year_start, year_end))
+            time.sleep(1)   # be polite between chunks
+
+        data = pd.concat(chunks)
+        data = data[~data.index.duplicated(keep="first")]   # remove year-boundary overlap
+        data.sort_index(inplace=True)
+
+        out = RAW / out_name
+        data.to_csv(out, **(to_csv_kwargs or {}))
+        log.info("  Saved %d rows → %s", len(data), out)
+        return out
