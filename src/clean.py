@@ -14,6 +14,7 @@ happens only at the display layer in the notebooks.
 from __future__ import annotations
 
 import logging
+from contextlib import contextmanager
 from pathlib import Path
 
 import duckdb
@@ -27,6 +28,17 @@ def _rowcount(con: duckdb.DuckDBPyConnection, table: str) -> int:
     result = con.execute(f"SELECT COUNT(*) FROM {table}").fetchone()
     assert result is not None  # COUNT(*) always returns exactly one row
     return int(result[0])
+
+
+@contextmanager
+def _registered(con: duckdb.DuckDBPyConnection, name: str, df: pd.DataFrame):
+    """Register ``df`` as a temp view for the block, then drop it — so intermediate
+    DataFrames never linger in the catalog (or show up in ``SHOW TABLES``)."""
+    con.register(name, df)
+    try:
+        yield
+    finally:
+        con.unregister(name)
 
 
 # ── pure transform (no DB; unit-testable on its own) ──────────────────────────────
@@ -105,7 +117,6 @@ def build_generation(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
     raw.index = pd.to_datetime(raw.index, utc=True)  # mixed DST offsets → UTC
 
     gen_long = melt_generation(raw)
-    con.register("gen_long", gen_long)
 
     con.execute("""
         CREATE OR REPLACE TABLE generation_15min (
@@ -116,7 +127,8 @@ def build_generation(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
             PRIMARY KEY (ts_utc, fuel_type, flow)
         )
     """)
-    con.execute("INSERT INTO generation_15min BY NAME SELECT * FROM gen_long")
+    with _registered(con, "gen_long", gen_long):
+        con.execute("INSERT INTO generation_15min BY NAME SELECT * FROM gen_long")
 
     con.execute("""
         CREATE OR REPLACE TABLE generation AS
@@ -159,7 +171,6 @@ def build_demand(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
     raw.index = pd.to_datetime(raw.index, utc=True)
     demand = raw.rename_axis("ts_utc").reset_index()
     demand.columns = ["ts_utc", "demand_mw"]
-    con.register("demand_long", demand)
 
     con.execute("""
         CREATE OR REPLACE TABLE demand_15min (
@@ -167,7 +178,8 @@ def build_demand(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
             demand_mw  DOUBLE
         )
     """)
-    con.execute("INSERT INTO demand_15min BY NAME SELECT * FROM demand_long")
+    with _registered(con, "demand_long", demand):
+        con.execute("INSERT INTO demand_15min BY NAME SELECT * FROM demand_long")
 
     con.execute("""
         CREATE OR REPLACE TABLE demand AS
@@ -198,7 +210,6 @@ def build_prices(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
     raw.index = pd.to_datetime(raw.index, utc=True)
     prices = raw.rename_axis("ts_utc").reset_index()
     prices.columns = ["ts_utc", "price_eur_mwh"]
-    con.register("prices_df", prices)
 
     con.execute("""
         CREATE OR REPLACE TABLE prices (
@@ -206,7 +217,8 @@ def build_prices(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
             price_eur_mwh  DOUBLE
         )
     """)
-    con.execute("INSERT INTO prices BY NAME SELECT * FROM prices_df")
+    with _registered(con, "prices_df", prices):
+        con.execute("INSERT INTO prices BY NAME SELECT * FROM prices_df")
     n = _rowcount(con, "prices")
     log.info("prices: %d rows", n)
     return n
@@ -230,7 +242,6 @@ def build_weather(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
         "precipitation":       "precip_mm",
         "cloudcover":          "cloudcover_pct",
     }).rename_axis("ts_utc").reset_index()
-    con.register("weather_df", weather)
 
     con.execute("""
         CREATE OR REPLACE TABLE weather (
@@ -242,7 +253,8 @@ def build_weather(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
             cloudcover_pct  DOUBLE
         )
     """)
-    con.execute("INSERT INTO weather BY NAME SELECT * FROM weather_df")
+    with _registered(con, "weather_df", weather):
+        con.execute("INSERT INTO weather BY NAME SELECT * FROM weather_df")
     n = _rowcount(con, "weather")
     log.info("weather: %d rows", n)
     return n
@@ -355,7 +367,6 @@ def build_esr(con: duckdb.DuckDBPyConnection, xlsx_path: Path) -> int:
     df["year"] = df["year"].astype(int)
     df["mt_co2e"] = df["mt_co2e"].astype(float)
     df = df[["year", "regime", "mt_co2e", "data_source"]].sort_values("year")
-    con.register("esr_df", df)
 
     con.execute("""
         CREATE OR REPLACE TABLE esr_emissions (
@@ -365,7 +376,8 @@ def build_esr(con: duckdb.DuckDBPyConnection, xlsx_path: Path) -> int:
             data_source  VARCHAR
         )
     """)
-    con.execute("INSERT INTO esr_emissions BY NAME SELECT * FROM esr_df")
+    with _registered(con, "esr_df", df):
+        con.execute("INSERT INTO esr_emissions BY NAME SELECT * FROM esr_df")
     n = _rowcount(con, "esr_emissions")
     log.info("esr_emissions: %d rows", n)
     return n
