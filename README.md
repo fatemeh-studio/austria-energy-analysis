@@ -90,16 +90,18 @@ Notebooks also open in any Jupyter-capable editor (VS Code, Cursor, PyCharm) —
 
 ```
 data/
-  raw/          # fetched CSVs — gitignored
-  processed/    # DuckDB database — gitignored
-  external/     # OWID CSV, EEA ESR xlsx — fetched, gitignored
-  reference/    # ESR AEA path CSV — hand-curated, committed
-notebooks/      # one notebook per phase / research question (01–08)
-figures/        # committed headline figures (one per RQ)
+  raw/             # fetched CSVs — gitignored
+  processed/       # DuckDB database — gitignored
+  external/        # OWID CSV, EEA ESR xlsx — fetched, gitignored
+  reference/       # ESR AEA path CSV — hand-curated, committed
+notebooks/         # one notebook per task / research question (01–06)
+figures/
+  headline/        # committed headline figures (one per RQ)
+  qa/              # gitignored QA figures (one per RQ)
 src/
   data_loader.py   # DataLoader class — one fetch method per source
-  clean.py         # cleaning transforms (Phase 2+)
-  viz.py           # shared plot helpers (Phase 3+)
+  clean.py         # cleaning transforms
+  viz.py           # shared plot helpers
 ```
 
 ## Key findings

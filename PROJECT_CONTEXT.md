@@ -41,16 +41,19 @@ austria-energy-analysis/
 │   ├── processed/    # DuckDB database — gitignored
 │   ├── external/     # OWID CSV, EEA ESR xlsx — fetched, gitignored
 │   └── reference/    # ESR AEA path CSV — hand-curated, committed
-├── figures/          # committed headline figures (one per RQ)
+├── figures/
+|   ├── headline/     # committed headline figures (one per RQ)
+|   ├── qa/           # gitignored QA figures (one per RQ)
 ├── notebooks/
 │   ├── 01_data_collection.ipynb
-│   ├── 02_cleaning_eda.ipynb
-│   ├── 03_rq1_energy_mix.ipynb
-│   ├── 04_rq2_temperature_demand.ipynb
-│   ├── 05_rq3_duck_curve.ipynb
-│   ├── 06_rq4_merit_order.ipynb
-│   ├── 07_rq5_renewable_electricity.ipynb
-│   └── 08_rq6_ghg_target.ipynb
+│   ├── 02_data_cleaning.ipynb
+│   ├── 03_exploratory_analysis.ipynb
+│   ├── 04_rq1_energy_mix.ipynb
+│   ├── 05_rq2_temperature_demand.ipynb
+│   ├── 06_rq3_duck_curve.ipynb
+│   ├── 07_rq4_merit_order.ipynb
+│   ├── 08_rq5_renewable_electricity.ipynb
+│   └── 09_rq6_ghg_target.ipynb
 ├── src/
 │   ├── __init__.py
 │   ├── data_loader.py   # DataLoader class (Phase 1) — one fetch method per source
@@ -76,7 +79,7 @@ austria-energy-analysis/
 | Open-Meteo / ERA5             | Temperature, solar radiation, wind speed, precipitation (Vienna) | Hourly      | None                  | ✅ Loaded                                           |
 | Our World in Data             | Energy mix, renewables share, CO₂ intensity                      | Annual      | None (public CSV)     | ✅ Loaded → `owid_energy_at`                        |
 | Eurostat (`env_air_gge`)      | GHG emissions by CRF sector                                      | Annual      | None (`eurostat` pkg) | ✅ Loaded → `ghg_emissions`                         |
-| EEA — Effort Sharing (ESR)    | Non-ETS emissions vs the 2030 target path                        | Annual      | None                  | ⏳ ✅ Loaded → `esr_emissions`                       |
+| EEA — Effort Sharing (ESR)    | Non-ETS emissions vs the 2030 target path                        | Annual      | None                  | ✅ Loaded → `esr_emissions`                         |
 | EU Effort Sharing legal acts  | Austria's binding Annual Emission Allocations (AEA path)         | Annual      | None                  | ✅ Committed → data/reference/ (CSV, read in nb 08) |
 
 
@@ -201,6 +204,7 @@ is non-ETS only (see RQ5/RQ6 section).
 **Artifacts:** `src/viz.py` now holds `PALETTE`, `set_house_style()`,
 `line_profile()`. Notebook `02_cleaning_eda.ipynb` cells J–M produce the electricity
 plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
+#TODO: modify this sentence 
 
 ## Phase 4 — RQ findings (complete)
 
@@ -219,7 +223,8 @@ slope of **+16 MW per °C** above it (p ≈ 0.05 — Austria's minimal AC, plus 
 coefficient: few hot days). Model `demand_mw ~ hdd + cdd + is_weekend + is_holiday`, daily
 grain, **HAC / Newey–West** standard errors (residuals strongly autocorrelated,
 Durbin–Watson ≈ 0.65). R² = **0.79**; weekend −1230 MW, holiday −1156 MW. Visual:
-degree-day curve over a calendar-adjusted scatter (notebook 04, Cell G).
+degree-day curve over a calendar-adjusted scatter (notebook 04, Cell G). 
+#TODO: Modify this sentence.
 - **RQ2 — STL cross-check + a trend the regression misses.** An independent STL
 decomposition (daily, period 365, robust) confirms the **seasonal demand swing is the
 mirror of the temperature cycle** — found *without* using temperature, so corroboration,
@@ -375,14 +380,13 @@ use a colorblind-safe scheme); document the `data/reference/` tier and the AR4/A
 | ----- | ------------------------------------------------------------------------------- | --------- |
 | 1     | Data collection — `DataLoader`, `01_data_collection.ipynb` (incl. Eurostat GHG) | ✅ Done    |
 | 2     | DuckDB schema + cleaning — load CSVs into DB, type-cast, handle nulls           | ✅ Done    |
-| 3     | EDA — distributions, missingness, seasonal patterns (incl. GHG, Cell O)         | ✅ Done    |
+| 3     | EDA — distributions, missingness, seasonal patterns (incl. GHG, Section 8)      | ✅ Done    |
 | 4     | RQ analysis — one notebook per question (RQ1–RQ6)                               | ✅ Done    |
 | 5     | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py`           | ⬜ Pending |
 | 6     | README + polish — key findings, reproduction steps, GitHub push                 | ⬜ Pending |
 
 
-**Current status:** Phases 1–4 complete; Phase 5 next. RQ1–RQ6 done (notebooks 03_rq1_energy_mix … 08_rq6_ghg_target). Two committed headline figures so far: figures/rq5_renewable_electricity_2030.png
-and figures/rq6_ghg_target_2030.png. DuckDB holds generation, demand, prices, weather, owid_energy_at, ghg_emissions, esr_emissions, plus the two staging tables.
+**Current status:** Phases 1–4 complete; Phase 5 next. RQ1–RQ6 done (notebooks 04_rq1_energy_mix … 09_rq6_ghg_target). Six committed headline figures so far: to figures/. DuckDB holds generation, demand, prices, weather, owid_energy_at, ghg_emissions, esr_emissions, plus the two staging tables.
 
 ---
 
