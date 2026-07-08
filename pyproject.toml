@@ -1,0 +1,12 @@
+# Project-level tooling configuration for the Austria Energy & Climate analysis.
+# Python 3.11 (conda env `austria-energy`). Ruff handles linting here;
+# static type checking is configured separately in pyrightconfig.json.
+
+[tool.ruff]
+target-version = "py311"
+
+[tool.ruff.lint.per-file-ignores]
+# Notebooks add the repo root to sys.path before importing project modules, so the
+# local `from src... import ...` is deliberately not at the top of the setup cell.
+# E402 is a false positive for that bootstrap; it stays active everywhere else (src/).
+"notebooks/*.ipynb" = ["E402"]
