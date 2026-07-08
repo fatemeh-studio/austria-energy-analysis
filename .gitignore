@@ -13,6 +13,10 @@ data/external/*
 !data/processed/.gitkeep
 !data/external/.gitkeep
 
+# ── Figures ──────────────────────────────────────────────
+figures/qa/
+!figures/qa/.gitkeep
+
 # ── Python ──────────────────────────────────────────────
 __pycache__/
 *.py[cod]
