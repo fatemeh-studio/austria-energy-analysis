@@ -43,7 +43,7 @@ austria-energy-analysis/
 │   └── reference/    # ESR AEA path CSV — hand-curated, committed
 ├── figures/
 │   ├── headline/     # committed headline figures (one per RQ)
-│   ├── qa/           # gitignored QA figures (one per RQ)
+│   └── qa/           # gitignored QA figures
 ├── notebooks/
 │   ├── 01_data_collection.ipynb
 │   ├── 02_data_cleaning.ipynb

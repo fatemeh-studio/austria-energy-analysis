@@ -97,7 +97,7 @@ data/
 notebooks/         # one notebook per task / research question (01–06)
 figures/
   headline/        # committed headline figures (one per RQ)
-  qa/              # gitignored QA figures (one per RQ)
+  qa/              # gitignored QA figures
 src/
   data_loader.py   # DataLoader class — one fetch method per source
   clean.py         # cleaning transforms
