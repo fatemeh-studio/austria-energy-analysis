@@ -2,7 +2,7 @@
 
 End-to-end data analysis of Austrian electricity generation, demand, pricing, and greenhouse-gas emissions. The hourly electricity data spans 2019–2024; the annual emissions inventory spans 1990–2024.
 
-Built as Portfolio Project 3 — demonstrating data collection, SQL-based data engineering, EDA, regression analysis, and time-series decomposition.
+Built as Portfolio Project — demonstrating data collection, SQL-based data engineering, EDA, regression analysis, and time-series decomposition.
 
 ## Research questions
 
@@ -82,7 +82,7 @@ cp .env.example .env
 jupyter lab
 ```
 
-Run notebooks in order: `01_data_collection` → `02_cleaning_eda` → `03_rq1_…` through `08_rq6_…`.
+Run notebooks in order: `01_data_collection` → `02_data_cleaning` → `03_exploratory_analysis` → `04_rq1_…` through `09_rq6_…`.
 
 Notebooks also open in any Jupyter-capable editor (VS Code, Cursor, PyCharm) — JupyterLab is just the no-setup default.
 

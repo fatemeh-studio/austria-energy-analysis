@@ -5,7 +5,7 @@
 End-to-end data analysis of Austrian electricity generation, demand, pricing, and
 climate trends. Hourly electricity data spans 2019–2024; the annual emissions
 inventory spans 1990–2024.
-Portfolio Project 3 for a data science job search in Austria (Physics MSc → DS transition).
+Portfolio Project for a data science job search in Austria (Physics MSc → DS transition).
 
 ---
 
@@ -201,10 +201,10 @@ nominal/zero fuels are excluded from variability work.
 the dominant and most-declining sector. NB the −28% is *total*; the −48% target
 is non-ETS only (see RQ5/RQ6 section).
 
-**Artifacts:** `src/viz.py` now holds `PALETTE`, `set_house_style()`,
-`line_profile()`. Notebook `02_cleaning_eda.ipynb` cells J–M produce the electricity
-plots; Cell O produces the GHG trajectory + sector-decomposition stackplot.
-#TODO: modify this sentence 
+**Artifacts:** `src/viz.py` provides the EDA helpers `PALETTE`, `set_house_style()`,
+`line_profile()`. All EDA now lives in `03_exploratory_analysis.ipynb` — the
+electricity-side figures in sections 4–6, and the GHG trajectory + sector-decomposition
+stackplot in section 8 (`## 8 · GHG emissions trajectory`).
 
 ## Phase 4 — RQ findings (complete)
 
@@ -214,7 +214,7 @@ but the gain is **back-loaded into 2023–24** and driven by solar scaling **~5�
 fully phased out after 2020. Hydro stayed dominant (35–46 TWh); its weather-driven
 **~11 TWh peak-to-trough swing** (2022 drought trough, 2024 recovery) exceeds solar's
 entire six-year gain, so any single year's share is a noisy read of the trend.
-Visual: absolute-TWh stacked area + renewable-share line (twin axis), notebook 03.
+Visual: absolute-TWh stacked area + renewable-share line (twin axis), notebook 04.
 - **RQ2 — temperature → demand.** Temperature is the dominant driver of daily demand, and
 strongly **asymmetric**. A **degree-day regression** (heating/cooling degree-days about an
 empirically estimated **balance point of 16.5 °C**) gives a steep heating slope of
@@ -223,8 +223,8 @@ slope of **+16 MW per °C** above it (p ≈ 0.05 — Austria's minimal AC, plus 
 coefficient: few hot days). Model `demand_mw ~ hdd + cdd + is_weekend + is_holiday`, daily
 grain, **HAC / Newey–West** standard errors (residuals strongly autocorrelated,
 Durbin–Watson ≈ 0.65). R² = **0.79**; weekend −1230 MW, holiday −1156 MW. Visual:
-degree-day curve over a calendar-adjusted scatter (notebook 04, Cell G). 
-#TODO: Modify this sentence.
+degree-day curve over a calendar-adjusted scatter (notebook 05, section 6 —
+`## 6 · Headline — the degree-day fit`). 
 - **RQ2 — STL cross-check + a trend the regression misses.** An independent STL
 decomposition (daily, period 365, robust) confirms the **seasonal demand swing is the
 mirror of the temperature cycle** — found *without* using temperature, so corroboration,
@@ -250,13 +250,13 @@ in summer, weakest in deep winter.
   **shoulder-relative** so the post-2022 demand-decline level shift cancels — read the *growth*, not
   the absolute. Evening ramp = (evening peak max 17–22h − trough) / Δhours; plus steepest single-hour
   ramp. Reusable `duck_metrics(profile)` (Phase-5 candidate → metrics module or `viz.py`), with a
-  `len < 24` guard for partial profiles.
+  `len < 24` guard for partial profiles. #TODO: attend to this comment
   - **Solar-only, justified empirically.** Solar's diurnal profile spans **0.00×–3.21×** its daily
   mean (clock-locked); wind only **0.87×–1.10×** (flat) — netting wind shifts net-load *level*, not
   *shape*, so we net solar only. (Wind label is `Wind Onshore`; no offshore in AT.)
   - **Gotcha (instance of #5).** Per-(season, year) grouping needs `WHERE ts_local < TIMESTAMP '2025-01-01'`: the final UTC hour spills to 2025 local and spawns a phantom 2025 group with a
   degenerate 1-row profile, crashing `idxmin()`.
-  - Notebook `05_rq3_duck_curve`: connect → verify 1:1 join → summer-vs-winter (solar wedge) →
+  - Notebook `06_rq3_duck_curve`: connect → verify 1:1 join → summer-vs-winter (solar wedge) →
   per-season avg-vs-2024 (4-panel) → wind justification → `duck_metrics` → metric table →
   belly-depth growth → headline (summer net load, one line per year). Closing 2-sentence finding.
 - **RQ4 — merit-order effect.** Higher wind+solar generation reliably depresses the day-ahead
@@ -274,7 +274,7 @@ calm 2019–21 but **−€36/MWh per GW in the 2022 gas crisis**, settling −�
 essential; with autocorrelation this severe, HAC-24 likely *understates* uncertainty slightly,
 but p≈4e-44 is unaffected). Predictor = VRE not all-renewables (reservoir/pumped hydro is
 dispatchable → endogenous); TTF gas-price control parked as a fast-follow. Visual: VRE-slope-by-
-year bar chart vs the 6-year average, notebook 06.
+year bar chart vs the 6-year average, notebook 07.
 - **RQ5 — renewable electricity vs the 2030 target.** A **logit (log-odds) trend** on the
 OWID renewable-electricity share (primary window **2010–2025**, 16 points) projects
 **87.5% by 2030 — ~12.5 percentage points short** of the Renewable Expansion Act's 100%
@@ -290,7 +290,7 @@ flagged provisional** — a weak-hydro year (37.9 TWh) pulling the share down, t
 anchoring on either. **Scope caveat:** OWID's *generation* share is a proxy for the EAG's
 *national-net-balance* metric (annual renewable generation ≥ consumption, trade netted) —
 tracked as the best consistent annual series, not an identical measure. Visual: share
-history + logit fit + 95% confidence band + four-window fan + 100% target line, notebook 07
+history + logit fit + 95% confidence band + four-window fan + 100% target line, notebook 08
 (`figures/rq5_renewable_electricity_2030.png`).
 - **RQ5 — ENTSO-E cross-check (provenance).** Rebuilding the annual renewable share from our
 own hourly `generation` table corroborates OWID's **trend and shape** (both ~~77→86%, same
@@ -314,7 +314,7 @@ prediction interval** (n=6 primary — HAC would be false precision, as in RQ5).
 path** overlaid (Austria tracked it closely 2021–24: +0.57 over in 2021, on the line in
 2024). Distinct from the **−28% total** (`TOTX4_MEMO`) Phase-3 figure. Visual: emissions
 history (AR4→AR5 marked) + AEA path + 2019–24 extrapolation with band + window fan +
-29.6 Mt target marker, notebook 08 (`figures/rq6_ghg_target_2030.png`).
+29.6 Mt target marker, notebook 09 (`figures/rq6_ghg_target_2030.png`).
 
 
 
@@ -335,13 +335,23 @@ context only — the −28% Phase-3 figure, not the on-track metric.)
 - Option A (done): EEA ESR series fetched → `esr_emissions`; binding AEA path
 hand-curated → `data/reference/austria_esr_aea.csv`.
 
-**Open items / next:**
+**Open items / next**
 
-- **Phase 4 complete — RQ1–RQ6 done.** Next: **Phase 5** — refactor the duplicated
-year-chunk/retry fetch logic into a shared helper on `DataLoader`.
-- Phase-6 polish: embed the headline figures in the README; fix the RQ1 stackplot
-Biomass/Wind colours (too close for colorblind viewers — note RQ5/RQ6 figures already
-use a colorblind-safe scheme); document the `data/reference/` tier and the AR4/AR5 basis.
+_Phase 5 — finish refactor (active):_
+- Finish the `src/` refactor.
+- Extract `duck_metrics(profile)` from `06_rq3_duck_curve.ipynb` → metrics module or
+  `viz.py`, with the `len < 24` partial-profile guard. ← flagged in RQ3 findings, not yet done
+- Add `save_qa_fig()` alongside `save_headline_fig()`; split `figures/` into
+  `headline/` + `qa/<notebook_stem>/`.
+- `build_database.py` — lean headless rebuild from committed processed data
+  (last; depends on the modules above).
+
+_Phase 6 — polish & presentation (some started):_
+- Comment + markdown homogenisation across notebooks 01–09 + `src/` (hiring-ready prose).
+- Warning triage — `ruff` + `basedpyright`, configured at project level
+  (`pyproject.toml` / `pyrightconfig.json`) rather than scattered `# noqa`.
+- README: embed headline figures.
+- Optional: Quarto reports (`code-fold: true`) → GitHub Pages.
 
 
 
@@ -376,17 +386,18 @@ use a colorblind-safe scheme); document the `data/reference/` tier and the AR4/A
 ## Build Phases
 
 
-| Phase | Description                                                                     | Status    |
-| ----- | ------------------------------------------------------------------------------- | --------- |
-| 1     | Data collection — `DataLoader`, `01_data_collection.ipynb` (incl. Eurostat GHG) | ✅ Done    |
-| 2     | DuckDB schema + cleaning — load CSVs into DB, type-cast, handle nulls           | ✅ Done    |
-| 3     | EDA — distributions, missingness, seasonal patterns (incl. GHG, Section 8)      | ✅ Done    |
-| 4     | RQ analysis — one notebook per question (RQ1–RQ6)                               | ✅ Done    |
-| 5     | Refactor to `src/` — extract repeated logic into `clean.py`, `viz.py`           | ⬜ Pending |
-| 6     | README + polish — key findings, reproduction steps, GitHub push                 | ⬜ Pending |
+| Phase | Description                                                                     | Status          |
+| ----- | ------------------------------------------------------------------------------- | ---------       |
+| 1     | Data collection — `DataLoader`, `01_data_collection.ipynb` (incl. Eurostat GHG) | ✅ Done         |
+| 2     | DuckDB schema + cleaning — load CSVs into DB, type-cast, handle nulls           | ✅ Done         |
+| 3     | EDA — distributions, missingness, seasonal patterns (incl. GHG, Section 8)      | ✅ Done         |
+| 4     | RQ analysis — one notebook per question (RQ1–RQ6)                               | ✅ Done         |
+| 5     | Refactor to src/ — shared helpers, metrics extraction, headless rebuild         | 🚧 In progress  |
+| 6     | README + polish — findings, figures, comment/warning cleanup                    | 🚧 Started      |
 
-
-**Current status:** Phases 1–4 complete; Phase 5 next. RQ1–RQ6 done (notebooks 04_rq1_energy_mix … 09_rq6_ghg_target). Six committed headline figures so far: to figures/. DuckDB holds generation, demand, prices, weather, owid_energy_at, ghg_emissions, esr_emissions, plus the two staging tables.
+**Current status:** Phases 1–4 complete. Phase 5 (refactor to `src/`) in progress;
+Phase 6 overlapping (README already drafted). RQ1–RQ6 done (notebooks 04–09).
+Six committed headline figures.
 
 ---
 
