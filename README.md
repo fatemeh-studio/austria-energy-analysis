@@ -11,7 +11,7 @@ Built as Portfolio Project — demonstrating data collection, SQL-based data eng
 | RQ1 | How has Austria's electricity mix shifted toward renewables since 2019? | Trend analysis, stacked area chart |
 | RQ2 | Does temperature explain electricity demand? | OLS regression, STL decomposition |
 | RQ3 | How pronounced is the solar "duck curve"? | Diurnal profiles, year-over-year comparison |
-| RQ4 | Do higher renewables shares push down prices? (merit-order effect) | Correlation, partial regression |
+| RQ4 | Do higher renewables shares push down prices? (merit-order effect) | OLS in levels, HAC SEs |
 | RQ5 | Is Austria on track for 100% renewable electricity by 2030? | Logit (log-odds) trend, extrapolation |
 | RQ6 | Is Austria's GHG trajectory on track for its 2030 emissions target? | Trend analysis, target-gap comparison |
 
@@ -23,7 +23,7 @@ RQ5 and RQ6 are deliberately separate. RQ5 tracks the **renewable share of elect
 - **Open-Meteo / ERA5** — hourly weather reanalysis for Vienna (no key needed)
 - **Our World in Data** — annual energy & CO₂ time series (public CSV)
 - **Eurostat (`env_air_gge`)** — annual national GHG emissions inventory by sector, 1990–2024 (no key; fetched via the `eurostat` package)
-- **- **EEA Effort Sharing** — non-ETS (ESR) emissions 2005–2024 vs the 2030 target path, for RQ6's apples-to-apples comparison
+- **EEA Effort Sharing** — non-ETS (ESR) emissions 2005–2024 vs the 2030 target path, for RQ6's apples-to-apples comparison
 - **EU Effort Sharing legal acts** — Austria's binding Annual Emission Allocations (Commission Implementing Decisions 2020/2126, 2023/1319, 2026/895); hand-curated to `data/reference/` (the one committed dataset)
 
 ## Notes on the data
@@ -161,7 +161,7 @@ source of record (ENTSO-E's hourly feed under-reports national generation by ~15
 distributed solar). *Caveat: OWID's generation-share metric is a proxy for the policy target's
 national-net-balance definition.*
 
-**RQ6 — On track for the 2030 emissions target?** On its post-2019 trend, Austria's non-ETS (Effort Sharing) greenhouse-gas emissions project to **≈36.8 Mt by 2030** (95% prediction interval 29.8–45.4 Mt) — about **7 Mt above** the binding −48%-vs-2005 Effort Sharing target of 29.6 Mt, and short of it across every trend window tested (gap +2.6 to +13.9 Mt). Closing it would require cutting emissions at roughly −6%/yr, **about 2.2× the recent pace.** The catch: the series was essentially flat from 2005 to 2019 and only fell sharply after 2020, so the steeper recent windows lean heavily on COVID- and energy-crisis-driven reductions whose permanence is unproven — Austria has tracked its binding annual allocation closely through 2024, but the budget falls far faster than the trend from here. On current momentum, Austria is **off track.** *!(Economy-wide non-ETS emissions question, distinct from RQ5's renewable-electricity question; the −48% target is the EU Effort Sharing scope, not the −28% total-emissions trajectory.)!*
+**RQ6 — On track for the 2030 emissions target?** On its post-2019 trend, Austria's non-ETS (Effort Sharing) greenhouse-gas emissions project to **≈36.8 Mt by 2030** (95% prediction interval 29.8–45.4 Mt) — about **7 Mt above** the binding −48%-vs-2005 Effort Sharing target of 29.6 Mt, and short of it across every trend window tested (gap +2.6 to +13.9 Mt). Closing it would require cutting emissions at roughly −6%/yr, **about 2.2× the recent pace.** The catch: the series was essentially flat from 2005 to 2019 and only fell sharply after 2020, so the steeper recent windows lean heavily on COVID- and energy-crisis-driven reductions whose permanence is unproven — Austria has tracked its binding annual allocation closely through 2024, but the budget falls far faster than the trend from here. On current momentum, Austria is **off track.** *(Economy-wide non-ETS emissions question, distinct from RQ5's renewable-electricity question; the −48% target is the EU Effort Sharing scope, not the −28% total-emissions trajectory.)*
 
 ![Austria non-ETS emissions vs 2030 target](figures/rq6_ghg_target_2030.png)
 
@@ -175,13 +175,13 @@ Commission Implementing Decisions, both acknowledged below.
 
 ## Tech stack
 
-Python · pandas · DuckDB · statsmodels · matplotlib · entsoe-py · eurostat
+Python · pandas · DuckDB · statsmodels · matplotlib · entsoe-py · eurostat · openpyxl · holidays
 
 ## License
 
 Code in this repository is licensed under the [MIT License](LICENSE).
 
-The datasets are not redistributed here (see .gitignore), with one exception — Austria's ESR Annual Emission Allocations (data/reference/), a small table hand-compiled from EU legal annexes that can't be fetched programmatically. Everything else, notebook 01_data_collection.ipynb fetches at runtime under each source's own terms:
+The datasets are not redistributed here (see .gitignore), with one exception — Austria's ESR Annual Emission Allocations (data/reference/), a small table hand-compiled from EU legal annexes that can't be fetched programmatically. Everything else is fetched at runtime by 01_data_collection.ipynb, under each source's own terms:
 
 | Source | License / terms | Attribution |
 |---|---|---|

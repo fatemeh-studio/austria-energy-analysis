@@ -17,7 +17,7 @@ Portfolio Project for a data science job search in Austria (Physics MSc → DS t
 | RQ1 | How has Austria's electricity mix shifted toward renewables since 2019?       | Trend analysis, stacked area chart          |
 | RQ2 | Does temperature explain electricity demand, and does that vary seasonally?   | OLS regression, STL decomposition           |
 | RQ3 | What is the solar "duck curve" signature, and how has it grown?               | Diurnal profiles, year-over-year comparison |
-| RQ4 | Do higher renewables shares push down day-ahead prices? (merit-order effect)  | Correlation, partial regression             |
+| RQ4 | Do higher renewables shares push down day-ahead prices? (merit-order effect)  | OLS in levels, HAC SEs             |
 | RQ5 | Is Austria on track for 100% renewable **electricity** by 2030?               | Logit (log-odds) trend, extrapolation       |
 | RQ6 | Is Austria's total **GHG emissions** trajectory on track for its 2030 target? | Trend analysis, target-gap vs ESR −48%/2005 |
 
@@ -42,8 +42,8 @@ austria-energy-analysis/
 │   ├── external/     # OWID CSV, EEA ESR xlsx — fetched, gitignored
 │   └── reference/    # ESR AEA path CSV — hand-curated, committed
 ├── figures/
-|   ├── headline/     # committed headline figures (one per RQ)
-|   ├── qa/           # gitignored QA figures (one per RQ)
+│   ├── headline/     # committed headline figures (one per RQ)
+│   ├── qa/           # gitignored QA figures (one per RQ)
 ├── notebooks/
 │   ├── 01_data_collection.ipynb
 │   ├── 02_data_cleaning.ipynb
@@ -80,7 +80,7 @@ austria-energy-analysis/
 | Our World in Data             | Energy mix, renewables share, CO₂ intensity                      | Annual      | None (public CSV)     | ✅ Loaded → `owid_energy_at`                        |
 | Eurostat (`env_air_gge`)      | GHG emissions by CRF sector                                      | Annual      | None (`eurostat` pkg) | ✅ Loaded → `ghg_emissions`                         |
 | EEA — Effort Sharing (ESR)    | Non-ETS emissions vs the 2030 target path                        | Annual      | None                  | ✅ Loaded → `esr_emissions`                         |
-| EU Effort Sharing legal acts  | Austria's binding Annual Emission Allocations (AEA path)         | Annual      | None                  | ✅ Committed → data/reference/ (CSV, read in nb 08) |
+| EU Effort Sharing legal acts  | Austria's binding Annual Emission Allocations (AEA path)         | Annual      | None                  | ✅ Committed → data/reference/ (CSV, read in nb 09) |
 
 
 ---
@@ -169,7 +169,7 @@ austria-energy-analysis/
     on the target's basis; (b) the binding Annual Emission Allocation (AEA) path 2021–2030
     comes from CID 2020/2126 → 2023/1319 → 2026/895, hand-curated to
     `data/reference/austria_esr_aea.csv` (not programmatically fetchable). The 2030 AEA =
-    29.64 Mt = −48% of 56.99, confirming the path lands exactly on target. Emissions vs AEAs
+    29.64 Mt = −48% of 56.99 ~ 29.6, confirming the path lands exactly on target. Emissions vs AEAs
     for 2021–2024 are clean AR5-vs-AR5; pre-2021 emissions are AR4 (context only).
 
 
@@ -189,12 +189,12 @@ peaks, overnight trough), weekday > weekend, winter-peak/summer-trough.
 Heating-driven — no summer cooling spike (little AC in AT).
 - **Temperature → RQ2.** Warm-summer / cold-winter arc (~2 °C Jan, ~22 °C Jul);
 near-perfect inverse mirror of demand-by-month → the RQ2 relationship.
-- **Solar → RQ3.** Duck-curve driver. Summer midday avg ~~1025 MW vs winter ~320 MW
-(~~3×), summer bump wider (day length). The duck curve is effectively a summer
+- **Solar → RQ3.** Duck-curve driver. Summer midday avg ~1025 MW vs winter ~320 MW
+(~3×), summer bump wider (day length). The duck curve is effectively a summer
 phenomenon — winter solar barely dents net load.
 - **Generation mix → RQ1.** Hydro run-of-river is the baseload backbone
-(never < ~~1337 MW); fossil gas is the flexible price-setter (→ RQ4); fossil coal
-~85% zero = phased out (~~2020); biomass near-constant (must-run). The 5
+(never < ~1337 MW); fossil gas is the flexible price-setter (→ RQ4); fossil coal
+~85% zero = phased out (~2020); biomass near-constant (must-run). The 5
 nominal/zero fuels are excluded from variability work.
 - **GHG → RQ6.** Total emissions (excl. LULUCF) peaked ~93 Mt in 2005, fell to
 66.6 Mt in 2024 (≈ −28% vs 2005), most of the drop after 2019. Energy (CRF1) is
@@ -250,7 +250,7 @@ in summer, weakest in deep winter.
   **shoulder-relative** so the post-2022 demand-decline level shift cancels — read the *growth*, not
   the absolute. Evening ramp = (evening peak max 17–22h − trough) / Δhours; plus steepest single-hour
   ramp. Reusable `duck_metrics(profile)` (Phase-5 candidate → metrics module or `viz.py`), with a
-  `len < 24` guard for partial profiles. #TODO: attend to this comment
+  `len < 24` guard for partial profiles.
   - **Solar-only, justified empirically.** Solar's diurnal profile spans **0.00×–3.21×** its daily
   mean (clock-locked); wind only **0.87×–1.10×** (flat) — netting wind shifts net-load *level*, not
   *shape*, so we net solar only. (Wind label is `Wind Onshore`; no offshore in AT.)
@@ -293,9 +293,9 @@ tracked as the best consistent annual series, not an identical measure. Visual: 
 history + logit fit + 95% confidence band + four-window fan + 100% target line, notebook 08
 (`figures/rq5_renewable_electricity_2030.png`).
 - **RQ5 — ENTSO-E cross-check (provenance).** Rebuilding the annual renewable share from our
-own hourly `generation` table corroborates OWID's **trend and shape** (both ~~77→86%, same
+own hourly `generation` table corroborates OWID's **trend and shape** (both ~77→86%, same
 2023–24 solar-driven jump) but **not its level**: ENTSO-E "Actual Aggregation" under-reports
-national total generation by **~~15%** (renewables ~12%) vs OWID's statistical total, the
+national total generation by **~15%** (renewables ~12%) vs OWID's statistical total, the
 renewable gap widening in 2023–24 (distributed rooftop solar a likely but partial cause).
 OWID stays primary; ENTSO-E confirms the story, not the number. See gotcha #9 for the
 share-denominator trap this exposed.
@@ -329,7 +329,7 @@ generation / electricity (ENTSO-E + OWID) with a log-linear trend + extrapolatio
 - Verdict series: `esr_emissions` — EEA non-ETS (ESR) scope. (`TOTX4_MEMO` total is
 context only — the −28% Phase-3 figure, not the on-track metric.)
 - Binding 2030 target: EU Effort Sharing Regulation −48% vs 2005, non-ETS sectors only
-(Reg 2018/842, raised from −36% by Reg 2023/857), on the AR5 basis = 29.64 Mt.
+(Reg 2018/842, raised from −36% by Reg 2023/857), on the AR5 basis = 29.6 Mt.
 - Scope catch: the −48% applies to the ~63% non-ETS slice and cannot be derived from
 `env_air_gge`'s CRF sectors (ETS/non-ETS cuts across them).
 - Option A (done): EEA ESR series fetched → `esr_emissions`; binding AEA path
@@ -370,7 +370,7 @@ _Phase 6 — polish & presentation (some started):_
 **Key design decisions:**
 
 - DuckDB chosen over SQLite/PostgreSQL: file-based, no server, excellent pandas interop, analytical SQL (window functions, CTEs, UNPIVOT)
-- `Dat`lass i`aLoader` cn `src/` fetches each source independently; gracefully skips ENTSO-E if no key
+- `DataLoader` class in `src/` fetches each source independently; gracefully skips ENTSO-E if no key
 - ENTSO-E fetched in yearly chunks (API limit), with 1s sleep between requests
 - Eurostat GHG fetched once (all sectors/units for AT), reshaped wide→long in DuckDB via `UNPIVOT`, filtered to `MIO_T` + curated sectors
 - All fetched data gitignored (raw/processed/external); only code + the hand-curated AEA reference CSV (data/reference/) committed. The repo regenerates data by running notebook 01 ("clone → run 01 → data appears").
