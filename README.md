@@ -50,7 +50,7 @@ such in its figure) to fit the modern renewables-expansion era.
 ### Setup
 
 ```bash
-git clone <repo>
+git clone https://github.com/fatemeh-studio/austria-energy-analysis.git
 cd austria-energy-analysis
 ```
 
@@ -72,6 +72,12 @@ python -m ipykernel install --user --name austria-energy \
 python -m venv .venv && source .venv/bin/activate   # requires Python 3.11+
 pip install -r requirements.txt
 ```
+
+**Optional — development tooling** (linting + type-checking; not needed to run the analysis):
+
+​```bash
+pip install -r requirements-dev.txt
+​```
 
 Then, with the environment active:
 
@@ -175,7 +181,7 @@ Commission Implementing Decisions, both acknowledged below.
 
 ## Tech stack
 
-Python · pandas · DuckDB · statsmodels · matplotlib · entsoe-py · eurostat · openpyxl · holidays
+Python · pandas · DuckDB · statsmodels · matplotlib · entsoe-py · eurostat · openpyxl · holidays · Ruff · basedpyright
 
 ## License
 

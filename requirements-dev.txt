@@ -1,0 +1,16 @@
+# requirements-dev.txt — austria-energy-analysis
+# Development tooling: linting, type-checking, notebook hygiene.
+# NOT needed to run the analysis. Installing this also pulls the runtime
+# deps via the line below, so `pip install -r requirements-dev.txt` is enough.
+-r requirements.txt
+
+# lint + format (lints .ipynb natively)
+ruff>=0.15.20
+
+# static type checking (basedpyright is a stricter fork of pyright 1.1.411)
+basedpyright>=1.39.9
+nbqa>=1.9.0            # runs .py-only tools like basedpyright across notebooks
+# pandas-stubs>=2.0    # optional: better pandas type hints for basedpyright
+
+# commit hygiene — strips notebook outputs before commit (git filter)
+nbstripout

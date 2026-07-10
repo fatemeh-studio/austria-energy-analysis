@@ -2,10 +2,9 @@
 # Target: Python 3.11 (pin the interpreter at env-create time — pip can't)
 
 pandas>=2.0
-# pandas-stubs>=2.0 # maybe needed for better type hints
 statsmodels>=0.14
 matplotlib>=3.7
-holidays>=0.40        # Austrian public-holiday flags (RQ2)
+holidays>=0.40  # Austrian public-holiday flags (RQ2)
 scipy>=1.11
 duckdb>=0.10
 requests>=2.31
@@ -14,13 +13,6 @@ eurostat>=1.0
 python-dotenv>=1.0
 openpyxl>=3.1
 
-# notebook tooling
+# notebook runtime — needed to run the notebooks (the analysis deliverable)
 jupyterlab>=4.0
 ipykernel
-nbstripout
-
-# linting
-ruff>=0.15.20
-nbqa>=1.9.0
-basedpyright>=1.39.9
-based on pyright>=1.1.411

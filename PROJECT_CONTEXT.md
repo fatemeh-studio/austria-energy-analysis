@@ -348,8 +348,8 @@ _Phase 5 — finish refactor (active):_
 
 _Phase 6 — polish & presentation (some started):_
 - Comment + markdown homogenisation across notebooks 01–09 + `src/` (hiring-ready prose).
-- Warning triage — `ruff` + `basedpyright`, configured at project level
-  (`pyproject.toml` / `pyrightconfig.json`) rather than scattered `# noqa`.
+- Warning triage — `ruff` + `basedpyright`, project-level config in place
+  (`pyproject.toml` / `pyrightconfig.json`); per-file triage ongoing.
 - README: embed headline figures.
 - Optional: Quarto reports (`code-fold: true`) → GitHub Pages.
 
@@ -378,6 +378,18 @@ _Phase 6 — polish & presentation (some started):_
 "direct download" link resolves to a JavaScript page, not the file (`fetch_esr`).
 - AEA path hand-curated from EU legal annexes (not programmatically fetchable) → committed
 `data/reference/` tier, distinct from the gitignored auto-fetched `external/`.
+
+**Code quality / tooling (dev-only, in `requirements-dev.txt`):**
+
+- **Ruff** — lint + format; lints `.ipynb` natively → `ruff check .`
+- **basedpyright** — static type checking; notebooks via **nbqa**
+  (basedpyright is `.py`-only) → `nbqa basedpyright notebooks/` and `basedpyright src/`
+- Config is project-level, not scattered `# noqa` / `# type: ignore`:
+  - `pyproject.toml` → `[tool.ruff]`; **E402** ignored for notebooks
+    (setup cells add repo root to `sys.path` before `from src… import …`)
+  - `pyrightconfig.json` → `typeCheckingMode: "standard"`, `reportAny` and
+    `reportUnusedCallResult` off to cut pandas/matplotlib stub noise
+- Dev tooling kept out of runtime `requirements.txt` → `requirements-dev.txt`
 
 ---
 
