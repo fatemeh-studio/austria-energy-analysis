@@ -33,8 +33,9 @@ env/
 
 # ── Editor / OS cruft ───────────────────────────────────
 .vscode/
-.idea/
 .cursor/
+.claude/
+.idea/
 .DS_Store
 Thumbs.db
 
