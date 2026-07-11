@@ -16,6 +16,7 @@ from __future__ import annotations
 import logging
 from contextlib import contextmanager
 from pathlib import Path
+from typing import cast
 
 import duckdb
 import pandas as pd
@@ -41,7 +42,7 @@ def _registered(con: duckdb.DuckDBPyConnection, name: str, df: pd.DataFrame):
         con.unregister(name)
 
 
-# ── pure transform (no DB; unit-testable on its own) ──────────────────────────────
+# pure transform (no DB; unit-testable on its own)
 def melt_generation(raw: pd.DataFrame) -> pd.DataFrame:
     """
     Reshape the wide ENTSO-E generation feed to long format.
@@ -72,26 +73,25 @@ def melt_generation(raw: pd.DataFrame) -> pd.DataFrame:
     raw.columns.names = ["fuel_type", "_flow_raw"]  # so stack() yields tidy names
 
     long = (
-        raw
-        .stack(level=["fuel_type", "_flow_raw"], future_stack=True)
+        cast(pd.Series, raw.stack(level=["fuel_type", "_flow_raw"], future_stack=True))
         .rename("mw")
         .reset_index()
         .dropna(subset=["mw"])  # ENTSO-E didn't report these
     )
 
     flow_map = {"Actual Aggregated": "generation", "Actual Consumption": "consumption"}
-    long["flow"] = long["_flow_raw"].map(flow_map)
+    long["flow"] = cast(pd.Series, long["_flow_raw"]).map(flow_map)
 
-    unmapped = long["flow"].isna()
+    unmapped = cast(pd.Series, long["flow"]).isna()
     if unmapped.any():
         raise ValueError(
             f"Unknown ENTSO-E flow types: {long.loc[unmapped, '_flow_raw'].unique().tolist()}"
         )
 
-    return long[["ts_utc", "fuel_type", "flow", "mw"]]
+    return cast(pd.DataFrame, long[["ts_utc", "fuel_type", "flow", "mw"]])
 
 
-# ── table builders: raw file → typed DuckDB table(s), idempotent ──────────────────
+# table builders: raw file → typed DuckDB table(s), idempotent
 def build_generation(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
     """
     Build ``generation_15min`` (long staging) then resample to hourly ``generation``.
@@ -201,6 +201,13 @@ def build_prices(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
     """
     Build ``prices`` (native hourly day-ahead). Timestamps carry offsets → parsed to UTC.
 
+    Parameters
+    ----------
+    con : duckdb.DuckDBPyConnection
+        Open read-write connection.
+    csv_path : Path
+        Path to ``entsoe_prices_AT.csv``.
+
     Returns
     -------
     int
@@ -228,13 +235,20 @@ def build_weather(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
     """
     Build ``weather`` (native hourly). Naive timestamps are tagged UTC; columns renamed.
 
+    Parameters
+    ----------
+    con : duckdb.DuckDBPyConnection
+        Open read-write connection.
+    csv_path : Path
+        Path to ``weather_vienna.csv``.
+
     Returns
     -------
     int
         Row count of ``weather``.
     """
     raw = pd.read_csv(csv_path, index_col="timestamp", parse_dates=True)
-    raw.index = raw.index.tz_localize("UTC")  # naive label → UTC, no shift
+    raw.index = cast(pd.DatetimeIndex, raw.index).tz_localize("UTC")  # naive label → UTC, no shift
     weather = raw.rename(columns={
         "temperature_2m":      "temperature_c",
         "shortwave_radiation": "solar_wm2",
@@ -264,6 +278,13 @@ def build_owid(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
     """
     Build ``owid_energy_at`` (annual) via CTAS straight from the CSV.
 
+    Parameters
+    ----------
+    con : duckdb.DuckDBPyConnection
+        Open read-write connection.
+    csv_path : Path
+        Path to ``owid_energy_AUT.csv``.
+
     Returns
     -------
     int
@@ -286,6 +307,13 @@ def build_ghg(con: duckdb.DuckDBPyConnection, csv_path: Path) -> int:
     Keeps Mt CO2-eq rows (``unit = 'MIO_T'``) for the two national totals and the six
     top-level CRF sectors, then UNPIVOTs the year columns to long (one row per
     sector × year) — UNPIVOT is DuckDB's wide→long, the SQL twin of pandas ``.melt()``.
+
+    Parameters
+    ----------
+    con : duckdb.DuckDBPyConnection
+        Open read-write connection.
+    csv_path : Path
+        Path to ``eurostat_ghg_AT.csv``.
 
     Returns
     -------
@@ -345,6 +373,13 @@ def build_esr(con: duckdb.DuckDBPyConnection, xlsx_path: Path) -> int:
     format change fails loudly), and stores the non-ETS series with its accounting
     regime (ESD/AR4 vs ESR/AR5).
 
+    Parameters
+    ----------
+    con : duckdb.DuckDBPyConnection
+        Open read-write connection.
+    xlsx_path : Path
+        Path to ``eea_esr_effort_sharing.xlsx``.
+
     Returns
     -------
     int
@@ -363,10 +398,10 @@ def build_esr(con: duckdb.DuckDBPyConnection, xlsx_path: Path) -> int:
     )
     df = df[df["country"] == "Austria"].copy()
 
-    assert (df["unit"] == "MtCO2 eq").all(), df["unit"].unique()
+    assert (df["unit"] == "MtCO2 eq").all(), cast(pd.Series, df["unit"]).unique()
     df["year"] = df["year"].astype(int)
     df["mt_co2e"] = df["mt_co2e"].astype(float)
-    df = df[["year", "regime", "mt_co2e", "data_source"]].sort_values("year")
+    df = cast(pd.DataFrame, df[["year", "regime", "mt_co2e", "data_source"]]).sort_values("year")
 
     con.execute("""
         CREATE OR REPLACE TABLE esr_emissions (
