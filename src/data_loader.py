@@ -16,7 +16,6 @@ Usage:
     dl.fetch_all(start="2019-01-01", end="2024-12-31")
 """
 
-
 import io
 import logging
 import os
@@ -24,25 +23,29 @@ import time
 import zipfile
 from collections.abc import Callable
 from pathlib import Path
+from typing import TYPE_CHECKING, cast
 
 import pandas as pd
 import requests
 
-# ── optional: entsoe-py (only needed for ENTSO-E fetches) ──────────────────────
-try:
+if TYPE_CHECKING:
     from entsoe.entsoe import EntsoePandasClient
-    ENTSOE_AVAILABLE = True
-except ImportError:
-    ENTSOE_AVAILABLE = False  # pyright: ignore[reportConstantRedefinition]
 
-# ── optional: eurostat (only needed for the GHG emissions fetch) ───────────────
+# optional: entsoe-py (only needed for ENTSO-E fetches). the type name is imported
+# under TYPE_CHECKING; the runtime alias carries a None fallback so the client
+# guards narrow cleanly when the package is absent.
+try:
+    from entsoe.entsoe import EntsoePandasClient as _EntsoeClient
+except ImportError:
+    _EntsoeClient = None
+
+# optional: eurostat (only needed for the GHG emissions fetch)
 try:
     import eurostat
-    EUROSTAT_AVAILABLE = True
 except ImportError:
-    EUROSTAT_AVAILABLE = False  # pyright: ignore[reportConstantRedefinition]
+    eurostat = None
 
-# ── logging ────────────────────────────────────────────────────────────────────
+# logging
 logging.basicConfig(
     format="%(asctime)s [%(levelname)s] %(message)s",
     datefmt="%H:%M:%S",
@@ -50,7 +53,7 @@ logging.basicConfig(
 )
 log = logging.getLogger(__name__)
 
-# ── paths ──────────────────────────────────────────────────────────────────────
+# paths
 ROOT = Path(__file__).resolve().parent.parent
 RAW = ROOT / "data" / "raw"
 EXTERNAL = ROOT / "data" / "external"
@@ -75,11 +78,11 @@ class DataLoader:
         "https://raw.githubusercontent.com/owid/energy-data/master/owid-energy-data.csv"
     )
     EEA_ESR_URL = (
-            # EEA datahub serves this dataset via a Nextcloud share; its /download
-            # endpoint returns a ZIP of the (single-file) folder, so we unzip it.
-            # The share token is pinned to this dataset version — it changes on the
-            # next annual release (2005-2025), at which point this URL goes stale.
-            "https://sdi.eea.europa.eu/datashare/s/NRLMznfmje62ggJ/download"
+        # EEA datahub serves this dataset via a Nextcloud share; its /download
+        # endpoint returns a ZIP of the (single-file) folder, so we unzip it.
+        # The share token is pinned to this dataset version — it changes on the
+        # next annual release (2005-2025), at which point this URL goes stale.
+        "https://sdi.eea.europa.eu/datashare/s/NRLMznfmje62ggJ/download"
     )
 
     def __init__(self, entsoe_api_key: str | None = None, country: str = "AT"):
@@ -88,8 +91,10 @@ class DataLoader:
         # resolve API key: argument > env var
         self._api_key: str | None = entsoe_api_key or os.getenv("ENTSOE_API_KEY")
 
-        if self._api_key and ENTSOE_AVAILABLE:
-            self._entsoe_client: EntsoePandasClient | None = EntsoePandasClient(api_key=self._api_key)  # pyright: ignore[reportPossiblyUnboundVariable]
+        if self._api_key and _EntsoeClient is not None:
+            self._entsoe_client: "EntsoePandasClient | None" = _EntsoeClient(
+                api_key=self._api_key
+            )
             log.info("ENTSO-E client initialised.")
         else:
             self._entsoe_client = None
@@ -99,19 +104,28 @@ class DataLoader:
                     "Set ENTSOE_API_KEY in .env or pass entsoe_api_key=... "
                     "ENTSO-E fetches will be skipped."
                 )
-            if not ENTSOE_AVAILABLE:
+            if _EntsoeClient is None:
                 log.warning("entsoe-py not installed.  Run: pip install entsoe-py")
 
     # ── public interface ───────────────────────────────────────────────────────
 
-    def fetch_all(self, start: str = "2019-01-01", end: str = "2024-12-31") -> dict[str, Path]:
+    def fetch_all(
+        self, start: str = "2019-01-01", end: str = "2024-12-31"
+    ) -> dict[str, Path]:
         """
-        Run all fetchers.  Returns a dict mapping dataset name → saved file path.
+        Run all fetchers.
 
         Parameters
         ----------
-        start : str  ISO date, e.g. "2019-01-01"
-        end   : str  ISO date, inclusive, e.g. "2024-12-31"
+        start : str
+            ISO date, e.g. "2019-01-01".
+        end : str
+            ISO date, inclusive, e.g. "2024-12-31".
+
+        Returns
+        -------
+        dict[str, Path]
+            Mapping of dataset name → saved file path.
         """
         results = {}
 
@@ -123,18 +137,20 @@ class DataLoader:
 
         # 3. Eurostat GHG inventory — no credentials, annual (ignores start/end)
         results["ghg"] = self.fetch_ghg(geo=self.country)
-        
+
         # 4. EEA Effort Sharing (non-ETS) — no credentials, annual
         results["esr"] = self.fetch_esr()
 
         # 5. ENTSO-E — skip gracefully if key is missing
         if self._entsoe_client:
-            ts_start = pd.Timestamp(start, tz="UTC")
-            ts_end   = pd.Timestamp(end,   tz="UTC") + pd.Timedelta(days=1)
+            ts_start = cast(pd.Timestamp, pd.Timestamp(start, tz="UTC"))
+            ts_end = cast(
+                pd.Timestamp, pd.Timestamp(end, tz="UTC") + pd.Timedelta(days=1)
+            )
 
             results["generation"] = self.fetch_generation(ts_start, ts_end)
-            results["load"]       = self.fetch_load(ts_start, ts_end)
-            results["prices"]     = self.fetch_prices(ts_start, ts_end)
+            results["load"] = self.fetch_load(ts_start, ts_end)
+            results["prices"] = self.fetch_prices(ts_start, ts_end)
         else:
             log.info("Skipping ENTSO-E fetches (no API key).")
 
@@ -144,76 +160,125 @@ class DataLoader:
                 log.info("  %-14s → %s", name, path)
         return results
 
-    # ── ENTSO-E ────────────────────────────────────────────────────────────────
+    # ENTSO-E
 
     def fetch_generation(self, start: pd.Timestamp, end: pd.Timestamp) -> Path | None:
         """
         Hourly actual generation per production type (MW).
-        Saved to: data/raw/entsoe_generation_AT.csv
+
+        Parameters
+        ----------
+        start, end : pd.Timestamp
+            UTC range, end-exclusive.
+
+        Returns
+        -------
+        Path | None
+            Saved CSV (data/raw/entsoe_generation_AT.csv), or None if no
+            ENTSO-E client is configured.
         """
         return self._year_chunked_fetch(
             label="generation",
-            query=lambda s, e: self._entsoe_client.query_generation(self.country, start=s, end=e),  # pyright: ignore[reportOptionalMemberAccess]
+            query=lambda s, e: cast(
+                "EntsoePandasClient", self._entsoe_client
+            ).query_generation(self.country, start=s, end=e),
             out_name=f"entsoe_generation_{self.country}.csv",
-            start=start, end=end,
+            start=start,
+            end=end,
         )
-    
-    
+
     def fetch_load(self, start: pd.Timestamp, end: pd.Timestamp) -> Path | None:
         """
         Hourly actual total load / electricity demand (MW).
-        Saved to: data/raw/entsoe_load_AT.csv
+
+        Parameters
+        ----------
+        start, end : pd.Timestamp
+            UTC range, end-exclusive.
+
+        Returns
+        -------
+        Path | None
+            Saved CSV (data/raw/entsoe_load_AT.csv), or None if no
+            ENTSO-E client is configured.
         """
         return self._year_chunked_fetch(
             label="load",
-            query=lambda s, e: self._entsoe_client.query_load(self.country, start=s, end=e),  # pyright: ignore[reportOptionalMemberAccess]
+            query=lambda s, e: cast(
+                "EntsoePandasClient", self._entsoe_client
+            ).query_load(self.country, start=s, end=e),
             out_name=f"entsoe_load_{self.country}.csv",
-            start=start, end=end,
+            start=start,
+            end=end,
         )
-    
-    
+
     def fetch_prices(self, start: pd.Timestamp, end: pd.Timestamp) -> Path | None:
         """
         Hourly day-ahead electricity prices (€/MWh).
-        Saved to: data/raw/entsoe_prices_AT.csv
+
+        Parameters
+        ----------
+        start, end : pd.Timestamp
+            UTC range, end-exclusive.
+
+        Returns
+        -------
+        Path | None
+            Saved CSV (data/raw/entsoe_prices_AT.csv), or None if no
+            ENTSO-E client is configured.
         """
         return self._year_chunked_fetch(
             label="day-ahead prices",
-            query=lambda s, e: self._entsoe_client.query_day_ahead_prices(self.country, start=s, end=e),  # pyright: ignore[reportOptionalMemberAccess]
+            query=lambda s, e: cast(
+                "EntsoePandasClient", self._entsoe_client
+            ).query_day_ahead_prices(self.country, start=s, end=e),
             out_name=f"entsoe_prices_{self.country}.csv",
-            start=start, end=end,
+            start=start,
+            end=end,
             to_csv_kwargs={"header": ["price_eur_mwh"]},
         )
 
-    # ── Open-Meteo (ERA5 reanalysis) ───────────────────────────────────────────
+    # Open-Meteo (ERA5 reanalysis)
 
     def fetch_weather(
         self,
         start: str = "2019-01-01",
-        end: str   = "2024-12-31",
-        lat: float = 48.2083,   # Vienna
+        end: str = "2024-12-31",
+        lat: float = 48.2083,  # Vienna
         lon: float = 16.3731,
     ) -> Path:
         """
         Hourly weather from Open-Meteo ERA5 reanalysis — no API key needed.
 
         Variables fetched:
-            temperature_2m          °C
-            shortwave_radiation      W/m²  (proxy for solar generation potential)
-            windspeed_10m            km/h
-            precipitation            mm
-            cloudcover               %
+            temperature_2m       °C
+            shortwave_radiation  W/m²  (proxy for solar generation potential)
+            windspeed_10m        km/h
+            precipitation        mm
+            cloudcover           %
 
-        Saved to: data/raw/weather_vienna.csv
+        Parameters
+        ----------
+        start : str
+            ISO start date. Default: "2019-01-01".
+        end : str
+            ISO end date, inclusive. Default: "2024-12-31".
+        lat, lon : float
+            Location in decimal degrees. Default: Vienna (48.2083, 16.3731).
+
+        Returns
+        -------
+        Path
+            Saved CSV (data/raw/weather_vienna.csv).
         """
         log.info("Fetching Open-Meteo weather  %s → %s …", start, end)
 
         url = "https://archive-api.open-meteo.com/v1/archive"
         params = {
-            "latitude":  lat,
+            "latitude": lat,
             "longitude": lon,
             "start_date": start,
-            "end_date":   end,
+            "end_date": end,
             "hourly": ",".join([
                 "temperature_2m",
                 "shortwave_radiation",
@@ -238,7 +303,7 @@ class DataLoader:
         log.info("  Saved %d rows → %s", len(df), out)
         return out
 
-    # ── Our World in Data ──────────────────────────────────────────────────────
+    # Our World in Data
 
     def fetch_owid(self, country_iso: str = "AUT") -> Path:
         """
@@ -247,9 +312,16 @@ class DataLoader:
         Full CSV is ~10 MB; we save the full file to data/external/ and the
         Austria slice to data/raw/ so analysts can re-filter without re-downloading.
 
-        Saved to:
-            data/external/owid_energy_full.csv   (full dataset)
-            data/raw/owid_energy_AUT.csv          (Austria only)
+        Parameters
+        ----------
+        country_iso : str
+            ISO-3 country code to slice. Default: "AUT" (Austria).
+
+        Returns
+        -------
+        Path
+            Saved Austria-slice CSV (data/raw/owid_energy_AUT.csv). The full
+            dataset is also written to data/external/owid_energy_full.csv.
         """
         log.info("Fetching OWID energy dataset …")
 
@@ -257,11 +329,11 @@ class DataLoader:
         resp.raise_for_status()
 
         full_path = EXTERNAL / "owid_energy_full.csv"
-        full_path.write_bytes(resp.content)  # pyright: ignore[reportUnusedCallResult]
+        full_path.write_bytes(resp.content)
         log.info("  Full dataset saved → %s", full_path)
 
         df_full = pd.read_csv(full_path)
-        df_at   = df_full[df_full["iso_code"] == country_iso].copy()
+        df_at = df_full[df_full["iso_code"] == country_iso].copy()
         df_at.set_index("year", inplace=True)
 
         out = RAW / f"owid_energy_{country_iso}.csv"
@@ -269,7 +341,7 @@ class DataLoader:
         log.info("  Austria slice (%d rows) → %s", len(df_at), out)
         return out
 
-    # ── Eurostat (GHG inventory) ─────────────────────────────────────────────────
+    # Eurostat (GHG inventory)
 
     def fetch_ghg(self, geo: str = "AT") -> Path:
         """
@@ -281,14 +353,17 @@ class DataLoader:
         We deliberately fetch *all* sectors and *all* units and pick what we need
         at the cleaning stage — easier to inspect first than to guess the codes.
 
-        Saved to: data/raw/eurostat_ghg_{geo}.csv
-
         Parameters
         ----------
         geo : str
             Eurostat country code. Default: "AT" (Austria).
+
+        Returns
+        -------
+        Path
+            Saved CSV (data/raw/eurostat_ghg_{geo}.csv).
         """
-        if not EUROSTAT_AVAILABLE:
+        if eurostat is None:
             raise ImportError(
                 "The 'eurostat' package is required for fetch_ghg(). "
                 "Install it with: pip install eurostat"
@@ -313,7 +388,7 @@ class DataLoader:
         log.info("  Saved %d rows x %d cols → %s", df.shape[0], df.shape[1], out)
         return out
 
-    # ── EEA (Effort Sharing emissions & targets) ─────────────────────────────────
+    # EEA (Effort Sharing emissions & targets)
 
     def fetch_esr(self) -> Path:
         """
@@ -338,7 +413,10 @@ class DataLoader:
 
         Source is CC-BY 4.0 (© European Commission, EEA) — acknowledge in README.
 
-        Saved to: data/external/eea_esr_effort_sharing.xlsx
+        Returns
+        -------
+        Path
+            Saved workbook (data/external/eea_esr_effort_sharing.xlsx).
         """
         log.info("Fetching EEA Effort Sharing emissions (DAT-170-en) …")
 
@@ -369,12 +447,12 @@ class DataLoader:
             xlsx_bytes = zf.read(members[0])
 
         out = EXTERNAL / "eea_esr_effort_sharing.xlsx"
-        out.write_bytes(xlsx_bytes)  # pyright: ignore[reportUnusedCallResult]
+        out.write_bytes(xlsx_bytes)
         log.info("  Extracted %s (%.0f KB) → %s",
                  members[0], len(xlsx_bytes) / 1024, out)
         return out
 
-    # ── helpers ────────────────────────────────────────────────────────────────
+    # helpers
 
     @staticmethod
     def _year_chunks(
@@ -382,7 +460,19 @@ class DataLoader:
     ) -> list[tuple[pd.Timestamp, pd.Timestamp]]:
         """
         Split a date range into (start, end) pairs by calendar year.
-        ENTSO-E API rejects requests spanning more than ~1 year.
+
+        ENTSO-E's API rejects requests spanning more than ~1 year, so each
+        chunk covers a single calendar year.
+
+        Parameters
+        ----------
+        start, end : pd.Timestamp
+            UTC range to split, end-exclusive.
+
+        Returns
+        -------
+        list[tuple[pd.Timestamp, pd.Timestamp]]
+            (start, end) pairs, one per calendar year.
         """
         chunks = []
         cursor = start
@@ -411,6 +501,22 @@ class DataLoader:
         doubling the wait each time (base_delay, 2×, 4×, …). Anything else — a 4xx
         other than 429, or entsoe-py's NoMatchingDataError — is a real failure and is
         re-raised at once rather than retried.
+
+        Parameters
+        ----------
+        query : callable
+            Takes (start, end) timestamps and returns one chunk (DataFrame or Series).
+        start, end : pd.Timestamp
+            UTC range for this chunk, end-exclusive.
+        attempts : int
+            Maximum number of tries before giving up. Default: 4.
+        base_delay : float
+            Initial backoff in seconds, doubled each retry. Default: 2.0.
+
+        Returns
+        -------
+        pd.DataFrame | pd.Series
+            The query result for this chunk.
         """
         retryable_status = {429, 500, 502, 503, 504}
         for attempt in range(1, attempts + 1):
@@ -480,7 +586,11 @@ class DataLoader:
             time.sleep(1)   # be polite between chunks
 
         data = pd.concat(chunks)
-        data = data[~data.index.duplicated(keep="first")]   # remove year-boundary overlap
+        # drop the year-boundary overlap (boolean filter widens the type → cast back)
+        data = cast(
+            "pd.DataFrame | pd.Series",
+            data[~data.index.duplicated(keep="first")],
+        )
         data.sort_index(inplace=True)
 
         out = RAW / out_name
