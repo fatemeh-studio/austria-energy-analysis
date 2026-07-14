@@ -17,6 +17,10 @@ data/external/*
 figures/qa/
 !figures/qa/.gitkeep
 
+# ── Quarto ──────────────────────────────────────────────
+# Build cache only. The rendered site in docs/ IS committed (Pages serves it).
+/.quarto/
+
 # ── Python ──────────────────────────────────────────────
 __pycache__/
 *.py[cod]
@@ -41,3 +45,5 @@ Thumbs.db
 
 # personal
 plans/
+
+**/*.quarto_ipynb

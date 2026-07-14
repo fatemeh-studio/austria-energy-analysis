@@ -1,0 +1,2064 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Collection – Austria Energy &amp; Climate Analysis</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ea50db029c3027269a8e1e1469a2484.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Austria Energy &amp; Climate Analysis</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fatemeh-studio/austria-energy-analysis"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01_data_collection.html">Data &amp; methods</a></li><li class="breadcrumb-item"><a href="../notebooks/01_data_collection.html">01 · Data collection</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Research questions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04_rq1_energy_mix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ1 · Electricity mix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05_rq2_temperature_demand.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ2 · Temperature &amp; demand</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/06_rq3_duck_curve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ3 · Solar duck curve</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/07_rq4_merit_order.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ4 · Merit-order effect</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/08_rq5_renewable_electricity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ5 · 100% renewable by 2030?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/09_rq6_ghg_target.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ6 · GHG 2030 target</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data &amp; methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01_data_collection.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">01 · Data collection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02_data_cleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02 · Cleaning &amp; DuckDB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03_exploratory_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03 · Exploratory analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#our-world-in-data-annual-energy-series" id="toc-our-world-in-data-annual-energy-series" class="nav-link" data-scroll-target="#our-world-in-data-annual-energy-series">1 · Our World in Data — annual energy series</a></li>
+  <li><a href="#open-meteo-hourly-weather-vienna" id="toc-open-meteo-hourly-weather-vienna" class="nav-link" data-scroll-target="#open-meteo-hourly-weather-vienna">2 · Open-Meteo — hourly weather (Vienna)</a></li>
+  <li><a href="#eurostat-greenhouse-gas-ghg-emissions-inventory" id="toc-eurostat-greenhouse-gas-ghg-emissions-inventory" class="nav-link" data-scroll-target="#eurostat-greenhouse-gas-ghg-emissions-inventory">3 · Eurostat — greenhouse-gas (GHG) emissions inventory</a></li>
+  <li><a href="#european-environment-agency-eea-effort-sharing-non-ets-emissions" id="toc-european-environment-agency-eea-effort-sharing-non-ets-emissions" class="nav-link" data-scroll-target="#european-environment-agency-eea-effort-sharing-non-ets-emissions">4 · European Environment Agency (EEA) — Effort Sharing (non-ETS) emissions</a></li>
+  <li><a href="#entso-e-hourly-generation-load-prices" id="toc-entso-e-hourly-generation-load-prices" class="nav-link" data-scroll-target="#entso-e-hourly-generation-load-prices">5 · ENTSO-E — hourly generation, load &amp; prices</a></li>
+  <li><a href="#summary-what-we-have" id="toc-summary-what-we-have" class="nav-link" data-scroll-target="#summary-what-we-have">6 · Summary — what we have</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01_data_collection.html">Data &amp; methods</a></li><li class="breadcrumb-item"><a href="../notebooks/01_data_collection.html">01 · Data collection</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Data Collection</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Fetches all raw data for the Austria Energy &amp; Climate project.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Source</th>
+<th>What we get</th>
+<th>Credentials needed</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Our World in Data</td>
+<td>Annual energy &amp; CO₂ time series</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>Open-Meteo / ERA5</td>
+<td>Hourly weather (Vienna)</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>Eurostat (env_air_gge)</td>
+<td>Annual GHG emissions by sector</td>
+<td>None</td>
+</tr>
+<tr class="even">
+<td>EEA — Effort Sharing (DAT-170-en)</td>
+<td>Annual non-ETS emissions &amp; 2030 target</td>
+<td>None</td>
+</tr>
+<tr class="odd">
+<td>ENTSO-E</td>
+<td>Hourly generation, load, prices</td>
+<td>API key (free)</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Run order:</strong> all sources except ENTSO-E can be run immediately, no credentials needed.</p>
+<p><strong>Pre-requisite for ENTSO-E:</strong> Add your API key to <code>.env</code>:</p>
+<pre><code>ENTSOE_API_KEY=your-key-here</code></pre>
+<p>Then re-run the Setup cell and continue from ENTSO-E section.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<p>Install once if needed: <code>pip install entsoe-py requests pandas python-dotenv eurostat</code> (or the conda-forge equivalents).</p>
+<div id="6fc73d81" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports, project path, environment, and the (keyless) data loader</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> cast</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> eurostat</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.dates <span class="im">as</span> mdates</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> dotenv <span class="im">import</span> load_dotenv</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>PROJECT_ROOT <span class="op">=</span> Path.cwd().parent</span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">str</span>(PROJECT_ROOT) <span class="kw">not</span> <span class="kw">in</span> sys.path:</span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    sys.path.insert(<span class="dv">0</span>, <span class="bu">str</span>(PROJECT_ROOT))</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src.data_loader <span class="im">import</span> DataLoader</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src.viz <span class="im">import</span> set_house_style, save_qa_fig, PALETTE</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>set_house_style()</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>save_qa <span class="op">=</span> partial(save_qa_fig, notebook<span class="op">=</span><span class="st">"01_data_collection"</span>)  <span class="co"># bind this notebook's QA subfolder once</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>load_dotenv(PROJECT_ROOT <span class="op">/</span> <span class="st">".env"</span>)  <span class="co"># ENTSOE_API_KEY, used in the ENTSO-E section</span></span>
+<span id="cb2-24"><a href="#cb2-24" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-25"><a href="#cb2-25" aria-hidden="true" tabindex="-1"></a><span class="co"># no API key needed for OWID / weather / Eurostat / EEA</span></span>
+<span id="cb2-26"><a href="#cb2-26" aria-hidden="true" tabindex="-1"></a>dl <span class="op">=</span> DataLoader()</span>
+<span id="cb2-27"><a href="#cb2-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-28"><a href="#cb2-28" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Project root:"</span>, PROJECT_ROOT)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>14:15:55 [INFO] ENTSO-E client initialised.</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Project root: /home/emilia/portfolio/austria-energy-analysis</code></pre>
+</div>
+</div>
+</section>
+<section id="our-world-in-data-annual-energy-series" class="level2">
+<h2 class="anchored" data-anchor-id="our-world-in-data-annual-energy-series">1 · Our World in Data — annual energy series</h2>
+<p>Downloads the full OWID energy CSV (~10 MB) and saves the Austria slice.<br>
+No credentials required.</p>
+<div id="e0c8a997" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fetch the OWID energy CSV, keep the Austria slice</span></span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>owid_path <span class="op">=</span> dl.fetch_owid()</span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>df_owid <span class="op">=</span> pd.read_csv(owid_path, index_col<span class="op">=</span><span class="st">"year"</span>)</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>df_owid<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a>df_owid.tail()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>14:15:55 [INFO] Fetching OWID energy dataset …
+14:15:56 [INFO]   Full dataset saved → /home/emilia/portfolio/austria-energy-analysis/data/external/owid_energy_full.csv
+14:15:56 [INFO]   Austria slice (126 rows) → /home/emilia/portfolio/austria-energy-analysis/data/raw/owid_energy_AUT.csv</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape: (126, 129)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">country</th>
+<th data-quarto-table-cell-role="th">iso_code</th>
+<th data-quarto-table-cell-role="th">population</th>
+<th data-quarto-table-cell-role="th">gdp</th>
+<th data-quarto-table-cell-role="th">biofuel_cons_change_pct</th>
+<th data-quarto-table-cell-role="th">biofuel_cons_change_twh</th>
+<th data-quarto-table-cell-role="th">biofuel_cons_per_capita</th>
+<th data-quarto-table-cell-role="th">biofuel_consumption</th>
+<th data-quarto-table-cell-role="th">biofuel_elec_per_capita</th>
+<th data-quarto-table-cell-role="th">biofuel_electricity</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">solar_share_elec</th>
+<th data-quarto-table-cell-role="th">solar_share_energy</th>
+<th data-quarto-table-cell-role="th">wind_cons_change_pct</th>
+<th data-quarto-table-cell-role="th">wind_cons_change_twh</th>
+<th data-quarto-table-cell-role="th">wind_consumption</th>
+<th data-quarto-table-cell-role="th">wind_elec_per_capita</th>
+<th data-quarto-table-cell-role="th">wind_electricity</th>
+<th data-quarto-table-cell-role="th">wind_energy_per_capita</th>
+<th data-quarto-table-cell-role="th">wind_share_elec</th>
+<th data-quarto-table-cell-role="th">wind_share_energy</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2021</th>
+<td>Austria</td>
+<td>AUT</td>
+<td>8967053.0</td>
+<td>3.798352e+11</td>
+<td>4.871</td>
+<td>0.225</td>
+<td>540.527</td>
+<td>4.847</td>
+<td>499.607</td>
+<td>4.48</td>
+<td>...</td>
+<td>4.170</td>
+<td>1.714</td>
+<td>-0.758</td>
+<td>-0.168</td>
+<td>16.601</td>
+<td>751.640</td>
+<td>6.74</td>
+<td>1851.343</td>
+<td>10.109</td>
+<td>4.165</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2022</th>
+<td>Austria</td>
+<td>AUT</td>
+<td>9064678.0</td>
+<td>3.988154e+11</td>
+<td>-4.995</td>
+<td>-0.242</td>
+<td>507.998</td>
+<td>4.605</td>
+<td>524.012</td>
+<td>4.75</td>
+<td>...</td>
+<td>5.879</td>
+<td>2.481</td>
+<td>7.442</td>
+<td>1.192</td>
+<td>17.793</td>
+<td>798.705</td>
+<td>7.24</td>
+<td>1962.866</td>
+<td>11.230</td>
+<td>4.749</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2023</th>
+<td>Austria</td>
+<td>AUT</td>
+<td>9130434.0</td>
+<td>NaN</td>
+<td>17.384</td>
+<td>0.801</td>
+<td>592.015</td>
+<td>5.405</td>
+<td>499.429</td>
+<td>4.56</td>
+<td>...</td>
+<td>9.707</td>
+<td>4.052</td>
+<td>10.979</td>
+<td>1.809</td>
+<td>19.602</td>
+<td>880.571</td>
+<td>8.04</td>
+<td>2146.855</td>
+<td>11.327</td>
+<td>5.093</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2024</th>
+<td>Austria</td>
+<td>AUT</td>
+<td>9120815.0</td>
+<td>NaN</td>
+<td>-2.322</td>
+<td>-0.126</td>
+<td>578.877</td>
+<td>5.280</td>
+<td>512.016</td>
+<td>4.67</td>
+<td>...</td>
+<td>10.373</td>
+<td>5.709</td>
+<td>14.593</td>
+<td>2.860</td>
+<td>22.462</td>
+<td>1002.103</td>
+<td>9.14</td>
+<td>2462.731</td>
+<td>11.648</td>
+<td>5.580</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2025</th>
+<td>Austria</td>
+<td>AUT</td>
+<td>9113578.0</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>511.325</td>
+<td>4.66</td>
+<td>...</td>
+<td>14.081</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>911.826</td>
+<td>8.31</td>
+<td>NaN</td>
+<td>11.349</td>
+<td>NaN</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 129 columns</p>
+</div>
+</div>
+</div>
+<div id="f6cda0cb" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># quick sanity check: which columns do we have?</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>energy_cols <span class="op">=</span> [c <span class="cf">for</span> c <span class="kw">in</span> df_owid.columns <span class="cf">if</span> <span class="bu">any</span>(</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    kw <span class="kw">in</span> c <span class="cf">for</span> kw <span class="kw">in</span> [<span class="st">"electricity"</span>, <span class="st">"renewables"</span>, <span class="st">"carbon"</span>, <span class="st">"energy"</span>, <span class="st">"co2"</span>, <span class="st">"solar"</span>, <span class="st">"wind"</span>, <span class="st">"hydro"</span>]</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)]</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span><span class="bu">len</span>(energy_cols)<span class="sc">}</span><span class="ss"> energy-related columns:"</span>)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> c <span class="kw">in</span> energy_cols:</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">" "</span>, c)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>77 energy-related columns:
+  biofuel_electricity
+  biofuel_share_energy
+  carbon_intensity_elec
+  coal_electricity
+  coal_share_energy
+  electricity_demand
+  electricity_demand_per_capita
+  electricity_generation
+  electricity_share_energy
+  energy_cons_change_pct
+  energy_cons_change_twh
+  energy_per_capita
+  energy_per_gdp
+  fossil_electricity
+  fossil_energy_per_capita
+  fossil_share_energy
+  gas_electricity
+  gas_energy_per_capita
+  gas_share_energy
+  hydro_cons_change_pct
+  hydro_cons_change_twh
+  hydro_consumption
+  hydro_elec_per_capita
+  hydro_electricity
+  hydro_energy_per_capita
+  hydro_share_elec
+  hydro_share_energy
+  low_carbon_cons_change_pct
+  low_carbon_cons_change_twh
+  low_carbon_consumption
+  low_carbon_elec_per_capita
+  low_carbon_electricity
+  low_carbon_energy_per_capita
+  low_carbon_share_elec
+  low_carbon_share_energy
+  nuclear_electricity
+  nuclear_energy_per_capita
+  nuclear_share_energy
+  oil_electricity
+  oil_energy_per_capita
+  oil_share_energy
+  other_renewable_electricity
+  other_renewable_exc_biofuel_electricity
+  other_renewables_cons_change_pct
+  other_renewables_cons_change_twh
+  other_renewables_elec_per_capita
+  other_renewables_elec_per_capita_exc_biofuel
+  other_renewables_energy_per_capita
+  other_renewables_share_elec
+  other_renewables_share_elec_exc_biofuel
+  other_renewables_share_energy
+  per_capita_electricity
+  primary_energy_consumption
+  renewables_cons_change_pct
+  renewables_cons_change_twh
+  renewables_consumption
+  renewables_elec_per_capita
+  renewables_electricity
+  renewables_energy_per_capita
+  renewables_share_elec
+  renewables_share_energy
+  solar_cons_change_pct
+  solar_cons_change_twh
+  solar_consumption
+  solar_elec_per_capita
+  solar_electricity
+  solar_energy_per_capita
+  solar_share_elec
+  solar_share_energy
+  wind_cons_change_pct
+  wind_cons_change_twh
+  wind_consumption
+  wind_elec_per_capita
+  wind_electricity
+  wind_energy_per_capita
+  wind_share_elec
+  wind_share_energy</code></pre>
+</div>
+</div>
+</section>
+<section id="open-meteo-hourly-weather-vienna" class="level2">
+<h2 class="anchored" data-anchor-id="open-meteo-hourly-weather-vienna">2 · Open-Meteo — hourly weather (Vienna)</h2>
+<p>ERA5 reanalysis data via the free Open-Meteo API.<br>
+No account or API key needed.</p>
+<div id="271a1187" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fetch hourly ERA5 weather for Vienna (Open-Meteo)</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>START <span class="op">=</span> <span class="st">"2019-01-01"</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>END   <span class="op">=</span> <span class="st">"2024-12-31"</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a>weather_path <span class="op">=</span> dl.fetch_weather(start<span class="op">=</span>START, end<span class="op">=</span>END)</span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>df_weather <span class="op">=</span> pd.read_csv(weather_path, index_col<span class="op">=</span><span class="st">"timestamp"</span>, parse_dates<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>df_weather<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Date range: </span><span class="sc">{</span>df_weather<span class="sc">.</span>index<span class="sc">.</span><span class="bu">min</span>()<span class="sc">}</span><span class="ss"> → </span><span class="sc">{</span>df_weather<span class="sc">.</span>index<span class="sc">.</span><span class="bu">max</span>()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a>df_weather.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>14:15:56 [INFO] Fetching Open-Meteo weather  2019-01-01 → 2024-12-31 …
+14:15:57 [INFO]   Saved 52608 rows → /home/emilia/portfolio/austria-energy-analysis/data/raw/weather_vienna.csv</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape: (52608, 5)
+Date range: 2019-01-01 00:00:00 → 2024-12-31 23:00:00</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="4">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">temperature_2m</th>
+<th data-quarto-table-cell-role="th">shortwave_radiation</th>
+<th data-quarto-table-cell-role="th">windspeed_10m</th>
+<th data-quarto-table-cell-role="th">precipitation</th>
+<th data-quarto-table-cell-role="th">cloudcover</th>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">timestamp</th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th"></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2019-01-01 00:00:00</th>
+<td>2.4</td>
+<td>0.0</td>
+<td>11.2</td>
+<td>0.0</td>
+<td>52</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2019-01-01 01:00:00</th>
+<td>2.2</td>
+<td>0.0</td>
+<td>10.2</td>
+<td>0.0</td>
+<td>94</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2019-01-01 02:00:00</th>
+<td>2.9</td>
+<td>0.0</td>
+<td>10.5</td>
+<td>0.0</td>
+<td>100</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2019-01-01 03:00:00</th>
+<td>4.1</td>
+<td>0.0</td>
+<td>11.5</td>
+<td>0.0</td>
+<td>100</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2019-01-01 04:00:00</th>
+<td>4.3</td>
+<td>0.0</td>
+<td>11.2</td>
+<td>0.0</td>
+<td>98</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="b903177c" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># basic stats + missing value check</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Missing values ==="</span>)</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(df_weather.isna().<span class="bu">sum</span>())</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== Descriptive stats ==="</span>)</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a>df_weather.describe().<span class="bu">round</span>(<span class="dv">2</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== Missing values ===
+temperature_2m         0
+shortwave_radiation    0
+windspeed_10m          0
+precipitation          0
+cloudcover             0
+dtype: int64
+
+=== Descriptive stats ===</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="5">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">temperature_2m</th>
+<th data-quarto-table-cell-role="th">shortwave_radiation</th>
+<th data-quarto-table-cell-role="th">windspeed_10m</th>
+<th data-quarto-table-cell-role="th">precipitation</th>
+<th data-quarto-table-cell-role="th">cloudcover</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">count</th>
+<td>52608.00</td>
+<td>52608.00</td>
+<td>52608.00</td>
+<td>52608.00</td>
+<td>52608.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">mean</th>
+<td>11.84</td>
+<td>147.74</td>
+<td>13.77</td>
+<td>0.08</td>
+<td>61.45</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">std</th>
+<td>8.50</td>
+<td>221.43</td>
+<td>7.84</td>
+<td>0.38</td>
+<td>40.31</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">min</th>
+<td>-9.60</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">25%</th>
+<td>4.90</td>
+<td>0.00</td>
+<td>7.60</td>
+<td>0.00</td>
+<td>18.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">50%</th>
+<td>11.30</td>
+<td>7.00</td>
+<td>12.30</td>
+<td>0.00</td>
+<td>80.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">75%</th>
+<td>18.40</td>
+<td>240.25</td>
+<td>18.90</td>
+<td>0.00</td>
+<td>100.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">max</th>
+<td>36.30</td>
+<td>905.00</td>
+<td>51.90</td>
+<td>14.00</td>
+<td>100.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="c86c7b85" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># daily-mean temperature &amp; solar radiation — confirms the series looks seasonal</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a>fig, (ax_temp, ax_solar) <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">1</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">6</span>), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>daily <span class="op">=</span> df_weather.resample(<span class="st">"D"</span>).mean()</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a>ax_temp.plot(daily.index, daily[<span class="st">"temperature_2m"</span>], lw<span class="op">=</span><span class="fl">0.8</span>, color<span class="op">=</span><span class="st">"#E8593C"</span>)</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>ax_temp.set_ylabel(<span class="st">"Temperature (°C)"</span>)</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a>ax_temp.set_title(<span class="st">"Vienna — daily mean temperature &amp; solar radiation (ERA5)"</span>)</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>ax_solar.plot(daily.index, daily[<span class="st">"shortwave_radiation"</span>], lw<span class="op">=</span><span class="fl">0.8</span>, color<span class="op">=</span><span class="st">"#EF9F27"</span>)</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>ax_solar.set_ylabel(<span class="st">"Solar radiation (W/m²)"</span>)</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> (ax_temp, ax_solar):</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">"%Y"</span>))</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>    ax.grid(axis<span class="op">=</span><span class="st">"y"</span>, alpha<span class="op">=</span><span class="fl">0.3</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>save_qa(fig, <span class="st">"weather_sanity_check"</span>)</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Looks reasonable? Seasonal oscillations present -&gt; ok"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/qa/01_data_collection/weather_sanity_check.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_data_collection_files/figure-html/cell-7-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Looks reasonable? Seasonal oscillations present -&gt; ok</code></pre>
+</div>
+</div>
+</section>
+<section id="eurostat-greenhouse-gas-ghg-emissions-inventory" class="level2">
+<h2 class="anchored" data-anchor-id="eurostat-greenhouse-gas-ghg-emissions-inventory">3 · Eurostat — greenhouse-gas (GHG) emissions inventory</h2>
+<p>Austria’s national greenhouse-gas inventory (dataset <code>env_air_gge</code>) — the official United Nations Framework Convention on Climate Change (UNFCCC) figures, re-published by Eurostat. Annual, 1990 → latest (~2 years behind), all gases combined as CO₂-equivalent. No API key needed.</p>
+<p>Feeds <strong>RQ6</strong> (emissions trajectory vs the 2030 target). We pull <em>all</em> sectors and units here and pick what we need during cleaning, so this cell doubles as a first look at what Eurostat actually returns.</p>
+<div id="33b7fa5b" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fetch GHG inventory + first look</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a><span class="co"># keyless; reuses `dl` from Setup. Pulls all sectors/units for AT,</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a><span class="co"># GHG aggregate (CO₂-eq), every year.</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>ghg_path <span class="op">=</span> dl.fetch_ghg(<span class="st">"AT"</span>)</span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a>df_ghg <span class="op">=</span> pd.read_csv(ghg_path)</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Shape:         </span><span class="sc">{</span>df_ghg<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Columns:       </span><span class="sc">{</span><span class="bu">list</span>(df_ghg.columns)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Units present: </span><span class="sc">{</span>df_ghg[<span class="st">'unit'</span>]<span class="sc">.</span>unique()<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co"># cryptic sector codes → human labels, to spot the TOTAL during cleaning</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a>sector_dic <span class="op">=</span> cast(<span class="bu">dict</span>[<span class="bu">str</span>, <span class="bu">str</span>], eurostat.get_dic(<span class="st">"env_air_gge"</span>, <span class="st">"src_crf"</span>, frmt<span class="op">=</span><span class="st">"dict"</span>))  <span class="co"># {code: label}</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sectors present in the Austria data:"</span>)</span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> code <span class="kw">in</span> df_ghg[<span class="st">"src_crf"</span>].unique():</span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>code<span class="sc">:&lt;18}</span><span class="ss"> </span><span class="sc">{</span>sector_dic<span class="sc">.</span>get(code, <span class="st">'?'</span>)<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a>df_ghg.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>14:15:58 [INFO] Fetching Eurostat GHG inventory (env_air_gge) for AT …
+14:15:58 [INFO]   Saved 316 rows x 40 cols → /home/emilia/portfolio/austria-energy-analysis/data/raw/eurostat_ghg_AT.csv</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape:         (316, 40)
+Columns:       ['freq', 'unit', 'airpol', 'src_crf', 'geo\\TIME_PERIOD', '1990', '1991', '1992', '1993', '1994', '1995', '1996', '1997', '1998', '1999', '2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009', '2010', '2011', '2012', '2013', '2014', '2015', '2016', '2017', '2018', '2019', '2020', '2021', '2022', '2023', '2024']
+Units present: &lt;StringArray&gt;
+['MIO_T', 'THS_T']
+Length: 2, dtype: str
+
+Sectors present in the Austria data:
+  CRF1               Energy
+  CRF1A              Fuel combustion - sectoral approach
+  CRF1A1             Fuel combustion in energy industries
+  CRF1A1A            Fuel combustion in public electricity and heat production
+  CRF1A1B            Fuel combustion in petroleum refining
+  CRF1A1C            Fuel combustion in manufacture of solid fuels and other energy industries
+  CRF1A2             Fuel combustion in manufacturing industries and construction
+  CRF1A2A            Fuel combustion in manufacture of iron and steel
+  CRF1A2B            Fuel combustion in manufacture of non-ferrous metals
+  CRF1A2C            Fuel combustion in manufacture of chemicals
+  CRF1A2D            Fuel combustion in manufacture of pulp, paper and printing
+  CRF1A2E            Fuel combustion in manufacture of food, beverages and tobacco
+  CRF1A2F            Fuel combustion in manufacture of non-metallic mineral products
+  CRF1A2G            Fuel combustion in other manufacturing industries and construction
+  CRF1A3             Fuel combustion in transport
+  CRF1A3A            Fuel combustion in domestic aviation
+  CRF1A3B            Fuel combustion in road transport
+  CRF1A3B1           Fuel combustion in cars
+  CRF1A3B2           Fuel combustion in light duty trucks
+  CRF1A3B3           Fuel combustion in heavy duty trucks and buses
+  CRF1A3B4           Fuel combustion in motorcycles
+  CRF1A3C            Fuel combustion in railways
+  CRF1A3D            Fuel combustion in domestic navigation
+  CRF1A3E            Fuel combustion in other transport
+  CRF1A4             Other fuel combustion sectors
+  CRF1A4A            Fuel combustion in commercial and institutional sector
+  CRF1A4B            Fuel combustion by households
+  CRF1A4C            Fuel combustion in agriculture, forestry and fishing
+  CRF1A5             Other fuel combustion sectors n.e.c.
+  CRF1A5A            Stationary fuel combustion sectors n.e.c.
+  CRF1A5B            Mobile fuel combustion sectors n.e.c.
+  CRF1B              Fuels - fugitive emissions
+  CRF1B1             Solid fuels - fugitive emissions
+  CRF1B2             Oil, natural gas and other energy production - fugitive emissions
+  CRF1C              Transport and storage of CO2 (memo item)
+  CRF1D1             International bunkers (memo item)
+  CRF1D1A            International aviation (memo item)
+  CRF1D1B            International navigation (memo item)
+  CRF1D2             Multilateral operations (memo item)
+  CRF1D3             Biomass - CO2 emissions (memo item)
+  CRF2               Industrial processes and product use
+  CRF2A              Mineral industry
+  CRF2A1             Cement production
+  CRF2A2             Lime production
+  CRF2A3             Glass production
+  CRF2A4             Other process uses of carbonates
+  CRF2B              Chemical industry
+  CRF2B1             Ammonia production
+  CRF2B10            Other chemical industry
+  CRF2B2             Nitric acid production
+  CRF2B3             Adipic acid production
+  CRF2B4             Caprolactam, glyoxal and glyoxylic acid production
+  CRF2B5             Carbide production
+  CRF2B6             Titanium dioxide production
+  CRF2B7             Soda ash production
+  CRF2B8             Petrochemical and carbon black production
+  CRF2C              Metal industry
+  CRF2C1             Iron and steel production
+  CRF2C2             Ferroalloys production
+  CRF2C3             Aluminium production
+  CRF2C4             Magnesium production
+  CRF2C5             Lead production
+  CRF2C6             Zinc production
+  CRF2C7             Other metal industry
+  CRF2D              Non-energy products from fuels and solvent use
+  CRF2D1             Lubricant use
+  CRF2D2             Paraffin wax use
+  CRF2D3             Other non-energy product use
+  CRF2E              Electronics industry
+  CRF2E1             Integrated circuit or semiconductor production
+  CRF2F              Product uses as substitutes for ozone depleting substances
+  CRF2F1             Refrigeration and air conditioning
+  CRF2F2             Foam blowing agent use
+  CRF2F3             Fire protection
+  CRF2F4             Aerosol use
+  CRF2F5             Solvent use
+  CRF2G              Other product manufacture and use
+  CRF2H              Other industrial process and product use
+  CRF3               Agriculture
+  CRF3A              Enteric fermentation
+  CRF3A1             Enteric fermentation of cattle
+  CRF3A2             Enteric fermentation of sheep
+  CRF3A3             Enteric fermentation of swine
+  CRF3A4             Enteric fermentation of other livestock
+  CRF3B              Manure management
+  CRF3B1             Cattle manure management
+  CRF3B2             Sheep manure management
+  CRF3B3             Swine manure management
+  CRF3B4             Other livestock manure management
+  CRF3B5             Manure management - indirect N2O emissions
+  CRF3C              Rice cultivation
+  CRF3C1             Irrigated rice cultivation
+  CRF3C2             Rainfed rice cultivation
+  CRF3C3             Deep water rice cultivation
+  CRF3C4             Other rice cultivation
+  CRF3D              Managed agricultural soils
+  CRF3D1             Managed agricultural soils - direct N2O emissions
+  CRF3D2             Managed agricultural soils - indirect N2O emissions
+  CRF3E              Prescribed burning of savannas
+  CRF3F              Field burning of agricultural residues
+  CRF3F1             Field burning of cereals residues
+  CRF3F2             Field burning of pulses residues
+  CRF3F3             Field burning of tubers and roots residues
+  CRF3F4             Field burning of sugar cane residues
+  CRF3F5             Field burning of other agricultural residues
+  CRF3G              Liming
+  CRF3H              Urea application
+  CRF3I              Other carbon-containing fertilizers
+  CRF3J              Other agriculture
+  CRF4               Land use, land use change, and forestry (LULUCF)
+  CRF4A              Forest land
+  CRF4A0             Drainage and rewetting and other management of organic and mineral soils related to forest land - emissions and removals
+  CRF4A1             Unconverted forest land
+  CRF4A2             Land converted to forest land
+  CRF4B              Cropland
+  CRF4B0             Drainage and rewetting and other management of organic and mineral soils related to cropland - emissions and removals
+  CRF4B1             Unconverted cropland
+  CRF4B2             Land converted to cropland
+  CRF4C              Grassland
+  CRF4C0             Drainage and rewetting and other management of organic and mineral soils related to grassland - emissions and removals
+  CRF4C1             Unconverted grassland
+  CRF4C2             Land converted to grassland
+  CRF4D              Wetlands
+  CRF4D0             Drainage and rewetting and other management of organic and mineral soils related to wetlands - emissions and removals
+  CRF4D1             Unconverted wetlands
+  CRF4D2             Land converted to wetlands
+  CRF4E              Settlements
+  CRF4E0             Biomass burning in settlements
+  CRF4E1             Unconverted settlements
+  CRF4E2             Land converted to settlements
+  CRF4F              Other land
+  CRF4F2             Land converted to other land
+  CRF4F3             Nitrogen mineralization and immobilization in other land - direct N2O emissions
+  CRF4F4             Biomass burning on other land
+  CRF4G              Harvested wood products
+  CRF4H              Other land use, land use change, and forestry
+  CRF5               Waste management
+  CRF5A              Solid waste disposal
+  CRF5A1             Managed waste disposal sites
+  CRF5A2             Unmanaged waste disposal sites
+  CRF5A3             Uncategorized waste disposal sites
+  CRF5B              Biological treatment of solid waste
+  CRF5B1             Waste composting
+  CRF5B2             Anaerobic digestion at biogas facilities
+  CRF5C              Incineration and open burning of waste
+  CRF5C1             Waste incineration
+  CRF5C2             Open burning of waste
+  CRF5D              Wastewater treatment and discharge
+  CRF5D1             Domestic wastewater
+  CRF5D2             Industrial wastewater
+  CRF5E              Other disposal
+  CRF5F1             Long-term storage of carbon in waste disposal sites
+  CRF5F2             Annual change in total long-term carbon storage
+  CRF5F3             Annual change in total long-term carbon storage in harvested wood products HWP waste
+  CRF6               Other sectors
+  CRF_INDCO2         Indirect CO2
+  TOTX4_MEMO         Total (excluding LULUCF and memo items)
+  TOTXMEMO           Total (excluding memo items)</code></pre>
+</div>
+<div class="cell-output cell-output-display" data-execution_count="7">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">freq</th>
+<th data-quarto-table-cell-role="th">unit</th>
+<th data-quarto-table-cell-role="th">airpol</th>
+<th data-quarto-table-cell-role="th">src_crf</th>
+<th data-quarto-table-cell-role="th">geo\TIME_PERIOD</th>
+<th data-quarto-table-cell-role="th">1990</th>
+<th data-quarto-table-cell-role="th">1991</th>
+<th data-quarto-table-cell-role="th">1992</th>
+<th data-quarto-table-cell-role="th">1993</th>
+<th data-quarto-table-cell-role="th">1994</th>
+<th data-quarto-table-cell-role="th">...</th>
+<th data-quarto-table-cell-role="th">2015</th>
+<th data-quarto-table-cell-role="th">2016</th>
+<th data-quarto-table-cell-role="th">2017</th>
+<th data-quarto-table-cell-role="th">2018</th>
+<th data-quarto-table-cell-role="th">2019</th>
+<th data-quarto-table-cell-role="th">2020</th>
+<th data-quarto-table-cell-role="th">2021</th>
+<th data-quarto-table-cell-role="th">2022</th>
+<th data-quarto-table-cell-role="th">2023</th>
+<th data-quarto-table-cell-role="th">2024</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>A</td>
+<td>MIO_T</td>
+<td>GHG</td>
+<td>CRF1</td>
+<td>AT</td>
+<td>52.84241</td>
+<td>56.46303</td>
+<td>51.69650</td>
+<td>52.22136</td>
+<td>51.50475</td>
+<td>...</td>
+<td>53.19180</td>
+<td>54.42775</td>
+<td>56.20278</td>
+<td>54.91140</td>
+<td>55.25926</td>
+<td>50.26068</td>
+<td>52.17155</td>
+<td>48.47306</td>
+<td>44.58905</td>
+<td>43.10443</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>A</td>
+<td>MIO_T</td>
+<td>GHG</td>
+<td>CRF1A</td>
+<td>AT</td>
+<td>51.90018</td>
+<td>55.67047</td>
+<td>50.85775</td>
+<td>51.41829</td>
+<td>50.82443</td>
+<td>...</td>
+<td>52.56836</td>
+<td>53.84171</td>
+<td>55.58406</td>
+<td>54.35912</td>
+<td>54.73412</td>
+<td>49.76020</td>
+<td>51.70425</td>
+<td>48.03802</td>
+<td>44.18212</td>
+<td>42.70548</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>A</td>
+<td>MIO_T</td>
+<td>GHG</td>
+<td>CRF1A1</td>
+<td>AT</td>
+<td>14.00751</td>
+<td>14.79639</td>
+<td>11.55240</td>
+<td>11.62626</td>
+<td>11.91457</td>
+<td>...</td>
+<td>10.45762</td>
+<td>10.23961</td>
+<td>10.85158</td>
+<td>10.00254</td>
+<td>10.03484</td>
+<td>8.66693</td>
+<td>8.68563</td>
+<td>8.17385</td>
+<td>7.29615</td>
+<td>7.25578</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>A</td>
+<td>MIO_T</td>
+<td>GHG</td>
+<td>CRF1A1A</td>
+<td>AT</td>
+<td>11.09819</td>
+<td>11.81394</td>
+<td>8.63592</td>
+<td>8.46483</td>
+<td>8.74720</td>
+<td>...</td>
+<td>7.41504</td>
+<td>7.22147</td>
+<td>7.89779</td>
+<td>6.98244</td>
+<td>7.05368</td>
+<td>5.76778</td>
+<td>5.75059</td>
+<td>5.70330</td>
+<td>4.55595</td>
+<td>4.45403</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>A</td>
+<td>MIO_T</td>
+<td>GHG</td>
+<td>CRF1A1B</td>
+<td>AT</td>
+<td>2.39793</td>
+<td>2.43171</td>
+<td>2.39305</td>
+<td>2.73594</td>
+<td>2.71355</td>
+<td>...</td>
+<td>2.81060</td>
+<td>2.79117</td>
+<td>2.74479</td>
+<td>2.83073</td>
+<td>2.79703</td>
+<td>2.73778</td>
+<td>2.75549</td>
+<td>2.25922</td>
+<td>2.58451</td>
+<td>2.62487</td>
+</tr>
+</tbody>
+</table>
+
+<p>5 rows × 40 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="european-environment-agency-eea-effort-sharing-non-ets-emissions" class="level2">
+<h2 class="anchored" data-anchor-id="european-environment-agency-eea-effort-sharing-non-ets-emissions">4 · European Environment Agency (EEA) — Effort Sharing (non-ETS) emissions</h2>
+<p>Non-ETS (emissions outside the EU Emissions Trading System, ETS) greenhouse-gas emissions and the 2030 Effort Sharing target (EEA dataset DAT-170-en, CC-BY 4.0). Annual, no credentials — feeds <strong>RQ6</strong>. The workbook’s structure is inspected and loaded into DuckDB in notebook 02.</p>
+<div id="663dd886" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fetch the EEA Effort Sharing (non-ETS) workbook</span></span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>esr_path <span class="op">=</span> dl.fetch_esr()</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>size_kb <span class="op">=</span> esr_path.stat().st_size <span class="op">/</span> <span class="dv">1024</span></span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"Saved: </span><span class="sc">{</span>esr_path<span class="sc">.</span>name<span class="sc">}</span><span class="ss">  (</span><span class="sc">{</span>size_kb<span class="sc">:.0f}</span><span class="ss"> KB)"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>14:15:59 [INFO] Fetching EEA Effort Sharing emissions (DAT-170-en) …
+14:16:01 [INFO]   Extracted eea_t_esd-2022_p_2005-2024_v01_r00/GHG_ESD-ESR_2025.xlsx (95 KB) → /home/emilia/portfolio/austria-energy-analysis/data/external/eea_esr_effort_sharing.xlsx</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Saved: eea_esr_effort_sharing.xlsx  (95 KB)</code></pre>
+</div>
+</div>
+</section>
+<section id="entso-e-hourly-generation-load-prices" class="level2">
+<h2 class="anchored" data-anchor-id="entso-e-hourly-generation-load-prices">5 · ENTSO-E — hourly generation, load &amp; prices</h2>
+<p>ENTSO-E (European Network of Transmission System Operators for Electricity) publishes Austria’s hourly generation, load, and day-ahead price data. If the key is not set yet, this section will log a warning and skip — that’s fine.</p>
+<div id="2b89a987" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># re-check the loader now that .env is loaded and carries the API key</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run the setup cell if needed</span></span>
+<span id="cb24-3"><a href="#cb24-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> dl._entsoe_client <span class="kw">is</span> <span class="va">None</span>:</span>
+<span id="cb24-4"><a href="#cb24-4" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"⚠️  ENTSO-E client not available — add your key to .env and re-run."</span>)</span>
+<span id="cb24-5"><a href="#cb24-5" aria-hidden="true" tabindex="-1"></a><span class="cf">else</span>:</span>
+<span id="cb24-6"><a href="#cb24-6" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"✓  ENTSO-E client ready."</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>✓  ENTSO-E client ready.</code></pre>
+</div>
+</div>
+<div id="3b254ba7" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fetch generation</span></span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a><span class="co"># takes ~2–4 minutes for 2019–2024 (6 API calls, one per year).</span></span>
+<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a><span class="co"># safe to interrupt and resume — each year chunk is independent.</span></span>
+<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>ts_start <span class="op">=</span> cast(pd.Timestamp, pd.Timestamp(START, tz<span class="op">=</span><span class="st">"UTC"</span>))</span>
+<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a>ts_end   <span class="op">=</span> cast(pd.Timestamp, pd.Timestamp(END,   tz<span class="op">=</span><span class="st">"UTC"</span>) <span class="op">+</span> pd.Timedelta(days<span class="op">=</span><span class="dv">1</span>))</span>
+<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>df_gen <span class="op">=</span> <span class="va">None</span></span>
+<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> dl._entsoe_client:</span>
+<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a>    gen_path <span class="op">=</span> dl.fetch_generation(ts_start, ts_end)</span>
+<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> gen_path <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a>    df_gen <span class="op">=</span> pd.read_csv(</span>
+<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>        gen_path,</span>
+<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a>        header<span class="op">=</span>[<span class="dv">0</span>, <span class="dv">1</span>],  <span class="co"># 2-level columns: fuel × (Actual Aggregated / Consumption)</span></span>
+<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a>        index_col<span class="op">=</span><span class="dv">0</span>,</span>
+<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>        parse_dates<span class="op">=</span><span class="va">True</span>,</span>
+<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a>    df_gen.index <span class="op">=</span> pd.to_datetime(df_gen.index, utc<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>    df_gen <span class="op">=</span> df_gen.sort_index()</span>
+<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>df_gen<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb26-21"><a href="#cb26-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"Columns (fuel types):"</span>, df_gen.columns.tolist())</span>
+<span id="cb26-22"><a href="#cb26-22" aria-hidden="true" tabindex="-1"></a>    df_gen.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>14:16:01 [INFO] Fetching ENTSO-E generation  2019-01-01 → 2025-01-01 …
+14:16:01 [INFO]   chunk 2019 …
+14:17:28 [INFO]   chunk 2020 …
+14:18:41 [INFO]   chunk 2021 …
+14:19:52 [INFO]   chunk 2022 …
+14:20:54 [INFO]   chunk 2023 …
+14:21:40 [INFO]   chunk 2024 …
+14:22:25 [INFO]   Saved 210432 rows → /home/emilia/portfolio/austria-energy-analysis/data/raw/entsoe_generation_AT.csv</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape: (210432, 26)
+Columns (fuel types): [('Biomass', 'Actual Aggregated'), ('Biomass', 'Actual Consumption'), ('Fossil Gas', 'Actual Aggregated'), ('Fossil Gas', 'Actual Consumption'), ('Fossil Hard coal', 'Actual Aggregated'), ('Fossil Hard coal', 'Actual Consumption'), ('Fossil Oil', 'Actual Aggregated'), ('Fossil Oil', 'Actual Consumption'), ('Geothermal', 'Actual Aggregated'), ('Geothermal', 'Actual Consumption'), ('Hydro Pumped Storage', 'Actual Aggregated'), ('Hydro Pumped Storage', 'Actual Consumption'), ('Hydro Run-of-river and poundage', 'Actual Aggregated'), ('Hydro Run-of-river and poundage', 'Actual Consumption'), ('Hydro Water Reservoir', 'Actual Aggregated'), ('Hydro Water Reservoir', 'Actual Consumption'), ('Other', 'Actual Aggregated'), ('Other', 'Actual Consumption'), ('Other renewable', 'Actual Aggregated'), ('Other renewable', 'Actual Consumption'), ('Solar', 'Actual Aggregated'), ('Solar', 'Actual Consumption'), ('Waste', 'Actual Aggregated'), ('Waste', 'Actual Consumption'), ('Wind Onshore', 'Actual Aggregated'), ('Wind Onshore', 'Actual Consumption')]</code></pre>
+</div>
+</div>
+<div id="728cb8ca" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb29"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fetch load</span></span>
+<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> dl._entsoe_client:</span>
+<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    load_path <span class="op">=</span> dl.fetch_load(ts_start, ts_end)</span>
+<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> load_path <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>    df_load <span class="op">=</span> pd.read_csv(load_path, index_col<span class="op">=</span><span class="dv">0</span>, parse_dates<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a>    df_load.index <span class="op">=</span> pd.to_datetime(df_load.index, utc<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a>    df_load <span class="op">=</span> df_load.sort_index()</span>
+<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>df_load<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a>    df_load.head()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>14:22:26 [INFO] Fetching ENTSO-E load  2019-01-01 → 2025-01-01 …
+14:22:26 [INFO]   chunk 2019 …
+14:22:37 [INFO]   chunk 2020 …
+14:22:47 [INFO]   chunk 2021 …
+14:22:54 [INFO]   chunk 2022 …
+14:23:07 [INFO]   chunk 2023 …
+14:23:16 [INFO]   chunk 2024 …
+14:23:25 [INFO]   Saved 210432 rows → /home/emilia/portfolio/austria-energy-analysis/data/raw/entsoe_load_AT.csv</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape: (210432, 1)</code></pre>
+</div>
+</div>
+<div id="89cf1731" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="co"># fetch day-ahead prices</span></span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> dl._entsoe_client:</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>    prices_path <span class="op">=</span> dl.fetch_prices(ts_start, ts_end)</span>
+<span id="cb32-4"><a href="#cb32-4" aria-hidden="true" tabindex="-1"></a>    <span class="cf">assert</span> prices_path <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span></span>
+<span id="cb32-5"><a href="#cb32-5" aria-hidden="true" tabindex="-1"></a>    df_prices <span class="op">=</span> pd.read_csv(prices_path, index_col<span class="op">=</span><span class="dv">0</span>, parse_dates<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-6"><a href="#cb32-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># timestamps carry explicit offsets (+01:00/+02:00) → UTC is unambiguous across daylight-saving time (DST)</span></span>
+<span id="cb32-7"><a href="#cb32-7" aria-hidden="true" tabindex="-1"></a>    df_prices.index <span class="op">=</span> pd.to_datetime(df_prices.index, utc<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb32-8"><a href="#cb32-8" aria-hidden="true" tabindex="-1"></a>    df_prices <span class="op">=</span> df_prices.sort_index()</span>
+<span id="cb32-9"><a href="#cb32-9" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"Shape: </span><span class="sc">{</span>df_prices<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb32-10"><a href="#cb32-10" aria-hidden="true" tabindex="-1"></a>    display(df_prices.head())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stderr">
+<pre><code>14:23:26 [INFO] Fetching ENTSO-E day-ahead prices  2019-01-01 → 2025-01-01 …
+14:23:26 [INFO]   chunk 2019 …
+14:23:31 [INFO]   chunk 2020 …
+14:23:36 [INFO]   chunk 2021 …
+14:23:43 [INFO]   chunk 2022 …
+14:23:48 [INFO]   chunk 2023 …
+14:23:51 [INFO]   chunk 2024 …
+14:23:56 [INFO]   Saved 52609 rows → /home/emilia/portfolio/austria-energy-analysis/data/raw/entsoe_prices_AT.csv</code></pre>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Shape: (52609, 1)</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">price_eur_mwh</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2019-01-01 00:00:00+00:00</th>
+<td>39.76</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2019-01-01 01:00:00+00:00</th>
+<td>39.78</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2019-01-01 02:00:00+00:00</th>
+<td>27.87</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">2019-01-01 03:00:00+00:00</th>
+<td>-0.36</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2019-01-01 04:00:00+00:00</th>
+<td>-4.45</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="fb9a347b" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb35"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb35-1"><a href="#cb35-1" aria-hidden="true" tabindex="-1"></a><span class="co"># one sample week of the generation mix (sanity check)</span></span>
+<span id="cb35-2"><a href="#cb35-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> df_gen <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb35-3"><a href="#cb35-3" aria-hidden="true" tabindex="-1"></a>    week <span class="op">=</span> df_gen.xs(<span class="st">"Actual Aggregated"</span>, axis<span class="op">=</span><span class="dv">1</span>, level<span class="op">=</span><span class="dv">1</span>).loc[<span class="st">"2023-07-01"</span>:<span class="st">"2023-07-07"</span>]</span>
+<span id="cb35-4"><a href="#cb35-4" aria-hidden="true" tabindex="-1"></a>    week <span class="op">=</span> week.dropna(axis<span class="op">=</span><span class="dv">1</span>, how<span class="op">=</span><span class="st">"all"</span>)  <span class="co"># keep only fuels with data</span></span>
+<span id="cb35-5"><a href="#cb35-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-6"><a href="#cb35-6" aria-hidden="true" tabindex="-1"></a>    <span class="co"># semantic colours (reuse the house PALETTE) + conventional stack order:</span></span>
+<span id="cb35-7"><a href="#cb35-7" aria-hidden="true" tabindex="-1"></a>    <span class="co"># thermal/dispatchable at the bottom, variable renewables on top.</span></span>
+<span id="cb35-8"><a href="#cb35-8" aria-hidden="true" tabindex="-1"></a>    FUEL_STYLE <span class="op">=</span> {</span>
+<span id="cb35-9"><a href="#cb35-9" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Fossil Hard coal"</span>:                 <span class="st">"#3B3B3B"</span>,</span>
+<span id="cb35-10"><a href="#cb35-10" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Fossil Oil"</span>:                       <span class="st">"#6E5849"</span>,</span>
+<span id="cb35-11"><a href="#cb35-11" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Fossil Gas"</span>:                       <span class="st">"#8C8C8C"</span>,</span>
+<span id="cb35-12"><a href="#cb35-12" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Waste"</span>:                            <span class="st">"#B4B2A9"</span>,</span>
+<span id="cb35-13"><a href="#cb35-13" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Biomass"</span>:                          <span class="st">"#6BA544"</span>,</span>
+<span id="cb35-14"><a href="#cb35-14" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Geothermal"</span>:                       <span class="st">"#C0724A"</span>,</span>
+<span id="cb35-15"><a href="#cb35-15" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Hydro Pumped Storage"</span>:             <span class="st">"#9EC7EF"</span>,</span>
+<span id="cb35-16"><a href="#cb35-16" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Hydro Water Reservoir"</span>:            <span class="st">"#2C6FB5"</span>,</span>
+<span id="cb35-17"><a href="#cb35-17" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Hydro Run-of-river and poundage"</span>:  PALETTE[<span class="st">"hydro"</span>],   <span class="co"># #378ADD</span></span>
+<span id="cb35-18"><a href="#cb35-18" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Wind Onshore"</span>:                     PALETTE[<span class="st">"wind"</span>],    <span class="co"># #1D9E75</span></span>
+<span id="cb35-19"><a href="#cb35-19" aria-hidden="true" tabindex="-1"></a>        <span class="st">"Solar"</span>:                            PALETTE[<span class="st">"solar"</span>],   <span class="co"># #EF9F27</span></span>
+<span id="cb35-20"><a href="#cb35-20" aria-hidden="true" tabindex="-1"></a>    }</span>
+<span id="cb35-21"><a href="#cb35-21" aria-hidden="true" tabindex="-1"></a>    order  <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> FUEL_STYLE <span class="cf">if</span> f <span class="kw">in</span> week.columns]</span>
+<span id="cb35-22"><a href="#cb35-22" aria-hidden="true" tabindex="-1"></a>    order <span class="op">+=</span> [f <span class="cf">for</span> f <span class="kw">in</span> week.columns <span class="cf">if</span> f <span class="kw">not</span> <span class="kw">in</span> FUEL_STYLE]  <span class="co"># anything unmapped, on top</span></span>
+<span id="cb35-23"><a href="#cb35-23" aria-hidden="true" tabindex="-1"></a>    week   <span class="op">=</span> week[order]</span>
+<span id="cb35-24"><a href="#cb35-24" aria-hidden="true" tabindex="-1"></a>    colors <span class="op">=</span> [FUEL_STYLE.get(f, <span class="st">"#B4B2A9"</span>) <span class="cf">for</span> f <span class="kw">in</span> order]</span>
+<span id="cb35-25"><a href="#cb35-25" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb35-26"><a href="#cb35-26" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>))</span>
+<span id="cb35-27"><a href="#cb35-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># x_compat=True → let matplotlib's date locators drive the x-axis (pandas would</span></span>
+<span id="cb35-28"><a href="#cb35-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># otherwise install its own and ignore the DayLocator/formatter below).</span></span>
+<span id="cb35-29"><a href="#cb35-29" aria-hidden="true" tabindex="-1"></a>    week.plot.area(ax<span class="op">=</span>ax, stacked<span class="op">=</span><span class="va">True</span>, linewidth<span class="op">=</span><span class="dv">0</span>, color<span class="op">=</span>colors, x_compat<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb35-30"><a href="#cb35-30" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"Austria — hourly generation mix (sample week, July 2023)"</span>)</span>
+<span id="cb35-31"><a href="#cb35-31" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"MW"</span>)</span>
+<span id="cb35-32"><a href="#cb35-32" aria-hidden="true" tabindex="-1"></a>    ax.margins(x<span class="op">=</span><span class="dv">0</span>)                       <span class="co"># kill the area-plot left/right whitespace</span></span>
+<span id="cb35-33"><a href="#cb35-33" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_locator(mdates.DayLocator())              <span class="co"># one tick per day</span></span>
+<span id="cb35-34"><a href="#cb35-34" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">"%b </span><span class="sc">%d</span><span class="st">"</span>))  <span class="co"># → "Jul 01"</span></span>
+<span id="cb35-35"><a href="#cb35-35" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">""</span>)</span>
+<span id="cb35-36"><a href="#cb35-36" aria-hidden="true" tabindex="-1"></a>    ax.legend(loc<span class="op">=</span><span class="st">"upper left"</span>, fontsize<span class="op">=</span><span class="dv">8</span>, ncol<span class="op">=</span><span class="dv">2</span>, reverse<span class="op">=</span><span class="va">True</span>)  <span class="co"># legend matches top-to-bottom stack</span></span>
+<span id="cb35-37"><a href="#cb35-37" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb35-38"><a href="#cb35-38" aria-hidden="true" tabindex="-1"></a>    save_qa(fig, <span class="st">"generation_sanity_check"</span>)</span>
+<span id="cb35-39"><a href="#cb35-39" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/qa/01_data_collection/generation_sanity_check.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_data_collection_files/figure-html/cell-14-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="4791fc3f" class="cell" data-execution_count="14">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb37"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb37-1"><a href="#cb37-1" aria-hidden="true" tabindex="-1"></a><span class="co"># per-fuel small multiples — sample week (sanity check · free y-axes)</span></span>
+<span id="cb37-2"><a href="#cb37-2" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> df_gen <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb37-3"><a href="#cb37-3" aria-hidden="true" tabindex="-1"></a>    week <span class="op">=</span> df_gen.xs(<span class="st">"Actual Aggregated"</span>, axis<span class="op">=</span><span class="dv">1</span>, level<span class="op">=</span><span class="dv">1</span>).loc[<span class="st">"2023-07-01"</span>:<span class="st">"2023-07-07"</span>]</span>
+<span id="cb37-4"><a href="#cb37-4" aria-hidden="true" tabindex="-1"></a>    week <span class="op">=</span> week.dropna(axis<span class="op">=</span><span class="dv">1</span>, how<span class="op">=</span><span class="st">"all"</span>)</span>
+<span id="cb37-5"><a href="#cb37-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-6"><a href="#cb37-6" aria-hidden="true" tabindex="-1"></a>    MIN_PEAK_MW <span class="op">=</span> <span class="dv">10</span>  <span class="co"># drop fuels that never rise above this — no pattern worth checking</span></span>
+<span id="cb37-7"><a href="#cb37-7" aria-hidden="true" tabindex="-1"></a>    peaks   <span class="op">=</span> week.<span class="bu">max</span>().sort_values(ascending<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb37-8"><a href="#cb37-8" aria-hidden="true" tabindex="-1"></a>    keep    <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> peaks.index <span class="cf">if</span> peaks[f] <span class="op">&gt;=</span> MIN_PEAK_MW]</span>
+<span id="cb37-9"><a href="#cb37-9" aria-hidden="true" tabindex="-1"></a>    dropped <span class="op">=</span> [f <span class="cf">for</span> f <span class="kw">in</span> peaks.index <span class="cf">if</span> peaks[f] <span class="op">&lt;</span>  MIN_PEAK_MW]</span>
+<span id="cb37-10"><a href="#cb37-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-11"><a href="#cb37-11" aria-hidden="true" tabindex="-1"></a>    ncols <span class="op">=</span> <span class="dv">3</span></span>
+<span id="cb37-12"><a href="#cb37-12" aria-hidden="true" tabindex="-1"></a>    nrows <span class="op">=</span> (<span class="bu">len</span>(keep) <span class="op">+</span> ncols <span class="op">-</span> <span class="dv">1</span>) <span class="op">//</span> ncols</span>
+<span id="cb37-13"><a href="#cb37-13" aria-hidden="true" tabindex="-1"></a>    fig, axes <span class="op">=</span> plt.subplots(nrows, ncols, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="fl">2.6</span> <span class="op">*</span> nrows), sharex<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb37-14"><a href="#cb37-14" aria-hidden="true" tabindex="-1"></a>    axes <span class="op">=</span> axes.ravel()</span>
+<span id="cb37-15"><a href="#cb37-15" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-16"><a href="#cb37-16" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax, fuel <span class="kw">in</span> <span class="bu">zip</span>(axes, keep):</span>
+<span id="cb37-17"><a href="#cb37-17" aria-hidden="true" tabindex="-1"></a>        ax.fill_between(week.index, week[fuel], <span class="dv">0</span>,</span>
+<span id="cb37-18"><a href="#cb37-18" aria-hidden="true" tabindex="-1"></a>                        color<span class="op">=</span>FUEL_STYLE.get(fuel, <span class="st">"#B4B2A9"</span>), linewidth<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb37-19"><a href="#cb37-19" aria-hidden="true" tabindex="-1"></a>        ax.set_title(<span class="ss">f"</span><span class="sc">{</span>fuel<span class="sc">}</span><span class="ss">  ·  peak </span><span class="sc">{</span>peaks[fuel]<span class="sc">:,.0f}</span><span class="ss"> MW"</span>, fontsize<span class="op">=</span><span class="dv">9</span>, loc<span class="op">=</span><span class="st">"left"</span>)</span>
+<span id="cb37-20"><a href="#cb37-20" aria-hidden="true" tabindex="-1"></a>        ax.margins(x<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb37-21"><a href="#cb37-21" aria-hidden="true" tabindex="-1"></a>        ax.xaxis.set_major_locator(mdates.DayLocator())              <span class="co"># one tick per day</span></span>
+<span id="cb37-22"><a href="#cb37-22" aria-hidden="true" tabindex="-1"></a>        ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">"%b </span><span class="sc">%d</span><span class="st">"</span>))  <span class="co"># → "Jul 01"</span></span>
+<span id="cb37-23"><a href="#cb37-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-24"><a href="#cb37-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> ax <span class="kw">in</span> axes[<span class="bu">len</span>(keep):]:      <span class="co"># blank any unused grid cells</span></span>
+<span id="cb37-25"><a href="#cb37-25" aria-hidden="true" tabindex="-1"></a>        ax.axis(<span class="st">"off"</span>)</span>
+<span id="cb37-26"><a href="#cb37-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-27"><a href="#cb37-27" aria-hidden="true" tabindex="-1"></a>    <span class="co"># guard: sharex shows tick labels only on the bottom row, but a partial last</span></span>
+<span id="cb37-28"><a href="#cb37-28" aria-hidden="true" tabindex="-1"></a>    <span class="co"># row leaves some columns unlabelled — re-enable the lowest cell in each column.</span></span>
+<span id="cb37-29"><a href="#cb37-29" aria-hidden="true" tabindex="-1"></a>    <span class="cf">for</span> c <span class="kw">in</span> <span class="bu">range</span>(ncols):</span>
+<span id="cb37-30"><a href="#cb37-30" aria-hidden="true" tabindex="-1"></a>        col <span class="op">=</span> [c <span class="op">+</span> r <span class="op">*</span> ncols <span class="cf">for</span> r <span class="kw">in</span> <span class="bu">range</span>(nrows) <span class="cf">if</span> c <span class="op">+</span> r <span class="op">*</span> ncols <span class="op">&lt;</span> <span class="bu">len</span>(keep)]</span>
+<span id="cb37-31"><a href="#cb37-31" aria-hidden="true" tabindex="-1"></a>        <span class="cf">if</span> col:</span>
+<span id="cb37-32"><a href="#cb37-32" aria-hidden="true" tabindex="-1"></a>            bottom <span class="op">=</span> axes[col[<span class="op">-</span><span class="dv">1</span>]]</span>
+<span id="cb37-33"><a href="#cb37-33" aria-hidden="true" tabindex="-1"></a>            bottom.tick_params(labelbottom<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb37-34"><a href="#cb37-34" aria-hidden="true" tabindex="-1"></a>            plt.setp(bottom.get_xticklabels(), rotation<span class="op">=</span><span class="dv">30</span>, ha<span class="op">=</span><span class="st">"right"</span>)</span>
+<span id="cb37-35"><a href="#cb37-35" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb37-36"><a href="#cb37-36" aria-hidden="true" tabindex="-1"></a>    omitted <span class="op">=</span> <span class="ss">f"   (≈0, omitted: </span><span class="sc">{</span><span class="st">', '</span><span class="sc">.</span>join(dropped)<span class="sc">}</span><span class="ss">)"</span> <span class="cf">if</span> dropped <span class="cf">else</span> <span class="st">""</span></span>
+<span id="cb37-37"><a href="#cb37-37" aria-hidden="true" tabindex="-1"></a>    fig.supylabel(<span class="st">"MW"</span>)</span>
+<span id="cb37-38"><a href="#cb37-38" aria-hidden="true" tabindex="-1"></a>    fig.suptitle(</span>
+<span id="cb37-39"><a href="#cb37-39" aria-hidden="true" tabindex="-1"></a>        <span class="ss">f"Austria — hourly generation by fuel · sample week Jul 2023 · free y-axes</span><span class="sc">{</span>omitted<span class="sc">}</span><span class="ss">"</span>,</span>
+<span id="cb37-40"><a href="#cb37-40" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="dv">12</span>,</span>
+<span id="cb37-41"><a href="#cb37-41" aria-hidden="true" tabindex="-1"></a>    )</span>
+<span id="cb37-42"><a href="#cb37-42" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb37-43"><a href="#cb37-43" aria-hidden="true" tabindex="-1"></a>    save_qa(fig, <span class="st">"generation_by_fuel_smallmultiples"</span>)</span>
+<span id="cb37-44"><a href="#cb37-44" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/qa/01_data_collection/generation_by_fuel_smallmultiples.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_data_collection_files/figure-html/cell-15-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="3cae589d" class="cell" data-execution_count="15">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb39"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb39-1"><a href="#cb39-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Hydro Pumped Storage: net flow (generation − consumption)</span></span>
+<span id="cb39-2"><a href="#cb39-2" aria-hidden="true" tabindex="-1"></a><span class="co"># positive = turbines (sending to grid); negative = pumping (drawing from grid)</span></span>
+<span id="cb39-3"><a href="#cb39-3" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> df_gen <span class="kw">is</span> <span class="kw">not</span> <span class="va">None</span>:</span>
+<span id="cb39-4"><a href="#cb39-4" aria-hidden="true" tabindex="-1"></a>    gen  <span class="op">=</span> df_gen[(<span class="st">"Hydro Pumped Storage"</span>, <span class="st">"Actual Aggregated"</span>)]</span>
+<span id="cb39-5"><a href="#cb39-5" aria-hidden="true" tabindex="-1"></a>    cons <span class="op">=</span> df_gen[(<span class="st">"Hydro Pumped Storage"</span>, <span class="st">"Actual Consumption"</span>)]</span>
+<span id="cb39-6"><a href="#cb39-6" aria-hidden="true" tabindex="-1"></a>    net  <span class="op">=</span> (gen <span class="op">-</span> cons).loc[<span class="st">"2023-07-01"</span>:<span class="st">"2023-07-07"</span>]</span>
+<span id="cb39-7"><a href="#cb39-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb39-8"><a href="#cb39-8" aria-hidden="true" tabindex="-1"></a>    fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">4</span>))</span>
+<span id="cb39-9"><a href="#cb39-9" aria-hidden="true" tabindex="-1"></a>    ax.fill_between(net.index, net.values, <span class="dv">0</span>,</span>
+<span id="cb39-10"><a href="#cb39-10" aria-hidden="true" tabindex="-1"></a>                    where<span class="op">=</span>(net.values <span class="op">&gt;=</span> <span class="dv">0</span>), color<span class="op">=</span><span class="st">"#2ca02c"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb39-11"><a href="#cb39-11" aria-hidden="true" tabindex="-1"></a>                    label<span class="op">=</span><span class="st">"Generating (turbine)"</span>)</span>
+<span id="cb39-12"><a href="#cb39-12" aria-hidden="true" tabindex="-1"></a>    ax.fill_between(net.index, net.values, <span class="dv">0</span>,</span>
+<span id="cb39-13"><a href="#cb39-13" aria-hidden="true" tabindex="-1"></a>                    where<span class="op">=</span>(net.values <span class="op">&lt;</span> <span class="dv">0</span>),  color<span class="op">=</span><span class="st">"#d62728"</span>, alpha<span class="op">=</span><span class="fl">0.7</span>,</span>
+<span id="cb39-14"><a href="#cb39-14" aria-hidden="true" tabindex="-1"></a>                    label<span class="op">=</span><span class="st">"Pumping (consuming)"</span>)</span>
+<span id="cb39-15"><a href="#cb39-15" aria-hidden="true" tabindex="-1"></a>    ax.axhline(<span class="dv">0</span>, color<span class="op">=</span><span class="st">"black"</span>, linewidth<span class="op">=</span><span class="fl">0.8</span>)</span>
+<span id="cb39-16"><a href="#cb39-16" aria-hidden="true" tabindex="-1"></a>    ax.set_title(<span class="st">"Austria — Hydro Pumped Storage net flow (sample week, July 2023)"</span>)</span>
+<span id="cb39-17"><a href="#cb39-17" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"MW   (+ generating  /  − pumping)"</span>)</span>
+<span id="cb39-18"><a href="#cb39-18" aria-hidden="true" tabindex="-1"></a>    ax.margins(x<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb39-19"><a href="#cb39-19" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_locator(mdates.DayLocator())              <span class="co"># one tick per day</span></span>
+<span id="cb39-20"><a href="#cb39-20" aria-hidden="true" tabindex="-1"></a>    ax.xaxis.set_major_formatter(mdates.DateFormatter(<span class="st">"%b </span><span class="sc">%d</span><span class="st">"</span>))  <span class="co"># → "Jul 01"</span></span>
+<span id="cb39-21"><a href="#cb39-21" aria-hidden="true" tabindex="-1"></a>    ax.legend(loc<span class="op">=</span><span class="st">"upper right"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb39-22"><a href="#cb39-22" aria-hidden="true" tabindex="-1"></a>    plt.tight_layout()</span>
+<span id="cb39-23"><a href="#cb39-23" aria-hidden="true" tabindex="-1"></a>    save_qa(fig, <span class="st">"hydro_pumped_storage"</span>)</span>
+<span id="cb39-24"><a href="#cb39-24" aria-hidden="true" tabindex="-1"></a>    plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/qa/01_data_collection/hydro_pumped_storage.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="01_data_collection_files/figure-html/cell-16-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="summary-what-we-have" class="level2">
+<h2 class="anchored" data-anchor-id="summary-what-we-have">6 · Summary — what we have</h2>
+<p>Run this cell after all fetches to confirm everything landed.</p>
+<div id="f6bb88d3" class="cell" data-execution_count="16">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb41"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb41-1"><a href="#cb41-1" aria-hidden="true" tabindex="-1"></a><span class="co"># confirm everything landed</span></span>
+<span id="cb41-2"><a href="#cb41-2" aria-hidden="true" tabindex="-1"></a>raw_dir <span class="op">=</span> PROJECT_ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"raw"</span></span>
+<span id="cb41-3"><a href="#cb41-3" aria-hidden="true" tabindex="-1"></a>ext_dir <span class="op">=</span> PROJECT_ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"external"</span></span>
+<span id="cb41-4"><a href="#cb41-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-5"><a href="#cb41-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== data/raw/ ==="</span>)</span>
+<span id="cb41-6"><a href="#cb41-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> <span class="bu">sorted</span>(raw_dir.glob(<span class="st">"*.csv"</span>)):</span>
+<span id="cb41-7"><a href="#cb41-7" aria-hidden="true" tabindex="-1"></a>    size_kb <span class="op">=</span> f.stat().st_size <span class="op">/</span> <span class="dv">1024</span></span>
+<span id="cb41-8"><a href="#cb41-8" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>f<span class="sc">.</span>name<span class="sc">:&lt;40}</span><span class="ss">  </span><span class="sc">{</span>size_kb<span class="sc">:&gt;8.1f}</span><span class="ss"> KB"</span>)</span>
+<span id="cb41-9"><a href="#cb41-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb41-10"><a href="#cb41-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>()</span>
+<span id="cb41-11"><a href="#cb41-11" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"=== data/external/ ==="</span>)</span>
+<span id="cb41-12"><a href="#cb41-12" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> f <span class="kw">in</span> <span class="bu">sorted</span>(ext_dir.glob(<span class="st">"*.csv"</span>)):</span>
+<span id="cb41-13"><a href="#cb41-13" aria-hidden="true" tabindex="-1"></a>    size_kb <span class="op">=</span> f.stat().st_size <span class="op">/</span> <span class="dv">1024</span></span>
+<span id="cb41-14"><a href="#cb41-14" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>f<span class="sc">.</span>name<span class="sc">:&lt;40}</span><span class="ss">  </span><span class="sc">{</span>size_kb<span class="sc">:&gt;8.1f}</span><span class="ss"> KB"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>=== data/raw/ ===
+  entsoe_generation_AT.csv                   30551.2 KB
+  entsoe_load_AT.csv                          6783.0 KB
+  entsoe_prices_AT.csv                        1652.4 KB
+  eurostat_ghg_AT.csv                           75.3 KB
+  owid_energy_AUT.csv                           61.0 KB
+  weather_vienna.csv                          2116.2 KB
+
+=== data/external/ ===
+  owid_energy_full.csv                        9013.1 KB</code></pre>
+</div>
+</div>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Austria Energy &amp; Climate Analysis · built with Quarto</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

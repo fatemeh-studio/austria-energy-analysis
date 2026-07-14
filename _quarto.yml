@@ -1,0 +1,61 @@
+project:
+  type: website
+  output-dir: docs            # rendered site lands here (GitHub Pages serves /docs)
+  render:                     # the render list — ONLY these files become site pages
+    - index.qmd
+    - notebooks/04_rq1_energy_mix.ipynb
+    - notebooks/05_rq2_temperature_demand.ipynb
+    - notebooks/06_rq3_duck_curve.ipynb
+    - notebooks/07_rq4_merit_order.ipynb
+    - notebooks/08_rq5_renewable_electricity.ipynb
+    - notebooks/09_rq6_ghg_target.ipynb
+    - notebooks/01_data_collection.ipynb
+    - notebooks/02_data_cleaning.ipynb
+    - notebooks/03_exploratory_analysis.ipynb
+
+# .ipynb inputs render from their STORED outputs. This makes that explicit:
+# no kernel ever starts during render, so nothing can accidentally re-execute.
+execute:
+  enabled: false
+
+website:
+  title: "Austria Energy & Climate Analysis"
+  description: "An end-to-end analysis of Austrian electricity and emissions, 2019–2024."
+  repo-url: "https://github.com/fatemeh-studio/austria-energy-analysis"
+  navbar:
+    left:
+      - href: index.qmd
+        text: "Home"
+    right:
+      - icon: github
+        href: "https://github.com/fatemeh-studio/austria-energy-analysis"
+        aria-label: "GitHub repository"
+  sidebar:
+    style: docked
+    search: true
+    contents:
+      - section: "Research questions"
+        contents:
+          - { href: notebooks/04_rq1_energy_mix.ipynb,            text: "RQ1 · Electricity mix" }
+          - { href: notebooks/05_rq2_temperature_demand.ipynb,    text: "RQ2 · Temperature & demand" }
+          - { href: notebooks/06_rq3_duck_curve.ipynb,            text: "RQ3 · Solar duck curve" }
+          - { href: notebooks/07_rq4_merit_order.ipynb,           text: "RQ4 · Merit-order effect" }
+          - { href: notebooks/08_rq5_renewable_electricity.ipynb, text: "RQ5 · 100% renewable by 2030?" }
+          - { href: notebooks/09_rq6_ghg_target.ipynb,            text: "RQ6 · GHG 2030 target" }
+      - section: "Data & methods"
+        contents:
+          - { href: notebooks/01_data_collection.ipynb,      text: "01 · Data collection" }
+          - { href: notebooks/02_data_cleaning.ipynb,        text: "02 · Cleaning & DuckDB" }
+          - { href: notebooks/03_exploratory_analysis.ipynb, text: "03 · Exploratory analysis" }
+  page-footer:
+    center: "Austria Energy & Climate Analysis · built with Quarto"
+
+format:
+  html:
+    theme: darkly                 # clean, professional Bootswatch theme — easy to swap
+    toc: true                     # per-page table of contents (right rail)
+    toc-depth: 3
+    code-fold: true               # code hidden behind a "Code" toggle — findings first
+    code-copy: true               # copy button on every code block
+    fig-align: center
+    link-external-newwindow: true

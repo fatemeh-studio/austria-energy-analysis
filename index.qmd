@@ -1,0 +1,49 @@
+---
+title: "Austria Energy & Climate Analysis"
+subtitle: "An end-to-end study of Austrian electricity and emissions, 2019–2024"
+toc: false
+---
+
+A Physics MSc → data science portfolio project: six research questions on Austria's
+power system and climate trajectory, taken from raw APIs through to reproducible
+analysis. Hourly electricity data spans 2019–2024; the national emissions inventory
+runs 1990–2024.
+
+## Research questions
+
+### [RQ1 · How has Austria's electricity mix shifted toward renewables?](notebooks/04_rq1_energy_mix.ipynb)
+Renewables' share of generation rises over 2019–2024, led by wind and solar, as coal
+leaves the mix around 2020 — hydro run-of-river stays the baseload backbone.
+
+### [RQ2 · Does temperature explain demand, seasonally?](notebooks/05_rq2_temperature_demand.ipynb)
+Electricity demand mirrors temperature inversely — a heating-driven signal, with no
+summer cooling spike (little air-conditioning in Austria).
+
+### [RQ3 · What is the solar duck curve, and how has it grown?](notebooks/06_rq3_duck_curve.ipynb)
+The duck curve is essentially a summer phenomenon and has deepened year on year —
+summer midday solar runs roughly 3× its winter level.
+
+### [RQ4 · Do higher renewable shares push down day-ahead prices?](notebooks/07_rq4_merit_order.ipynb)
+Yes — the merit-order effect — estimated in levels with autocorrelation-robust (HAC)
+standard errors.
+
+### [RQ5 · Is Austria on track for 100% renewable electricity by 2030?](notebooks/08_rq5_renewable_electricity.ipynb)
+No. On the current trajectory Austria reaches about 87.5% by 2030 — roughly 12.5
+percentage points short of the 100% Renewable Expansion Act target.
+
+### [RQ6 · Is Austria's non-ETS emissions trajectory on track for 2030?](notebooks/09_rq6_ghg_target.ipynb)
+No. Non-ETS emissions head for about 36.8 Mt in 2030 against a binding 29.6 Mt target —
+off track, needing roughly 2.2× the recent pace of cuts.
+
+## Data & methods
+
+The pipeline behind the analysis:
+
+- [01 · Data collection](notebooks/01_data_collection.ipynb) — ENTSO-E, Open-Meteo, OWID, Eurostat/EEA.
+- [02 · Cleaning & DuckDB](notebooks/02_data_cleaning.ipynb) — schema, type-casting, a 9-table DuckDB.
+- [03 · Exploratory analysis](notebooks/03_exploratory_analysis.ipynb) — distributions, missingness, seasonality.
+
+## Stack
+
+Python 3.11 · pandas · DuckDB · statsmodels · matplotlib · entsoe-py. Data from ENTSO-E
+Transparency, Open-Meteo / ERA5, Our World in Data, and Eurostat / EEA.

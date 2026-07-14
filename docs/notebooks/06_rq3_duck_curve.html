@@ -1,0 +1,1933 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>RQ3 · The Solar Duck Curve – Austria Energy &amp; Climate Analysis</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ea50db029c3027269a8e1e1469a2484.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Austria Energy &amp; Climate Analysis</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fatemeh-studio/austria-energy-analysis"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04_rq1_energy_mix.html">Research questions</a></li><li class="breadcrumb-item"><a href="../notebooks/06_rq3_duck_curve.html">RQ3 · Solar duck curve</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Research questions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04_rq1_energy_mix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ1 · Electricity mix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05_rq2_temperature_demand.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ2 · Temperature &amp; demand</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/06_rq3_duck_curve.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">RQ3 · Solar duck curve</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/07_rq4_merit_order.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ4 · Merit-order effect</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/08_rq5_renewable_electricity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ5 · 100% renewable by 2030?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/09_rq6_ghg_target.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ6 · GHG 2030 target</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data &amp; methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01_data_collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01 · Data collection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02_data_cleaning.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">02 · Cleaning &amp; DuckDB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03_exploratory_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03 · Exploratory analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#data" id="toc-data" class="nav-link active" data-scroll-target="#data">Data</a></li>
+  <li><a href="#method-diurnal-profiles-year-over-year" id="toc-method-diurnal-profiles-year-over-year" class="nav-link" data-scroll-target="#method-diurnal-profiles-year-over-year">Method — diurnal profiles + year-over-year</a></li>
+  <li><a href="#setup" id="toc-setup" class="nav-link" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#solar-series-join-integrity-window" id="toc-solar-series-join-integrity-window" class="nav-link" data-scroll-target="#solar-series-join-integrity-window">1 · Solar series, join integrity &amp; window</a></li>
+  <li><a href="#average-diurnal-shape-summer-vs-winter" id="toc-average-diurnal-shape-summer-vs-winter" class="nav-link" data-scroll-target="#average-diurnal-shape-summer-vs-winter">2 · Average diurnal shape — summer vs winter</a></li>
+  <li><a href="#net-load-by-season-avg-vs-2024" id="toc-net-load-by-season-avg-vs-2024" class="nav-link" data-scroll-target="#net-load-by-season-avg-vs-2024">3 · Net load by season — avg vs 2024</a></li>
+  <li><a href="#justify-solar-only-solar-vs-wind-shape" id="toc-justify-solar-only-solar-vs-wind-shape" class="nav-link" data-scroll-target="#justify-solar-only-solar-vs-wind-shape">4 · Justify solar-only — solar vs wind shape</a></li>
+  <li><a href="#quantify-the-duck-shape-metrics-function" id="toc-quantify-the-duck-shape-metrics-function" class="nav-link" data-scroll-target="#quantify-the-duck-shape-metrics-function">5 · Quantify the duck shape — metrics function</a></li>
+  <li><a href="#per-season-year-profiles-metric-table" id="toc-per-season-year-profiles-metric-table" class="nav-link" data-scroll-target="#per-season-year-profiles-metric-table">6 · Per-(season, year) profiles → metric table</a></li>
+  <li><a href="#belly-depth-by-year" id="toc-belly-depth-by-year" class="nav-link" data-scroll-target="#belly-depth-by-year">7 · Belly depth by year</a></li>
+  <li><a href="#headline-the-summer-duck-deepening" id="toc-headline-the-summer-duck-deepening" class="nav-link" data-scroll-target="#headline-the-summer-duck-deepening">8 · Headline — the summer duck deepening</a></li>
+  <li><a href="#finding" id="toc-finding" class="nav-link" data-scroll-target="#finding">Finding</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/04_rq1_energy_mix.html">Research questions</a></li><li class="breadcrumb-item"><a href="../notebooks/06_rq3_duck_curve.html">RQ3 · Solar duck curve</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">RQ3 · The Solar Duck Curve</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p><strong>Question:</strong> What is the solar “duck curve” signature in Austria, and how has it deepened as solar scaled (2019→2024)?</p>
+<p>The “duck curve” is the daily shape of <strong>net load</strong> — electricity demand minus solar generation — the load that everything <em>other</em> than solar (hydro, gas, imports) has to serve. As solar floods in around midday, net load sinks into a <strong>belly</strong>; as the sun sets into the evening demand peak, solar vanishes and net load climbs a steep <strong>evening ramp</strong>. The silhouette — belly, then neck — looks like a duck.</p>
+<p>This is the operational flip-side of RQ1. There, solar scaling ~5× was a line on an annual chart; here, that same growth shows up as a <em>within-day</em> problem — a deeper midday trough and a sharper evening ramp that dispatchable generation must follow. It also sets up RQ4: the belly hours are exactly when day-ahead prices crater (the merit-order effect).</p>
+<section id="data" class="level2">
+<h2 class="anchored" data-anchor-id="data">Data</h2>
+<p>Two hourly ENTSO-E tables, both stored UTC, joined 1:1 on <code>ts_utc</code>:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Grain</th>
+<th>Source</th>
+<th>Column used</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>demand</code></td>
+<td>hourly</td>
+<td>ENTSO-E (Austrian Power Grid / APG), resampled from 15-min</td>
+<td><code>demand_mw</code></td>
+</tr>
+<tr class="even">
+<td><code>generation</code></td>
+<td>hourly</td>
+<td>ENTSO-E (APG), resampled from 15-min</td>
+<td><code>mw</code> where <code>fuel_type = 'Solar'</code>, <code>flow = 'generation'</code></td>
+</tr>
+</tbody>
+</table>
+<p>Solar sits in the long-format <code>generation</code> table (one row per fuel × flow), so it’s filtered to its own series before the join. Both series are <strong>national</strong> totals — unlike RQ2 (national demand vs Vienna-only temperature), there’s no single-station proxy here. The <code>demand ⋈ solar</code> join is exactly one-to-one (52,608 hours, no orphan hour — verified in Section 1). All clock-dependent aggregation converts to <code>Europe/Vienna</code> at the display layer.</p>
+</section>
+<section id="method-diurnal-profiles-year-over-year" class="level2">
+<h2 class="anchored" data-anchor-id="method-diurnal-profiles-year-over-year">Method — diurnal profiles + year-over-year</h2>
+<p><strong>Grain is hourly — deliberately the opposite of RQ2.</strong> RQ2 aggregated to daily means <em>to remove</em> the hour-of-day cycle. Here that cycle <em>is</em> the phenomenon: the duck is a within-day shape, so we stay hourly and look at the average profile across the 24 Vienna-local hours.</p>
+<ul>
+<li><strong>Diurnal profiles.</strong> Average net load by hour-of-day isolates the characteristic belly + ramp shape. Splitting by season shows the belly is deepest in summer but present in every season — winter solar dents net load least.</li>
+<li><strong>Year-over-year.</strong> Overlaying each year’s summer profile shows the belly deepening and the ramp steepening as solar capacity grew — the “how has it grown” half of the question.</li>
+</ul>
+<p><strong>Solar-only (headline), with a wind footnote.</strong> The duck is canonically a <em>solar</em> signature: solar is clock-locked (zero at night, midday spike), so it carves a fixed-shape belly. Wind is weather-driven with a near-flat diurnal profile, so netting it out shifts net load <em>down</em> without changing its <em>shape</em>. We net solar only for the headline duck; total variable-renewable net load (demand − solar − wind) appears as operational context, not as the duck itself.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>Build net load, eyeball the diurnal shape (summer vs winter, avg vs 2024)</td>
+<td>Diurnal profiles</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>Quantify the signature (belly depth, evening ramp rate, timing) + show its growth</td>
+<td>Year-over-year profiles + metrics</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>Headline visual + 2-sentence finding</td>
+<td>Duck-curve growth figure</td>
+</tr>
+</tbody>
+</table>
+<p><strong>What an averaged profile hides.</strong> Hour-of-day means smooth away day-to-day weather, so the headline shape is a <em>typical</em> day, not any real one; the deepest individual bellies are sharper. And the 2019→2024 belly deepening conflates two things — more solar <em>and</em> the post-2022 demand decline (RQ2) — separated where it matters in Step 2.</p>
+</section>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<div id="af6824db" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports, paths, house style, read-only DuckDB connection</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> functools <span class="im">import</span> partial</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> typing <span class="im">import</span> cast</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> matplotlib.pyplot <span class="im">as</span> plt</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>PROJECT_ROOT <span class="op">=</span> Path.cwd().parent</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">str</span>(PROJECT_ROOT) <span class="kw">not</span> <span class="kw">in</span> sys.path:</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>    sys.path.insert(<span class="dv">0</span>, <span class="bu">str</span>(PROJECT_ROOT))</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src.viz <span class="im">import</span> set_house_style, PALETTE, save_headline_fig, save_qa_fig</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>set_house_style()</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>save_qa <span class="op">=</span> partial(save_qa_fig, notebook<span class="op">=</span><span class="st">"06_rq3_duck_curve"</span>)</span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-22"><a href="#cb1-22" aria-hidden="true" tabindex="-1"></a><span class="co"># read_only=True — RQ notebooks only SELECT; a stray write raises instead of mutating the DB</span></span>
+<span id="cb1-23"><a href="#cb1-23" aria-hidden="true" tabindex="-1"></a>DB_PATH <span class="op">=</span> PROJECT_ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"processed"</span> <span class="op">/</span> <span class="st">"austria_energy.duckdb"</span></span>
+<span id="cb1-24"><a href="#cb1-24" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="bu">str</span>(DB_PATH), read_only<span class="op">=</span><span class="va">True</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="solar-series-join-integrity-window" class="level2">
+<h2 class="anchored" data-anchor-id="solar-series-join-integrity-window">1 · Solar series, join integrity &amp; window</h2>
+<div id="ed7fe16e" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># a CTE isolates the Solar generation series; we then join it 1:1 to demand on</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="co"># ts_utc. Matching counts ⇒ no demand hour was silently dropped because solar</span></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="co"># happened to be unreported that hour.</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"""</span></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="st">WITH solar AS (</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ts_utc, mw AS solar_mw</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM generation</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE fuel_type = 'Solar' AND flow = 'generation'</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'demand'            AS tbl, COUNT(*) AS n, MIN(ts_utc) AS lo, MAX(ts_utc) AS hi</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a><span class="st">FROM demand</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a><span class="st">UNION ALL</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'solar',                  COUNT(*),       MIN(ts_utc),       MAX(ts_utc)</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a><span class="st">FROM solar</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="st">UNION ALL</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'demand JOIN solar',      COUNT(*),       MIN(ts_utc),       MAX(ts_utc)</span></span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="st">FROM demand d JOIN solar s USING (ts_utc)</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="2">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">tbl</th>
+<th data-quarto-table-cell-role="th">n</th>
+<th data-quarto-table-cell-role="th">lo</th>
+<th data-quarto-table-cell-role="th">hi</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>demand</td>
+<td>52608</td>
+<td>2019-01-01 01:00:00+01:00</td>
+<td>2025-01-01 00:00:00+01:00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>solar</td>
+<td>52608</td>
+<td>2019-01-01 01:00:00+01:00</td>
+<td>2025-01-01 00:00:00+01:00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>demand JOIN solar</td>
+<td>52608</td>
+<td>2019-01-01 01:00:00+01:00</td>
+<td>2025-01-01 00:00:00+01:00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="average-diurnal-shape-summer-vs-winter" class="level2">
+<h2 class="anchored" data-anchor-id="average-diurnal-shape-summer-vs-winter">2 · Average diurnal shape — summer vs winter</h2>
+<div id="a844720a" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a><span class="co"># net load = demand − solar, hourly, Vienna-local. EXTRACT runs on the local</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true" tabindex="-1"></a><span class="co"># wall-clock (the AT TIME ZONE result), sidestepping the session-tz gotcha.</span></span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true" tabindex="-1"></a>diurnal <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true" tabindex="-1"></a><span class="st">WITH solar AS (</span></span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ts_utc, mw AS solar_mw</span></span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM generation</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE fuel_type = 'Solar' AND flow = 'generation'</span></span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true" tabindex="-1"></a><span class="st">),</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true" tabindex="-1"></a><span class="st">net_load AS (</span></span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT</span></span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true" tabindex="-1"></a><span class="st">        d.ts_utc AT TIME ZONE 'Europe/Vienna'  AS ts_local,   -- convert once</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true" tabindex="-1"></a><span class="st">        d.demand_mw,</span></span>
+<span id="cb3-13"><a href="#cb3-13" aria-hidden="true" tabindex="-1"></a><span class="st">        d.demand_mw - s.solar_mw               AS net_load_mw</span></span>
+<span id="cb3-14"><a href="#cb3-14" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM demand d</span></span>
+<span id="cb3-15"><a href="#cb3-15" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN solar s USING (ts_utc)               -- 1:1 (verified in Section 1)</span></span>
+<span id="cb3-16"><a href="#cb3-16" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
+<span id="cb3-17"><a href="#cb3-17" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
+<span id="cb3-18"><a href="#cb3-18" aria-hidden="true" tabindex="-1"></a><span class="st">    EXTRACT(hour FROM ts_local)                                                AS hour_local,</span></span>
+<span id="cb3-19"><a href="#cb3-19" aria-hidden="true" tabindex="-1"></a><span class="st">    AVG(demand_mw)   FILTER (WHERE EXTRACT(month FROM ts_local) IN (6, 7, 8))   AS demand_summer,</span></span>
+<span id="cb3-20"><a href="#cb3-20" aria-hidden="true" tabindex="-1"></a><span class="st">    AVG(net_load_mw) FILTER (WHERE EXTRACT(month FROM ts_local) IN (6, 7, 8))   AS net_summer,</span></span>
+<span id="cb3-21"><a href="#cb3-21" aria-hidden="true" tabindex="-1"></a><span class="st">    AVG(demand_mw)   FILTER (WHERE EXTRACT(month FROM ts_local) IN (12, 1, 2))  AS demand_winter,</span></span>
+<span id="cb3-22"><a href="#cb3-22" aria-hidden="true" tabindex="-1"></a><span class="st">    AVG(net_load_mw) FILTER (WHERE EXTRACT(month FROM ts_local) IN (12, 1, 2))  AS net_winter</span></span>
+<span id="cb3-23"><a href="#cb3-23" aria-hidden="true" tabindex="-1"></a><span class="st">FROM net_load</span></span>
+<span id="cb3-24"><a href="#cb3-24" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY hour_local</span></span>
+<span id="cb3-25"><a href="#cb3-25" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY hour_local</span></span>
+<span id="cb3-26"><a href="#cb3-26" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb3-27"><a href="#cb3-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-28"><a href="#cb3-28" aria-hidden="true" tabindex="-1"></a>h <span class="op">=</span> diurnal[<span class="st">"hour_local"</span>]</span>
+<span id="cb3-29"><a href="#cb3-29" aria-hidden="true" tabindex="-1"></a>fig, (ax_s, ax_w) <span class="op">=</span> plt.subplots(<span class="dv">1</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">5</span>), sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb3-30"><a href="#cb3-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-31"><a href="#cb3-31" aria-hidden="true" tabindex="-1"></a>ax_s.fill_between(h, diurnal[<span class="st">"net_summer"</span>], diurnal[<span class="st">"demand_summer"</span>],</span>
+<span id="cb3-32"><a href="#cb3-32" aria-hidden="true" tabindex="-1"></a>                  color<span class="op">=</span>PALETTE[<span class="st">"solar"</span>], alpha<span class="op">=</span><span class="fl">0.5</span>, label<span class="op">=</span><span class="st">"Solar (carved out)"</span>)</span>
+<span id="cb3-33"><a href="#cb3-33" aria-hidden="true" tabindex="-1"></a>ax_s.plot(h, diurnal[<span class="st">"demand_summer"</span>], color<span class="op">=</span>PALETTE[<span class="st">"demand"</span>], lw<span class="op">=</span><span class="fl">1.8</span>, label<span class="op">=</span><span class="st">"Demand"</span>)</span>
+<span id="cb3-34"><a href="#cb3-34" aria-hidden="true" tabindex="-1"></a>ax_s.plot(h, diurnal[<span class="st">"net_summer"</span>], color<span class="op">=</span><span class="st">"#1A1A1A"</span>, lw<span class="op">=</span><span class="fl">2.2</span>, label<span class="op">=</span><span class="st">"Net load (demand − solar)"</span>)</span>
+<span id="cb3-35"><a href="#cb3-35" aria-hidden="true" tabindex="-1"></a>ax_s.<span class="bu">set</span>(title<span class="op">=</span><span class="st">"Summer (Jun–Aug)"</span>, xlabel<span class="op">=</span><span class="st">"hour of day (local)"</span>, ylabel<span class="op">=</span><span class="st">"MW"</span>)</span>
+<span id="cb3-36"><a href="#cb3-36" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-37"><a href="#cb3-37" aria-hidden="true" tabindex="-1"></a>ax_w.fill_between(h, diurnal[<span class="st">"net_winter"</span>], diurnal[<span class="st">"demand_winter"</span>],</span>
+<span id="cb3-38"><a href="#cb3-38" aria-hidden="true" tabindex="-1"></a>                  color<span class="op">=</span>PALETTE[<span class="st">"solar"</span>], alpha<span class="op">=</span><span class="fl">0.5</span>)</span>
+<span id="cb3-39"><a href="#cb3-39" aria-hidden="true" tabindex="-1"></a>ax_w.plot(h, diurnal[<span class="st">"demand_winter"</span>], color<span class="op">=</span>PALETTE[<span class="st">"demand"</span>], lw<span class="op">=</span><span class="fl">1.8</span>)</span>
+<span id="cb3-40"><a href="#cb3-40" aria-hidden="true" tabindex="-1"></a>ax_w.plot(h, diurnal[<span class="st">"net_winter"</span>], color<span class="op">=</span><span class="st">"#1A1A1A"</span>, lw<span class="op">=</span><span class="fl">2.2</span>)</span>
+<span id="cb3-41"><a href="#cb3-41" aria-hidden="true" tabindex="-1"></a>ax_w.<span class="bu">set</span>(title<span class="op">=</span><span class="st">"Winter (Dec–Feb)"</span>, xlabel<span class="op">=</span><span class="st">"hour of day (local)"</span>)</span>
+<span id="cb3-42"><a href="#cb3-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-43"><a href="#cb3-43" aria-hidden="true" tabindex="-1"></a>ax_s.legend(loc<span class="op">=</span><span class="st">"lower center"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb3-44"><a href="#cb3-44" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Austria — average net-load diurnal shape: the duck belly is deepest in summer"</span>, y<span class="op">=</span><span class="fl">1.02</span>)</span>
+<span id="cb3-45"><a href="#cb3-45" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb3-46"><a href="#cb3-46" aria-hidden="true" tabindex="-1"></a>save_qa(fig, <span class="st">"austria_average_net_load_diurnal_shape"</span>)</span>
+<span id="cb3-47"><a href="#cb3-47" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb3-48"><a href="#cb3-48" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-49"><a href="#cb3-49" aria-hidden="true" tabindex="-1"></a><span class="co"># eyeball aid (formal metrics come in step 2)</span></span>
+<span id="cb3-50"><a href="#cb3-50" aria-hidden="true" tabindex="-1"></a><span class="co"># belly = the midday depression (10–16h), not the 4am demand trough, which is</span></span>
+<span id="cb3-51"><a href="#cb3-51" aria-hidden="true" tabindex="-1"></a><span class="co"># the global minimum of net load but unrelated to solar.</span></span>
+<span id="cb3-52"><a href="#cb3-52" aria-hidden="true" tabindex="-1"></a>midday <span class="op">=</span> diurnal[diurnal[<span class="st">"hour_local"</span>].between(<span class="dv">10</span>, <span class="dv">16</span>)]</span>
+<span id="cb3-53"><a href="#cb3-53" aria-hidden="true" tabindex="-1"></a>evening <span class="op">=</span> diurnal[diurnal[<span class="st">"hour_local"</span>].between(<span class="dv">17</span>, <span class="dv">22</span>)]</span>
+<span id="cb3-54"><a href="#cb3-54" aria-hidden="true" tabindex="-1"></a>belly_mw <span class="op">=</span> midday[<span class="st">"net_summer"</span>].<span class="bu">min</span>()</span>
+<span id="cb3-55"><a href="#cb3-55" aria-hidden="true" tabindex="-1"></a>belly_h <span class="op">=</span> cast(<span class="bu">int</span>, midday.loc[cast(pd.Series, midday[<span class="st">"net_summer"</span>]).idxmin(), <span class="st">"hour_local"</span>])</span>
+<span id="cb3-56"><a href="#cb3-56" aria-hidden="true" tabindex="-1"></a>peak_mw <span class="op">=</span> evening[<span class="st">"net_summer"</span>].<span class="bu">max</span>()</span>
+<span id="cb3-57"><a href="#cb3-57" aria-hidden="true" tabindex="-1"></a>peak_h <span class="op">=</span> cast(<span class="bu">int</span>, evening.loc[cast(pd.Series, evening[<span class="st">"net_summer"</span>]).idxmax(), <span class="st">"hour_local"</span>])</span>
+<span id="cb3-58"><a href="#cb3-58" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"summer midday belly:  </span><span class="sc">{</span>belly_mw<span class="sc">:,.0f}</span><span class="ss"> MW at </span><span class="sc">{</span>belly_h<span class="sc">:02d}</span><span class="ss">:00"</span>)</span>
+<span id="cb3-59"><a href="#cb3-59" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"summer evening peak:  </span><span class="sc">{</span>peak_mw<span class="sc">:,.0f}</span><span class="ss"> MW at </span><span class="sc">{</span>peak_h<span class="sc">:02d}</span><span class="ss">:00"</span>)</span>
+<span id="cb3-60"><a href="#cb3-60" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"belly → peak rise:    </span><span class="sc">{</span>peak_mw <span class="op">-</span> belly_mw<span class="sc">:,.0f}</span><span class="ss"> MW over </span><span class="sc">{</span>peak_h <span class="op">-</span> belly_h<span class="sc">}</span><span class="ss"> h"</span>)</span>
+<span id="cb3-61"><a href="#cb3-61" aria-hidden="true" tabindex="-1"></a>display(diurnal.<span class="bu">round</span>(<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/qa/06_rq3_duck_curve/austria_average_net_load_diurnal_shape.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_rq3_duck_curve_files/figure-html/cell-4-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>summer midday belly:  5,963 MW at 14:00
+summer evening peak:  6,701 MW at 19:00
+belly → peak rise:    737 MW over 5 h</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">hour_local</th>
+<th data-quarto-table-cell-role="th">demand_summer</th>
+<th data-quarto-table-cell-role="th">net_summer</th>
+<th data-quarto-table-cell-role="th">demand_winter</th>
+<th data-quarto-table-cell-role="th">net_winter</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>0</td>
+<td>5390.0</td>
+<td>5390.0</td>
+<td>6588.0</td>
+<td>6588.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>1</td>
+<td>5104.0</td>
+<td>5104.0</td>
+<td>6327.0</td>
+<td>6327.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>2</td>
+<td>5003.0</td>
+<td>5003.0</td>
+<td>6217.0</td>
+<td>6217.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>3</td>
+<td>4887.0</td>
+<td>4887.0</td>
+<td>6117.0</td>
+<td>6117.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>4</td>
+<td>4955.0</td>
+<td>4955.0</td>
+<td>6237.0</td>
+<td>6237.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>5</td>
+<td>5327.0</td>
+<td>5307.0</td>
+<td>6749.0</td>
+<td>6749.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>6</td>
+<td>6049.0</td>
+<td>5977.0</td>
+<td>7542.0</td>
+<td>7541.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>7</td>
+<td>6658.0</td>
+<td>6459.0</td>
+<td>8284.0</td>
+<td>8272.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>8</td>
+<td>7029.0</td>
+<td>6622.0</td>
+<td>8638.0</td>
+<td>8580.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>9</td>
+<td>7172.0</td>
+<td>6539.0</td>
+<td>8752.0</td>
+<td>8609.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>10</td>
+<td>7272.0</td>
+<td>6449.0</td>
+<td>8785.0</td>
+<td>8556.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>11</td>
+<td>7351.0</td>
+<td>6402.0</td>
+<td>8767.0</td>
+<td>8469.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>12</td>
+<td>7152.0</td>
+<td>6132.0</td>
+<td>8557.0</td>
+<td>8235.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>13</td>
+<td>7043.0</td>
+<td>6016.0</td>
+<td>8403.0</td>
+<td>8109.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>14</td>
+<td>6937.0</td>
+<td>5963.0</td>
+<td>8295.0</td>
+<td>8076.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>15</td>
+<td>6896.0</td>
+<td>6034.0</td>
+<td>8327.0</td>
+<td>8205.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>16</td>
+<td>6885.0</td>
+<td>6182.0</td>
+<td>8505.0</td>
+<td>8466.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>17</td>
+<td>6945.0</td>
+<td>6442.0</td>
+<td>8792.0</td>
+<td>8786.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>18</td>
+<td>6948.0</td>
+<td>6658.0</td>
+<td>8763.0</td>
+<td>8762.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>19</td>
+<td>6826.0</td>
+<td>6701.0</td>
+<td>8381.0</td>
+<td>8381.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20</th>
+<td>20</td>
+<td>6647.0</td>
+<td>6610.0</td>
+<td>7905.0</td>
+<td>7905.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21</th>
+<td>21</td>
+<td>6382.0</td>
+<td>6381.0</td>
+<td>7408.0</td>
+<td>7408.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">22</th>
+<td>22</td>
+<td>6148.0</td>
+<td>6148.0</td>
+<td>7303.0</td>
+<td>7303.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23</th>
+<td>23</td>
+<td>5667.0</td>
+<td>5667.0</td>
+<td>6870.0</td>
+<td>6870.0</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="net-load-by-season-avg-vs-2024" class="level2">
+<h2 class="anchored" data-anchor-id="net-load-by-season-avg-vs-2024">3 · Net load by season — avg vs 2024</h2>
+<div id="e3af13ed" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># net load by season: 2019–2024 avg vs 2024, one panel per season</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># CASE tags the four meteorological seasons in a single pass;</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># FILTER (WHERE yr = 2024) pulls the 2024 line.</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># sharey=True ⇒ belly depths are comparable across panels (deepest = summer).</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>diurnal_seasons <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">WITH solar AS (</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ts_utc, mw AS solar_mw</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM generation</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE fuel_type = 'Solar' AND flow = 'generation'</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">),</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">net_load AS (</span></span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a><span class="st">        d.ts_utc AT TIME ZONE 'Europe/Vienna'  AS ts_local,</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">        d.demand_mw - s.solar_mw               AS net_load_mw</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM demand d</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN solar s USING (ts_utc)</span></span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true" tabindex="-1"></a><span class="st">),</span></span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true" tabindex="-1"></a><span class="st">tagged AS (</span></span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT</span></span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true" tabindex="-1"></a><span class="st">        EXTRACT(hour FROM ts_local)  AS hour_local,</span></span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true" tabindex="-1"></a><span class="st">        EXTRACT(year FROM ts_local)  AS yr,</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true" tabindex="-1"></a><span class="st">        CASE                                            -- meteorological seasons</span></span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(month FROM ts_local) IN (12, 1, 2)  THEN 'Winter'</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(month FROM ts_local) IN (3, 4, 5)   THEN 'Spring'</span></span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(month FROM ts_local) IN (6, 7, 8)   THEN 'Summer'</span></span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(month FROM ts_local) IN (9, 10, 11) THEN 'Autumn'</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true" tabindex="-1"></a><span class="st">        END                          AS season,</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true" tabindex="-1"></a><span class="st">        net_load_mw</span></span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM net_load</span></span>
+<span id="cb6-30"><a href="#cb6-30" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
+<span id="cb6-31"><a href="#cb6-31" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
+<span id="cb6-32"><a href="#cb6-32" aria-hidden="true" tabindex="-1"></a><span class="st">    season,</span></span>
+<span id="cb6-33"><a href="#cb6-33" aria-hidden="true" tabindex="-1"></a><span class="st">    hour_local,</span></span>
+<span id="cb6-34"><a href="#cb6-34" aria-hidden="true" tabindex="-1"></a><span class="st">    AVG(net_load_mw)                            AS net_all,</span></span>
+<span id="cb6-35"><a href="#cb6-35" aria-hidden="true" tabindex="-1"></a><span class="st">    AVG(net_load_mw) FILTER (WHERE yr = 2024)   AS net_2024</span></span>
+<span id="cb6-36"><a href="#cb6-36" aria-hidden="true" tabindex="-1"></a><span class="st">FROM tagged</span></span>
+<span id="cb6-37"><a href="#cb6-37" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY season, hour_local</span></span>
+<span id="cb6-38"><a href="#cb6-38" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY season, hour_local</span></span>
+<span id="cb6-39"><a href="#cb6-39" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb6-40"><a href="#cb6-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-41"><a href="#cb6-41" aria-hidden="true" tabindex="-1"></a>seasons <span class="op">=</span> [<span class="st">"Spring"</span>, <span class="st">"Summer"</span>, <span class="st">"Autumn"</span>, <span class="st">"Winter"</span>]  <span class="co"># calendar order across the 2×2</span></span>
+<span id="cb6-42"><a href="#cb6-42" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-43"><a href="#cb6-43" aria-hidden="true" tabindex="-1"></a>fig, axes <span class="op">=</span> plt.subplots(<span class="dv">2</span>, <span class="dv">2</span>, figsize<span class="op">=</span>(<span class="dv">14</span>, <span class="dv">9</span>), sharex<span class="op">=</span><span class="va">True</span>, sharey<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb6-44"><a href="#cb6-44" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax, season <span class="kw">in</span> <span class="bu">zip</span>(axes.flat, seasons):</span>
+<span id="cb6-45"><a href="#cb6-45" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> cast(pd.DataFrame, diurnal_seasons[diurnal_seasons[<span class="st">"season"</span>] <span class="op">==</span> season]).sort_values(<span class="st">"hour_local"</span>)</span>
+<span id="cb6-46"><a href="#cb6-46" aria-hidden="true" tabindex="-1"></a>    ax.plot(sub[<span class="st">"hour_local"</span>], sub[<span class="st">"net_all"</span>], color<span class="op">=</span>PALETTE[<span class="st">"muted"</span>], lw<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb6-47"><a href="#cb6-47" aria-hidden="true" tabindex="-1"></a>            marker<span class="op">=</span><span class="st">"o"</span>, ms<span class="op">=</span><span class="fl">3.5</span>, label<span class="op">=</span><span class="st">"2019–2024 avg"</span>)</span>
+<span id="cb6-48"><a href="#cb6-48" aria-hidden="true" tabindex="-1"></a>    ax.plot(sub[<span class="st">"hour_local"</span>], sub[<span class="st">"net_2024"</span>], color<span class="op">=</span>PALETTE[<span class="st">"accent"</span>], lw<span class="op">=</span><span class="fl">2.2</span>,</span>
+<span id="cb6-49"><a href="#cb6-49" aria-hidden="true" tabindex="-1"></a>            marker<span class="op">=</span><span class="st">"o"</span>, ms<span class="op">=</span><span class="fl">3.5</span>, label<span class="op">=</span><span class="st">"2024"</span>)</span>
+<span id="cb6-50"><a href="#cb6-50" aria-hidden="true" tabindex="-1"></a>    ax.set_title(season)</span>
+<span id="cb6-51"><a href="#cb6-51" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-52"><a href="#cb6-52" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[<span class="op">-</span><span class="dv">1</span>, :]:</span>
+<span id="cb6-53"><a href="#cb6-53" aria-hidden="true" tabindex="-1"></a>    ax.set_xlabel(<span class="st">"hour of day (local)"</span>)</span>
+<span id="cb6-54"><a href="#cb6-54" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> ax <span class="kw">in</span> axes[:, <span class="dv">0</span>]:</span>
+<span id="cb6-55"><a href="#cb6-55" aria-hidden="true" tabindex="-1"></a>    ax.set_ylabel(<span class="st">"avg net load (MW)"</span>)</span>
+<span id="cb6-56"><a href="#cb6-56" aria-hidden="true" tabindex="-1"></a>axes[<span class="dv">0</span>, <span class="dv">0</span>].legend(loc<span class="op">=</span><span class="st">"upper right"</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb6-57"><a href="#cb6-57" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-58"><a href="#cb6-58" aria-hidden="true" tabindex="-1"></a>fig.suptitle(<span class="st">"Net load by season — the duck is in every season, deepest in summer"</span>, y<span class="op">=</span><span class="fl">1.02</span>)</span>
+<span id="cb6-59"><a href="#cb6-59" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb6-60"><a href="#cb6-60" aria-hidden="true" tabindex="-1"></a>save_qa(fig, <span class="st">"austria_net_load_by_season"</span>)</span>
+<span id="cb6-61"><a href="#cb6-61" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb6-62"><a href="#cb6-62" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-63"><a href="#cb6-63" aria-hidden="true" tabindex="-1"></a>display(diurnal_seasons.<span class="bu">round</span>(<span class="dv">0</span>))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/qa/06_rq3_duck_curve/austria_net_load_by_season.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_rq3_duck_curve_files/figure-html/cell-5-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">season</th>
+<th data-quarto-table-cell-role="th">hour_local</th>
+<th data-quarto-table-cell-role="th">net_all</th>
+<th data-quarto-table-cell-role="th">net_2024</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Autumn</td>
+<td>0</td>
+<td>5761.0</td>
+<td>5755.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Autumn</td>
+<td>1</td>
+<td>5502.0</td>
+<td>5494.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Autumn</td>
+<td>2</td>
+<td>5400.0</td>
+<td>5391.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Autumn</td>
+<td>3</td>
+<td>5316.0</td>
+<td>5320.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Autumn</td>
+<td>4</td>
+<td>5428.0</td>
+<td>5436.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">...</th>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+<td>...</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">91</th>
+<td>Winter</td>
+<td>19</td>
+<td>8381.0</td>
+<td>8225.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">92</th>
+<td>Winter</td>
+<td>20</td>
+<td>7905.0</td>
+<td>7756.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">93</th>
+<td>Winter</td>
+<td>21</td>
+<td>7408.0</td>
+<td>7256.0</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">94</th>
+<td>Winter</td>
+<td>22</td>
+<td>7303.0</td>
+<td>7106.0</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">95</th>
+<td>Winter</td>
+<td>23</td>
+<td>6870.0</td>
+<td>6676.0</td>
+</tr>
+</tbody>
+</table>
+
+<p>96 rows × 4 columns</p>
+</div>
+</div>
+</div>
+</section>
+<section id="justify-solar-only-solar-vs-wind-shape" class="level2">
+<h2 class="anchored" data-anchor-id="justify-solar-only-solar-vs-wind-shape">4 · Justify solar-only — solar vs wind shape</h2>
+<div id="da719914" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># the duck is a solar signature because solar is clock-locked. Show it empirically,</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a><span class="co"># not by assertion: compare each source's hour-of-day shape, normalised to its own</span></span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="co"># daily mean so both sit on one scale. Solar swings 0 → sharp midday peak; wind ~flat.</span></span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="co"># NB ENTSO-E labels Austrian wind 'Wind Onshore' (no offshore). If wind_mw comes back</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="co"># empty, check: SELECT DISTINCT fuel_type FROM generation WHERE flow = 'generation'.</span></span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a>diurnal_vre <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="st">WITH vre AS (</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="st">        ts_utc AT TIME ZONE 'Europe/Vienna'  AS ts_local,</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="st">        fuel_type,</span></span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="st">        mw</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM generation</span></span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE flow = 'generation' AND fuel_type IN ('Solar', 'Wind Onshore')</span></span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="st">    EXTRACT(hour FROM ts_local)                        AS hour_local,</span></span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="st">    AVG(mw) FILTER (WHERE fuel_type = 'Solar')         AS solar_mw,</span></span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="st">    AVG(mw) FILTER (WHERE fuel_type = 'Wind Onshore')  AS wind_mw</span></span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="st">FROM vre</span></span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY hour_local</span></span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY hour_local</span></span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="co"># normalise each to its own 24-hour mean → compares shape, not magnitude</span></span>
+<span id="cb8-25"><a href="#cb8-25" aria-hidden="true" tabindex="-1"></a>diurnal_vre[<span class="st">"solar_norm"</span>] <span class="op">=</span> diurnal_vre[<span class="st">"solar_mw"</span>] <span class="op">/</span> diurnal_vre[<span class="st">"solar_mw"</span>].mean()</span>
+<span id="cb8-26"><a href="#cb8-26" aria-hidden="true" tabindex="-1"></a>diurnal_vre[<span class="st">"wind_norm"</span>] <span class="op">=</span> diurnal_vre[<span class="st">"wind_mw"</span>] <span class="op">/</span> diurnal_vre[<span class="st">"wind_mw"</span>].mean()</span>
+<span id="cb8-27"><a href="#cb8-27" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-28"><a href="#cb8-28" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb8-29"><a href="#cb8-29" aria-hidden="true" tabindex="-1"></a>ax.plot(diurnal_vre[<span class="st">"hour_local"</span>], diurnal_vre[<span class="st">"solar_norm"</span>], color<span class="op">=</span>PALETTE[<span class="st">"solar"</span>],</span>
+<span id="cb8-30"><a href="#cb8-30" aria-hidden="true" tabindex="-1"></a>        lw<span class="op">=</span><span class="fl">2.2</span>, marker<span class="op">=</span><span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">4</span>, label<span class="op">=</span><span class="st">"Solar"</span>)</span>
+<span id="cb8-31"><a href="#cb8-31" aria-hidden="true" tabindex="-1"></a>ax.plot(diurnal_vre[<span class="st">"hour_local"</span>], diurnal_vre[<span class="st">"wind_norm"</span>], color<span class="op">=</span>PALETTE[<span class="st">"wind"</span>],</span>
+<span id="cb8-32"><a href="#cb8-32" aria-hidden="true" tabindex="-1"></a>        lw<span class="op">=</span><span class="fl">2.2</span>, marker<span class="op">=</span><span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">4</span>, label<span class="op">=</span><span class="st">"Wind"</span>)</span>
+<span id="cb8-33"><a href="#cb8-33" aria-hidden="true" tabindex="-1"></a>ax.axhline(<span class="fl">1.0</span>, color<span class="op">=</span>PALETTE[<span class="st">"muted"</span>], lw<span class="op">=</span><span class="fl">0.8</span>, ls<span class="op">=</span><span class="st">"--"</span>)  <span class="co"># each series' own daily mean</span></span>
+<span id="cb8-34"><a href="#cb8-34" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(title<span class="op">=</span><span class="st">"Why solar-only: solar is clock-locked, wind is flat"</span>,</span>
+<span id="cb8-35"><a href="#cb8-35" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"hour of day (local)"</span>, ylabel<span class="op">=</span><span class="st">"generation ÷ own daily mean"</span>)</span>
+<span id="cb8-36"><a href="#cb8-36" aria-hidden="true" tabindex="-1"></a>ax.legend()</span>
+<span id="cb8-37"><a href="#cb8-37" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb8-38"><a href="#cb8-38" aria-hidden="true" tabindex="-1"></a>save_qa(fig, <span class="st">"austria_solar_vs_wind_diurnal_shape"</span>)</span>
+<span id="cb8-39"><a href="#cb8-39" aria-hidden="true" tabindex="-1"></a>plt.show()</span>
+<span id="cb8-40"><a href="#cb8-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb8-41"><a href="#cb8-41" aria-hidden="true" tabindex="-1"></a><span class="co"># one-line evidence: how far each swings from its own daily mean</span></span>
+<span id="cb8-42"><a href="#cb8-42" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> name, col <span class="kw">in</span> [(<span class="st">"solar"</span>, <span class="st">"solar_norm"</span>), (<span class="st">"wind"</span>, <span class="st">"wind_norm"</span>)]:</span>
+<span id="cb8-43"><a href="#cb8-43" aria-hidden="true" tabindex="-1"></a>    lo, hi <span class="op">=</span> diurnal_vre[col].<span class="bu">min</span>(), diurnal_vre[col].<span class="bu">max</span>()</span>
+<span id="cb8-44"><a href="#cb8-44" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"</span><span class="sc">{</span>name<span class="sc">:5s}</span><span class="ss">: ranges </span><span class="sc">{</span>lo<span class="sc">:.2f}</span><span class="ss">× – </span><span class="sc">{</span>hi<span class="sc">:.2f}</span><span class="ss">× its daily mean"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/qa/06_rq3_duck_curve/austria_solar_vs_wind_diurnal_shape.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_rq3_duck_curve_files/figure-html/cell-6-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+<div class="cell-output cell-output-stdout">
+<pre><code>solar: ranges 0.00× – 3.21× its daily mean
+wind : ranges 0.87× – 1.10× its daily mean</code></pre>
+</div>
+</div>
+<p><strong>Solar-only, justified.</strong> Normalised to its own daily mean, solar swings from zero overnight to a sharp midday peak, while wind stays near-flat all day — solar is clock-locked, wind is weather-driven. Netting wind would lower net load without reshaping it, so the belly is a <em>solar</em> signature. We net <strong>solar only</strong> for the headline duck; wind returns later as operational context, not as the duck itself.</p>
+</section>
+<section id="quantify-the-duck-shape-metrics-function" class="level2">
+<h2 class="anchored" data-anchor-id="quantify-the-duck-shape-metrics-function">5 · Quantify the duck shape — metrics function</h2>
+<div id="cf528763" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># quantify the duck shape of one diurnal net-load profile</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a><span class="kw">def</span> duck_metrics(profile: pd.DataFrame) <span class="op">-&gt;</span> pd.Series:</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a>    <span class="co">"""</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="co">    Duck-curve metrics for one diurnal net-load profile (one season × year).</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="co">    Parameters</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="co">    ----------</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="co">    profile : pd.DataFrame</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="co">        24 rows, columns 'hour_local' (0–23) and 'net_load_mw' (hourly mean).</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="co">    Returns</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="co">    -------</span></span>
+<span id="cb11-13"><a href="#cb11-13" aria-hidden="true" tabindex="-1"></a><span class="co">    pd.Series:</span></span>
+<span id="cb11-14"><a href="#cb11-14" aria-hidden="true" tabindex="-1"></a><span class="co">        belly_depth_mw  morning shoulder − midday trough. The solar-driven dent.</span></span>
+<span id="cb11-15"><a href="#cb11-15" aria-hidden="true" tabindex="-1"></a><span class="co">                        Level-invariant (the demand decline cancels), so its</span></span>
+<span id="cb11-16"><a href="#cb11-16" aria-hidden="true" tabindex="-1"></a><span class="co">                        *rise over years* is the solar signal — read the slope.</span></span>
+<span id="cb11-17"><a href="#cb11-17" aria-hidden="true" tabindex="-1"></a><span class="co">        trough_mw       absolute midday-trough level (informative, but partly</span></span>
+<span id="cb11-18"><a href="#cb11-18" aria-hidden="true" tabindex="-1"></a><span class="co">                        falls with the demand decline → don't read as solar).</span></span>
+<span id="cb11-19"><a href="#cb11-19" aria-hidden="true" tabindex="-1"></a><span class="co">        ramp_rate_mwh   avg evening ramp = (evening peak − trough) / Δhours.</span></span>
+<span id="cb11-20"><a href="#cb11-20" aria-hidden="true" tabindex="-1"></a><span class="co">        max_ramp_mwh    steepest single-hour climb between trough and peak.</span></span>
+<span id="cb11-21"><a href="#cb11-21" aria-hidden="true" tabindex="-1"></a><span class="co">        trough_hour     hour of the midday trough.</span></span>
+<span id="cb11-22"><a href="#cb11-22" aria-hidden="true" tabindex="-1"></a><span class="co">        peak_hour       hour of the evening peak.</span></span>
+<span id="cb11-23"><a href="#cb11-23" aria-hidden="true" tabindex="-1"></a><span class="co">    """</span></span>
+<span id="cb11-24"><a href="#cb11-24" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="bu">len</span>(profile) <span class="op">&lt;</span> <span class="dv">24</span>:  <span class="co"># partial profile (boundary-hour leak) → not a real day</span></span>
+<span id="cb11-25"><a href="#cb11-25" aria-hidden="true" tabindex="-1"></a>        <span class="cf">return</span> pd.Series({k: <span class="bu">float</span>(<span class="st">"nan"</span>) <span class="cf">for</span> k <span class="kw">in</span></span>
+<span id="cb11-26"><a href="#cb11-26" aria-hidden="true" tabindex="-1"></a>            [<span class="st">"belly_depth_mw"</span>, <span class="st">"trough_mw"</span>, <span class="st">"ramp_rate_mwh"</span>,</span>
+<span id="cb11-27"><a href="#cb11-27" aria-hidden="true" tabindex="-1"></a>             <span class="st">"max_ramp_mwh"</span>, <span class="st">"trough_hour"</span>, <span class="st">"peak_hour"</span>]})</span>
+<span id="cb11-28"><a href="#cb11-28" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-29"><a href="#cb11-29" aria-hidden="true" tabindex="-1"></a>    p <span class="op">=</span> profile.set_index(<span class="st">"hour_local"</span>)[<span class="st">"net_load_mw"</span>].sort_index()</span>
+<span id="cb11-30"><a href="#cb11-30" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-31"><a href="#cb11-31" aria-hidden="true" tabindex="-1"></a>    morning <span class="op">=</span> p.loc[<span class="dv">6</span>:<span class="dv">10</span>]  <span class="co"># morning shoulder window (Vienna-local hours)</span></span>
+<span id="cb11-32"><a href="#cb11-32" aria-hidden="true" tabindex="-1"></a>    midday <span class="op">=</span> p.loc[<span class="dv">11</span>:<span class="dv">15</span>]  <span class="co"># belly window</span></span>
+<span id="cb11-33"><a href="#cb11-33" aria-hidden="true" tabindex="-1"></a>    evening <span class="op">=</span> p.loc[<span class="dv">17</span>:<span class="dv">22</span>]  <span class="co"># evening peak window</span></span>
+<span id="cb11-34"><a href="#cb11-34" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-35"><a href="#cb11-35" aria-hidden="true" tabindex="-1"></a>    shoulder_mw <span class="op">=</span> morning.<span class="bu">max</span>()</span>
+<span id="cb11-36"><a href="#cb11-36" aria-hidden="true" tabindex="-1"></a>    trough_mw <span class="op">=</span> midday.<span class="bu">min</span>()</span>
+<span id="cb11-37"><a href="#cb11-37" aria-hidden="true" tabindex="-1"></a>    trough_hour <span class="op">=</span> <span class="bu">int</span>(midday.idxmin())</span>
+<span id="cb11-38"><a href="#cb11-38" aria-hidden="true" tabindex="-1"></a>    peak_mw <span class="op">=</span> evening.<span class="bu">max</span>()</span>
+<span id="cb11-39"><a href="#cb11-39" aria-hidden="true" tabindex="-1"></a>    peak_hour <span class="op">=</span> <span class="bu">int</span>(evening.idxmax())</span>
+<span id="cb11-40"><a href="#cb11-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb11-41"><a href="#cb11-41" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> pd.Series({</span>
+<span id="cb11-42"><a href="#cb11-42" aria-hidden="true" tabindex="-1"></a>        <span class="st">"belly_depth_mw"</span>: <span class="bu">round</span>(shoulder_mw <span class="op">-</span> trough_mw),</span>
+<span id="cb11-43"><a href="#cb11-43" aria-hidden="true" tabindex="-1"></a>        <span class="st">"trough_mw"</span>: <span class="bu">round</span>(trough_mw),</span>
+<span id="cb11-44"><a href="#cb11-44" aria-hidden="true" tabindex="-1"></a>        <span class="st">"ramp_rate_mwh"</span>: <span class="bu">round</span>((peak_mw <span class="op">-</span> trough_mw) <span class="op">/</span> (peak_hour <span class="op">-</span> trough_hour)),</span>
+<span id="cb11-45"><a href="#cb11-45" aria-hidden="true" tabindex="-1"></a>        <span class="st">"max_ramp_mwh"</span>: <span class="bu">round</span>(p.loc[trough_hour:peak_hour].diff().<span class="bu">max</span>()),</span>
+<span id="cb11-46"><a href="#cb11-46" aria-hidden="true" tabindex="-1"></a>        <span class="st">"trough_hour"</span>: trough_hour,</span>
+<span id="cb11-47"><a href="#cb11-47" aria-hidden="true" tabindex="-1"></a>        <span class="st">"peak_hour"</span>: peak_hour,</span>
+<span id="cb11-48"><a href="#cb11-48" aria-hidden="true" tabindex="-1"></a>    })</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="per-season-year-profiles-metric-table" class="level2">
+<h2 class="anchored" data-anchor-id="per-season-year-profiles-metric-table">6 · Per-(season, year) profiles → metric table</h2>
+<div id="68bd53b0" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>profiles <span class="op">=</span> con.sql(<span class="st">"""</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="st">WITH solar AS (</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT ts_utc, mw AS solar_mw</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM generation</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE fuel_type = 'Solar' AND flow = 'generation'</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="st">),</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a><span class="st">net_load AS (</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT</span></span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a><span class="st">        d.ts_utc AT TIME ZONE 'Europe/Vienna'  AS ts_local,</span></span>
+<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a><span class="st">        d.demand_mw - s.solar_mw               AS net_load_mw</span></span>
+<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM demand d</span></span>
+<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="st">    JOIN solar s USING (ts_utc)</span></span>
+<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a><span class="st">),</span></span>
+<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="st">tagged AS (</span></span>
+<span id="cb12-15"><a href="#cb12-15" aria-hidden="true" tabindex="-1"></a><span class="st">    SELECT</span></span>
+<span id="cb12-16"><a href="#cb12-16" aria-hidden="true" tabindex="-1"></a><span class="st">        EXTRACT(hour  FROM ts_local) AS hour_local,</span></span>
+<span id="cb12-17"><a href="#cb12-17" aria-hidden="true" tabindex="-1"></a><span class="st">        EXTRACT(year  FROM ts_local) AS yr,</span></span>
+<span id="cb12-18"><a href="#cb12-18" aria-hidden="true" tabindex="-1"></a><span class="st">        CASE</span></span>
+<span id="cb12-19"><a href="#cb12-19" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(month FROM ts_local) IN (12, 1, 2)  THEN 'Winter'</span></span>
+<span id="cb12-20"><a href="#cb12-20" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(month FROM ts_local) IN (3, 4, 5)   THEN 'Spring'</span></span>
+<span id="cb12-21"><a href="#cb12-21" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(month FROM ts_local) IN (6, 7, 8)   THEN 'Summer'</span></span>
+<span id="cb12-22"><a href="#cb12-22" aria-hidden="true" tabindex="-1"></a><span class="st">            WHEN EXTRACT(month FROM ts_local) IN (9, 10, 11) THEN 'Autumn'</span></span>
+<span id="cb12-23"><a href="#cb12-23" aria-hidden="true" tabindex="-1"></a><span class="st">        END                          AS season,</span></span>
+<span id="cb12-24"><a href="#cb12-24" aria-hidden="true" tabindex="-1"></a><span class="st">        net_load_mw</span></span>
+<span id="cb12-25"><a href="#cb12-25" aria-hidden="true" tabindex="-1"></a><span class="st">    FROM net_load</span></span>
+<span id="cb12-26"><a href="#cb12-26" aria-hidden="true" tabindex="-1"></a><span class="st">    WHERE ts_local &lt; TIMESTAMP '2025-01-01'   -- drop the 1-h UTC→local spill into 2025</span></span>
+<span id="cb12-27"><a href="#cb12-27" aria-hidden="true" tabindex="-1"></a><span class="st">)</span></span>
+<span id="cb12-28"><a href="#cb12-28" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT season, yr AS year, hour_local, AVG(net_load_mw) AS net_load_mw</span></span>
+<span id="cb12-29"><a href="#cb12-29" aria-hidden="true" tabindex="-1"></a><span class="st">FROM tagged</span></span>
+<span id="cb12-30"><a href="#cb12-30" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY season, yr, hour_local</span></span>
+<span id="cb12-31"><a href="#cb12-31" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY season, yr, hour_local</span></span>
+<span id="cb12-32"><a href="#cb12-32" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span>
+<span id="cb12-33"><a href="#cb12-33" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-34"><a href="#cb12-34" aria-hidden="true" tabindex="-1"></a>rows <span class="op">=</span> []</span>
+<span id="cb12-35"><a href="#cb12-35" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> key, grp <span class="kw">in</span> profiles.groupby([<span class="st">"season"</span>, <span class="st">"year"</span>]):</span>
+<span id="cb12-36"><a href="#cb12-36" aria-hidden="true" tabindex="-1"></a>    season, year <span class="op">=</span> cast(<span class="st">"tuple[str, int]"</span>, key)</span>
+<span id="cb12-37"><a href="#cb12-37" aria-hidden="true" tabindex="-1"></a>    m <span class="op">=</span> duck_metrics(grp)</span>
+<span id="cb12-38"><a href="#cb12-38" aria-hidden="true" tabindex="-1"></a>    rows.append(pd.Series({<span class="st">"season"</span>: season, <span class="st">"year"</span>: <span class="bu">int</span>(year), <span class="op">**</span>m.to_dict()}))</span>
+<span id="cb12-39"><a href="#cb12-39" aria-hidden="true" tabindex="-1"></a>metrics <span class="op">=</span> pd.DataFrame(rows)</span>
+<span id="cb12-40"><a href="#cb12-40" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-41"><a href="#cb12-41" aria-hidden="true" tabindex="-1"></a>season_order <span class="op">=</span> [<span class="st">"Spring"</span>, <span class="st">"Summer"</span>, <span class="st">"Autumn"</span>, <span class="st">"Winter"</span>]  <span class="co"># calendar order</span></span>
+<span id="cb12-42"><a href="#cb12-42" aria-hidden="true" tabindex="-1"></a>metrics[<span class="st">"season"</span>] <span class="op">=</span> pd.Categorical(metrics[<span class="st">"season"</span>], season_order, ordered<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-43"><a href="#cb12-43" aria-hidden="true" tabindex="-1"></a>metrics <span class="op">=</span> metrics.sort_values([<span class="st">"season"</span>, <span class="st">"year"</span>]).reset_index(drop<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb12-44"><a href="#cb12-44" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb12-45"><a href="#cb12-45" aria-hidden="true" tabindex="-1"></a>display(metrics)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">season</th>
+<th data-quarto-table-cell-role="th">year</th>
+<th data-quarto-table-cell-role="th">belly_depth_mw</th>
+<th data-quarto-table-cell-role="th">trough_mw</th>
+<th data-quarto-table-cell-role="th">ramp_rate_mwh</th>
+<th data-quarto-table-cell-role="th">max_ramp_mwh</th>
+<th data-quarto-table-cell-role="th">trough_hour</th>
+<th data-quarto-table-cell-role="th">peak_hour</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Spring</td>
+<td>2019</td>
+<td>520</td>
+<td>7301</td>
+<td>153</td>
+<td>233</td>
+<td>15</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Spring</td>
+<td>2020</td>
+<td>543</td>
+<td>6435</td>
+<td>136</td>
+<td>294</td>
+<td>15</td>
+<td>19</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Spring</td>
+<td>2021</td>
+<td>655</td>
+<td>7041</td>
+<td>169</td>
+<td>271</td>
+<td>15</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Spring</td>
+<td>2022</td>
+<td>508</td>
+<td>7152</td>
+<td>111</td>
+<td>201</td>
+<td>14</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Spring</td>
+<td>2023</td>
+<td>984</td>
+<td>6033</td>
+<td>213</td>
+<td>389</td>
+<td>14</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Spring</td>
+<td>2024</td>
+<td>2426</td>
+<td>3929</td>
+<td>476</td>
+<td>765</td>
+<td>13</td>
+<td>19</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Summer</td>
+<td>2019</td>
+<td>356</td>
+<td>6953</td>
+<td>64</td>
+<td>115</td>
+<td>15</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Summer</td>
+<td>2020</td>
+<td>420</td>
+<td>6759</td>
+<td>18</td>
+<td>66</td>
+<td>15</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Summer</td>
+<td>2021</td>
+<td>280</td>
+<td>7085</td>
+<td>16</td>
+<td>49</td>
+<td>14</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Summer</td>
+<td>2022</td>
+<td>392</td>
+<td>6566</td>
+<td>89</td>
+<td>138</td>
+<td>15</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Summer</td>
+<td>2023</td>
+<td>1123</td>
+<td>4998</td>
+<td>271</td>
+<td>407</td>
+<td>14</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>Summer</td>
+<td>2024</td>
+<td>2524</td>
+<td>3281</td>
+<td>459</td>
+<td>785</td>
+<td>13</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>Autumn</td>
+<td>2019</td>
+<td>460</td>
+<td>7539</td>
+<td>134</td>
+<td>238</td>
+<td>14</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>Autumn</td>
+<td>2020</td>
+<td>486</td>
+<td>7562</td>
+<td>121</td>
+<td>237</td>
+<td>14</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">14</th>
+<td>Autumn</td>
+<td>2021</td>
+<td>552</td>
+<td>7374</td>
+<td>144</td>
+<td>244</td>
+<td>14</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">15</th>
+<td>Autumn</td>
+<td>2022</td>
+<td>588</td>
+<td>6995</td>
+<td>159</td>
+<td>261</td>
+<td>14</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">16</th>
+<td>Autumn</td>
+<td>2023</td>
+<td>1275</td>
+<td>5971</td>
+<td>302</td>
+<td>460</td>
+<td>13</td>
+<td>18</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">17</th>
+<td>Autumn</td>
+<td>2024</td>
+<td>1876</td>
+<td>5569</td>
+<td>434</td>
+<td>622</td>
+<td>13</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">18</th>
+<td>Winter</td>
+<td>2019</td>
+<td>470</td>
+<td>8591</td>
+<td>204</td>
+<td>341</td>
+<td>14</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">19</th>
+<td>Winter</td>
+<td>2020</td>
+<td>491</td>
+<td>8338</td>
+<td>188</td>
+<td>318</td>
+<td>14</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">20</th>
+<td>Winter</td>
+<td>2021</td>
+<td>529</td>
+<td>8205</td>
+<td>191</td>
+<td>326</td>
+<td>14</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">21</th>
+<td>Winter</td>
+<td>2022</td>
+<td>502</td>
+<td>8160</td>
+<td>184</td>
+<td>289</td>
+<td>14</td>
+<td>17</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">22</th>
+<td>Winter</td>
+<td>2023</td>
+<td>540</td>
+<td>7855</td>
+<td>224</td>
+<td>275</td>
+<td>14</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">23</th>
+<td>Winter</td>
+<td>2024</td>
+<td>1200</td>
+<td>7141</td>
+<td>363</td>
+<td>480</td>
+<td>13</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="belly-depth-by-year" class="level2">
+<h2 class="anchored" data-anchor-id="belly-depth-by-year">7 · Belly depth by year</h2>
+<div id="978d4e6f" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># one line per season</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>season_colors <span class="op">=</span> {<span class="st">"Spring"</span>: PALETTE[<span class="st">"wind"</span>], <span class="st">"Summer"</span>: PALETTE[<span class="st">"temp"</span>],</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a>                 <span class="st">"Autumn"</span>: PALETTE[<span class="st">"solar"</span>], <span class="st">"Winter"</span>: PALETTE[<span class="st">"hydro"</span>]}</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots()</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> season <span class="kw">in</span> season_order:</span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> metrics[metrics[<span class="st">"season"</span>] <span class="op">==</span> season]</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a>    ax.plot(sub[<span class="st">"year"</span>], sub[<span class="st">"belly_depth_mw"</span>], marker<span class="op">=</span><span class="st">"o"</span>, lw<span class="op">=</span><span class="dv">2</span>,</span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>            color<span class="op">=</span>season_colors[season], label<span class="op">=</span>season)</span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(title<span class="op">=</span><span class="st">"Duck belly depth by year — every season deepening, summer steepest"</span>,</span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"year"</span>, ylabel<span class="op">=</span><span class="st">"belly depth (MW): morning shoulder − midday trough"</span>)</span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a>ax.legend(title<span class="op">=</span><span class="st">"season"</span>)</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true" tabindex="-1"></a>save_qa(fig, <span class="st">"austria_duck_belly_depth_by_year"</span>)</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/qa/06_rq3_duck_curve/austria_duck_belly_depth_by_year.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_rq3_duck_curve_files/figure-html/cell-9-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+</section>
+<section id="headline-the-summer-duck-deepening" class="level2">
+<h2 class="anchored" data-anchor-id="headline-the-summer-duck-deepening">8 · Headline — the summer duck deepening</h2>
+<div id="18308316" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb15"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true" tabindex="-1"></a><span class="co"># 2019→2024</span></span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true" tabindex="-1"></a>summer <span class="op">=</span> cast(pd.DataFrame, profiles[profiles[<span class="st">"season"</span>] <span class="op">==</span> <span class="st">"Summer"</span>])</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true" tabindex="-1"></a>years <span class="op">=</span> <span class="bu">sorted</span>(cast(pd.Series, summer[<span class="st">"year"</span>]).unique())</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true" tabindex="-1"></a>colors <span class="op">=</span> plt.cm.YlOrRd(np.linspace(<span class="fl">0.35</span>, <span class="fl">0.95</span>, <span class="bu">len</span>(years)))  <span class="co"># light → deep red</span></span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true" tabindex="-1"></a>fig, ax <span class="op">=</span> plt.subplots(figsize<span class="op">=</span>(<span class="dv">11</span>, <span class="dv">6</span>))</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> yr, c <span class="kw">in</span> <span class="bu">zip</span>(years, colors):</span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true" tabindex="-1"></a>    sub <span class="op">=</span> cast(pd.DataFrame, summer[summer[<span class="st">"year"</span>] <span class="op">==</span> yr]).sort_values(<span class="st">"hour_local"</span>)</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true" tabindex="-1"></a>    ax.plot(sub[<span class="st">"hour_local"</span>], sub[<span class="st">"net_load_mw"</span>], color<span class="op">=</span>c,</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true" tabindex="-1"></a>            lw<span class="op">=</span><span class="fl">3.0</span> <span class="cf">if</span> yr <span class="op">==</span> <span class="dv">2024</span> <span class="cf">else</span> <span class="fl">1.8</span>, marker<span class="op">=</span><span class="st">"o"</span>, ms<span class="op">=</span><span class="dv">3</span>, label<span class="op">=</span><span class="bu">str</span>(yr))</span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true" tabindex="-1"></a>ax.<span class="bu">set</span>(title<span class="op">=</span><span class="st">"Austria — the summer duck curve deepens, 2019→2024"</span>,</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true" tabindex="-1"></a>       xlabel<span class="op">=</span><span class="st">"hour of day (local)"</span>, ylabel<span class="op">=</span><span class="st">"avg summer net load (MW)"</span>)</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true" tabindex="-1"></a>ax.legend(title<span class="op">=</span><span class="st">"year"</span>, ncol<span class="op">=</span><span class="dv">2</span>, fontsize<span class="op">=</span><span class="dv">9</span>)</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true" tabindex="-1"></a><span class="co"># headline numbers, read from the metric table</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true" tabindex="-1"></a>m19 <span class="op">=</span> metrics[(metrics[<span class="st">"season"</span>] <span class="op">==</span> <span class="st">"Summer"</span>) <span class="op">&amp;</span> (metrics[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2019</span>)].iloc[<span class="dv">0</span>]</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true" tabindex="-1"></a>m24 <span class="op">=</span> metrics[(metrics[<span class="st">"season"</span>] <span class="op">==</span> <span class="st">"Summer"</span>) <span class="op">&amp;</span> (metrics[<span class="st">"year"</span>] <span class="op">==</span> <span class="dv">2024</span>)].iloc[<span class="dv">0</span>]</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true" tabindex="-1"></a>txt <span class="op">=</span> (<span class="ss">f"belly depth    </span><span class="sc">{</span>m19<span class="sc">.</span>belly_depth_mw<span class="sc">:.0f}</span><span class="ss"> → </span><span class="sc">{</span>m24<span class="sc">.</span>belly_depth_mw<span class="sc">:.0f}</span><span class="ss"> MW</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true" tabindex="-1"></a>       <span class="ss">f"evening ramp   </span><span class="sc">{</span>m19<span class="sc">.</span>ramp_rate_mwh<span class="sc">:.0f}</span><span class="ss"> → </span><span class="sc">{</span>m24<span class="sc">.</span>ramp_rate_mwh<span class="sc">:.0f}</span><span class="ss"> MW/h</span><span class="ch">\n</span><span class="ss">"</span></span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true" tabindex="-1"></a>       <span class="ss">f"steepest hour  </span><span class="sc">{</span>m19<span class="sc">.</span>max_ramp_mwh<span class="sc">:.0f}</span><span class="ss"> → </span><span class="sc">{</span>m24<span class="sc">.</span>max_ramp_mwh<span class="sc">:.0f}</span><span class="ss"> MW/h"</span>)</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true" tabindex="-1"></a>ax.text(<span class="fl">0.02</span>, <span class="fl">0.04</span>, txt, transform<span class="op">=</span>ax.transAxes, ha<span class="op">=</span><span class="st">"left"</span>, va<span class="op">=</span><span class="st">"bottom"</span>,</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true" tabindex="-1"></a>        fontsize<span class="op">=</span><span class="fl">8.5</span>, family<span class="op">=</span><span class="st">"monospace"</span>,</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true" tabindex="-1"></a>        bbox<span class="op">=</span><span class="bu">dict</span>(boxstyle<span class="op">=</span><span class="st">"round,pad=0.5"</span>, fc<span class="op">=</span><span class="st">"white"</span>, ec<span class="op">=</span>PALETTE[<span class="st">"muted"</span>], lw<span class="op">=</span><span class="fl">0.8</span>))</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true" tabindex="-1"></a>plt.tight_layout()</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true" tabindex="-1"></a>save_headline_fig(fig, <span class="st">"rq3_duck_curve"</span>)</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true" tabindex="-1"></a>plt.show()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>saved → figures/headline/rq3_duck_curve.png</code></pre>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+<figure class="figure">
+<p><img src="06_rq3_duck_curve_files/figure-html/cell-10-output-2.png" class="img-fluid figure-img"></p>
+</figure>
+</div>
+</div>
+</div>
+<div id="07bc2ba7" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># close the connection</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>con.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="finding" class="level2">
+<h2 class="anchored" data-anchor-id="finding">Finding</h2>
+<p><strong>Finding (RQ3).</strong> Austria’s summer duck curve was essentially flat through 2022 and then emerged abruptly in 2023–24: the midday belly deepened from ~390 MW below the morning shoulder in 2022 to ~2,520 MW in 2024, the average evening ramp steepened from ~90 to ~460 MW/hour (785 MW in the steepest single hour), and the belly’s low point migrated two hours earlier (15h → 13h) while the summer peak pushed two hours later (18h → 20h). The signature is deepest in summer but now appears in every season — even winter’s belly more than doubled, to ~1,200 MW — and its abrupt onset tracks the ~5× solar build-out of RQ1, marking the duck as a solar-driven, post-2022 development rather than a gradual trend.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Austria Energy &amp; Climate Analysis · built with Quarto</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

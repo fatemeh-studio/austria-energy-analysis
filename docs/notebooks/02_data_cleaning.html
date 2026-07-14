@@ -1,0 +1,1632 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.9.38">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Data Cleaning – Austria Energy &amp; Climate Analysis</title>
+<style>
+/* Default styles provided by pandoc.
+** See https://pandoc.org/MANUAL.html#variables-for-html for config info.
+*/
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script><script src="../site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="../site_libs/quarto-nav/headroom.min.js"></script>
+<script src="../site_libs/clipboard/clipboard.min.js"></script>
+<script src="../site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="../site_libs/quarto-search/fuse.min.js"></script>
+<script src="../site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="../">
+<script src="../site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="../site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="../site_libs/quarto-html/popper.min.js"></script>
+<script src="../site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="../site_libs/quarto-html/anchor.min.js"></script>
+<link href="../site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="../site_libs/quarto-html/quarto-syntax-highlighting-dark-0a6b7249c26820e032cb0bd839ff02b1.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="../site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="../site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="../site_libs/bootstrap/bootstrap-6ea50db029c3027269a8e1e1469a2484.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="dark">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script src="https://cdn.jsdelivr.net/npm/requirejs@2.3.6/require.min.js" integrity="sha384-c9c+LnTbwQ3aujuU7ULEPVvgLs+Fn6fJUvIGTsuu1ZcCf11fiEubah0ttpca4ntM sha384-6V1/AdqZRWk1KAlWbKBlGhN7VG4iE/yAZcO6NZPMF8od0vukrvr0tg4qY6NSrItx" crossorigin="anonymous"></script>
+
+<script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
+
+
+</head>
+
+<body class="nav-sidebar docked nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="../index.html">
+    <span class="navbar-title">Austria Energy &amp; Climate Analysis</span>
+    </a>
+  </div>
+            <div id="quarto-search" class="" title="Search"></div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="../index.html"> 
+<span class="menu-text">Home</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/fatemeh-studio/austria-energy-analysis"> <i class="bi bi-github" role="img" aria-label="GitHub repository">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" role="button" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+        <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01_data_collection.html">Data &amp; methods</a></li><li class="breadcrumb-item"><a href="../notebooks/02_data_cleaning.html">02 · Cleaning &amp; DuckDB</a></li></ol></nav>
+        <a class="flex-grow-1" role="navigation" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+        </a>
+      <button type="button" class="btn quarto-search-button" aria-label="Search" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal quarto-sidebar-collapse-item sidebar-navigation docked overflow-auto">
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true">
+ <span class="menu-text">Research questions</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/04_rq1_energy_mix.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ1 · Electricity mix</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/05_rq2_temperature_demand.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ2 · Temperature &amp; demand</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/06_rq3_duck_curve.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ3 · Solar duck curve</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/07_rq4_merit_order.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ4 · Merit-order effect</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/08_rq5_renewable_electricity.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ5 · 100% renewable by 2030?</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/09_rq6_ghg_target.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">RQ6 · GHG 2030 target</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true">
+ <span class="menu-text">Data &amp; methods</span></a>
+          <a class="sidebar-item-toggle text-start" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" role="navigation" aria-expanded="true" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 show">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/01_data_collection.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">01 · Data collection</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/02_data_cleaning.html" class="sidebar-item-text sidebar-link active">
+ <span class="menu-text">02 · Cleaning &amp; DuckDB</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="../notebooks/03_exploratory_analysis.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">03 · Exploratory analysis</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" class="quarto-sidebar-collapse-item" data-bs-toggle="collapse" data-bs-target=".quarto-sidebar-collapse-item"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#setup" id="toc-setup" class="nav-link active" data-scroll-target="#setup">Setup</a></li>
+  <li><a href="#inspect-the-raw-csvs" id="toc-inspect-the-raw-csvs" class="nav-link" data-scroll-target="#inspect-the-raw-csvs">1 · Inspect the raw CSVs</a></li>
+  <li><a href="#load-owid-prices-weather" id="toc-load-owid-prices-weather" class="nav-link" data-scroll-target="#load-owid-prices-weather">2 · Load OWID, prices &amp; weather</a></li>
+  <li><a href="#build-generation-demand-melt-resample" id="toc-build-generation-demand-melt-resample" class="nav-link" data-scroll-target="#build-generation-demand-melt-resample">3 · Build generation &amp; demand (melt → resample)</a></li>
+  <li><a href="#build-ghg-emissions" id="toc-build-ghg-emissions" class="nav-link" data-scroll-target="#build-ghg-emissions">4 · Build GHG emissions</a></li>
+  <li><a href="#build-esr-non-ets-emissions" id="toc-build-esr-non-ets-emissions" class="nav-link" data-scroll-target="#build-esr-non-ets-emissions">5 · Build ESR non-ETS emissions</a></li>
+  <li><a href="#confirm-the-nine-tables-close" id="toc-confirm-the-nine-tables-close" class="nav-link" data-scroll-target="#confirm-the-nine-tables-close">6 · Confirm the nine tables &amp; close</a></li>
+  <li><a href="#database-built" id="toc-database-built" class="nav-link" data-scroll-target="#database-built">Database built</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default"><nav class="quarto-page-breadcrumbs quarto-title-breadcrumbs d-none d-lg-block" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item"><a href="../notebooks/01_data_collection.html">Data &amp; methods</a></li><li class="breadcrumb-item"><a href="../notebooks/02_data_cleaning.html">02 · Cleaning &amp; DuckDB</a></li></ol></nav>
+<div class="quarto-title">
+<h1 class="title">Data Cleaning</h1>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<p>Turns the raw CSVs from notebook 01 into a clean, queryable DuckDB database: load each source into typed tables, standardise on UTC, melt the wide ENTSO-E generation feed to long format, and resample the 15-minute series to hourly. Exploratory analysis of these tables lives in <code>03_exploratory_analysis.ipynb</code>.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Step</th>
+<th>What</th>
+<th>Output</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Load</td>
+<td>CSV → typed tables · UTC · wide→long · 15-min→hourly</td>
+<td>clean DuckDB tables</td>
+</tr>
+<tr class="even">
+<td>Verify</td>
+<td>row counts, gaps, quarter counts, per-fuel variability</td>
+<td>QA during the build</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Database:</strong> <code>data/processed/austria_energy.duckdb</code>. All timestamps stored as UTC <code>TIMESTAMPTZ</code>; converted to <code>Europe/Vienna</code> only at the display layer.</p>
+<p><strong>Prerequisite:</strong> <code>01_data_collection.ipynb</code> has been run — raw CSVs present in <code>data/raw/</code>.</p>
+<section id="setup" class="level2">
+<h2 class="anchored" data-anchor-id="setup">Setup</h2>
+<div id="a2579a72" class="cell" data-execution_count="1">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># imports, paths, house style, DuckDB connection</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> sys</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> pathlib <span class="im">import</span> Path</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> duckdb</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> IPython.display <span class="im">import</span> display</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>PROJECT_ROOT <span class="op">=</span> Path.cwd().parent</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">str</span>(PROJECT_ROOT) <span class="kw">not</span> <span class="kw">in</span> sys.path:</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>    sys.path.insert(<span class="dv">0</span>, <span class="bu">str</span>(PROJECT_ROOT))</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> src <span class="im">import</span> clean</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>RAW       <span class="op">=</span> PROJECT_ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"raw"</span></span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>EXTERNAL  <span class="op">=</span> PROJECT_ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"external"</span></span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>PROCESSED <span class="op">=</span> PROJECT_ROOT <span class="op">/</span> <span class="st">"data"</span> <span class="op">/</span> <span class="st">"processed"</span></span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>PROCESSED.mkdir(parents<span class="op">=</span><span class="va">True</span>, exist_ok<span class="op">=</span><span class="va">True</span>)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>DB_PATH <span class="op">=</span> PROCESSED <span class="op">/</span> <span class="st">"austria_energy.duckdb"</span></span>
+<span id="cb1-21"><a href="#cb1-21" aria-hidden="true" tabindex="-1"></a>con <span class="op">=</span> duckdb.<span class="ex">connect</span>(<span class="bu">str</span>(DB_PATH))</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="inspect-the-raw-csvs" class="level2">
+<h2 class="anchored" data-anchor-id="inspect-the-raw-csvs">1 · Inspect the raw CSVs</h2>
+<div id="bbd14b3d" class="cell" data-execution_count="2">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect before schema design</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>files <span class="op">=</span> [</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"entsoe_generation_AT.csv"</span>,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a>    <span class="st">"entsoe_load_AT.csv"</span>,</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a>    <span class="st">"entsoe_prices_AT.csv"</span>,</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a>    <span class="st">"weather_vienna.csv"</span>,</span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a>]</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> fname <span class="kw">in</span> files:</span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a>    path <span class="op">=</span> RAW <span class="op">/</span> fname</span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> <span class="kw">not</span> path.exists():</span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(<span class="ss">f"!! MISSING: </span><span class="sc">{</span>path<span class="sc">}</span><span class="ch">\n</span><span class="ss">"</span>)</span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a>        <span class="cf">continue</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a>    size_kb <span class="op">=</span> path.stat().st_size <span class="op">/</span> <span class="dv">1024</span></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"  </span><span class="sc">{</span>fname<span class="sc">}</span><span class="ss">   (</span><span class="sc">{</span>size_kb<span class="sc">:,.0f}</span><span class="ss"> KB)"</span>)</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> <span class="bu">open</span>(path) <span class="im">as</span> f:</span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a>        <span class="cf">for</span> i, line <span class="kw">in</span> <span class="bu">enumerate</span>(f):</span>
+<span id="cb2-20"><a href="#cb2-20" aria-hidden="true" tabindex="-1"></a>            <span class="cf">if</span> i <span class="op">&gt;=</span> <span class="dv">5</span>:</span>
+<span id="cb2-21"><a href="#cb2-21" aria-hidden="true" tabindex="-1"></a>                <span class="cf">break</span></span>
+<span id="cb2-22"><a href="#cb2-22" aria-hidden="true" tabindex="-1"></a>            <span class="bu">print</span>(<span class="ss">f"L</span><span class="sc">{</span>i<span class="sc">}</span><span class="ss">: </span><span class="sc">{</span>line<span class="sc">.</span>rstrip()[:<span class="dv">160</span>]<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb2-23"><a href="#cb2-23" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>================================================================================
+  entsoe_generation_AT.csv   (30,551 KB)
+================================================================================
+L0: ,Biomass,Biomass,Fossil Gas,Fossil Gas,Fossil Hard coal,Fossil Hard coal,Fossil Oil,Fossil Oil,Geothermal,Geothermal,Hydro Pumped Storage,Hydro Pumped Storage,H
+L1: ,Actual Aggregated,Actual Consumption,Actual Aggregated,Actual Consumption,Actual Aggregated,Actual Consumption,Actual Aggregated,Actual Consumption,Actual Aggr
+L2: 2019-01-01 01:00:00+01:00,304.0,0.0,1056.4,0.0,154.4,0.0,0.0,0.0,0.07,0.0,0.0,1583.6,2692.0,0.0,204.0,0.0,22.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,200.0,0.0
+L3: 2019-01-01 01:15:00+01:00,304.0,0.0,1012.8,0.0,154.4,0.0,0.0,0.0,0.07,0.0,0.0,1605.6,2689.6,0.0,157.6,0.0,22.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,192.0,0.0
+L4: 2019-01-01 01:30:00+01:00,304.0,0.0,937.6,0.0,155.6,0.0,0.0,0.0,0.07,0.0,0.0,1633.2,2712.4,0.0,133.2,0.0,22.0,0.0,0.0,0.0,0.0,0.0,100.0,0.0,184.0,0.0
+
+================================================================================
+  entsoe_load_AT.csv   (6,783 KB)
+================================================================================
+L0: ,Actual Load
+L1: 2019-01-01 01:00:00+01:00,5975.6
+L2: 2019-01-01 01:15:00+01:00,5889.6
+L3: 2019-01-01 01:30:00+01:00,5837.2
+L4: 2019-01-01 01:45:00+01:00,5707.6
+
+================================================================================
+  entsoe_prices_AT.csv   (1,652 KB)
+================================================================================
+L0: ,price_eur_mwh
+L1: 2019-01-01 01:00:00+01:00,39.76
+L2: 2019-01-01 02:00:00+01:00,39.78
+L3: 2019-01-01 03:00:00+01:00,27.87
+L4: 2019-01-01 04:00:00+01:00,-0.36
+
+================================================================================
+  weather_vienna.csv   (2,116 KB)
+================================================================================
+L0: timestamp,temperature_2m,shortwave_radiation,windspeed_10m,precipitation,cloudcover
+L1: 2019-01-01 00:00:00,2.4,0.0,11.2,0.0,52
+L2: 2019-01-01 01:00:00,2.2,0.0,10.2,0.0,94
+L3: 2019-01-01 02:00:00,2.9,0.0,10.5,0.0,100
+L4: 2019-01-01 03:00:00,4.1,0.0,11.5,0.0,100
+</code></pre>
+</div>
+</div>
+</section>
+<section id="load-owid-prices-weather" class="level2">
+<h2 class="anchored" data-anchor-id="load-owid-prices-weather">2 · Load OWID, prices &amp; weather</h2>
+<div id="03a5a9e1" class="cell" data-execution_count="3">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb4"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="co"># native-hourly + annual sources</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a><span class="co"># OWID (Our World in Data) — annual, no timezone, CTAS straight from CSV</span></span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"owid:    </span><span class="sc">{</span>clean<span class="sc">.</span>build_owid(con, RAW <span class="op">/</span> <span class="st">'owid_energy_AUT.csv'</span>)<span class="sc">:,}</span><span class="ss"> rows"</span>)</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true" tabindex="-1"></a><span class="co"># prices — timestamps already carry offsets, parse to UTC</span></span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"prices:  </span><span class="sc">{</span>clean<span class="sc">.</span>build_prices(con, RAW <span class="op">/</span> <span class="st">'entsoe_prices_AT.csv'</span>)<span class="sc">:,}</span><span class="ss"> rows"</span>)</span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true" tabindex="-1"></a><span class="co"># weather</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"weather: </span><span class="sc">{</span>clean<span class="sc">.</span>build_weather(con, RAW <span class="op">/</span> <span class="st">'weather_vienna.csv'</span>)<span class="sc">:,}</span><span class="ss"> rows"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>owid:    126 rows
+prices:  52,609 rows
+weather: 52,608 rows</code></pre>
+</div>
+</div>
+<div id="bec15809" class="cell" data-execution_count="4">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># sanity check what's in the DB</span></span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a><span class="co"># The hourly tables share a UTC timestamp span; owid is annual and has no ts_utc, so</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="co"># it's checked by its year range instead — MIN/MAX(ts_utc) on it would just return NaT</span></span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a><span class="co"># (a not-applicable timestamp), which is correct but unhelpful.</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>display(con.sql(<span class="st">"""</span></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'prices'  AS tbl, COUNT(*) AS rows,</span></span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a><span class="st">        MIN(ts_utc) AS first_ts, MAX(ts_utc) AS last_ts</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM prices</span></span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="st">UNION ALL</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'weather', COUNT(*), MIN(ts_utc), MAX(ts_utc) FROM weather</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df())</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>display(con.sql(<span class="st">"""</span></span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT COUNT(*) AS rows, MIN(year) AS first_year, MAX(year) AS last_year</span></span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true" tabindex="-1"></a><span class="st">FROM owid_energy_at</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">tbl</th>
+<th data-quarto-table-cell-role="th">rows</th>
+<th data-quarto-table-cell-role="th">first_ts</th>
+<th data-quarto-table-cell-role="th">last_ts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>prices</td>
+<td>52609</td>
+<td>2019-01-01 01:00:00+01:00</td>
+<td>2025-01-01 01:00:00+01:00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>weather</td>
+<td>52608</td>
+<td>2019-01-01 01:00:00+01:00</td>
+<td>2025-01-01 00:00:00+01:00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">rows</th>
+<th data-quarto-table-cell-role="th">first_year</th>
+<th data-quarto-table-cell-role="th">last_year</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>126</td>
+<td>1900</td>
+<td>2025</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="build-generation-demand-melt-resample" class="level2">
+<h2 class="anchored" data-anchor-id="build-generation-demand-melt-resample">3 · Build generation &amp; demand (melt → resample)</h2>
+<div id="869b334a" class="cell" data-execution_count="5">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb7"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># melt wide→long, then resample 15-min → hourly</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="co"># generation</span></span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"generation: </span><span class="sc">{</span>clean<span class="sc">.</span>build_generation(con, RAW <span class="op">/</span> <span class="st">'entsoe_generation_AT.csv'</span>)<span class="sc">:,}</span><span class="ss"> rows"</span>)</span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># demand</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"demand:     </span><span class="sc">{</span>clean<span class="sc">.</span>build_demand(con, RAW <span class="op">/</span> <span class="st">'entsoe_load_AT.csv'</span>)<span class="sc">:,}</span><span class="ss"> rows"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>generation: 736,512 rows
+demand:     52,608 rows</code></pre>
+</div>
+</div>
+<div id="8180271e" class="cell" data-execution_count="6">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb9"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># re-run QA on the populated tables</span></span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"""</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'generation_15min' AS tbl,</span></span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a><span class="st">       COUNT(*)                                  AS rows,</span></span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a><span class="st">       COUNT(DISTINCT fuel_type)                 AS n_fuels,</span></span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="st">       COUNT(*) FILTER (WHERE mw IS NULL)        AS nulls,</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a><span class="st">       MIN(ts_utc) AS first_ts, MAX(ts_utc) AS last_ts</span></span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM generation_15min</span></span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a><span class="st">UNION ALL</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'demand_15min', COUNT(*), NULL,</span></span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a><span class="st">       COUNT(*) FILTER (WHERE demand_mw IS NULL),</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="st">       MIN(ts_utc), MAX(ts_utc)</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a><span class="st">FROM demand_15min</span></span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="6">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">tbl</th>
+<th data-quarto-table-cell-role="th">rows</th>
+<th data-quarto-table-cell-role="th">n_fuels</th>
+<th data-quarto-table-cell-role="th">nulls</th>
+<th data-quarto-table-cell-role="th">first_ts</th>
+<th data-quarto-table-cell-role="th">last_ts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>generation_15min</td>
+<td>5471232</td>
+<td>13</td>
+<td>0</td>
+<td>2019-01-01 01:00:00+01:00</td>
+<td>2025-01-01 00:45:00+01:00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>demand_15min</td>
+<td>210432</td>
+<td>&lt;NA&gt;</td>
+<td>0</td>
+<td>2019-01-01 01:00:00+01:00</td>
+<td>2025-01-01 00:45:00+01:00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="a3983b79" class="cell" data-execution_count="7">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># quarter-count check: should always be 4</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>display(con.sql(<span class="st">"""</span></span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'generation' AS tbl, n_quarters, COUNT(*) AS n_rows</span></span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a><span class="st">FROM generation</span></span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY n_quarters</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="st">UNION ALL</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT 'demand', n_quarters, COUNT(*)</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM demand</span></span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY n_quarters</span></span>
+<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY tbl, n_quarters</span></span>
+<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df())</span>
+<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a><span class="co"># what's actually in Austria's generation mix?</span></span>
+<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a>display(con.sql(<span class="st">"""</span></span>
+<span id="cb10-15"><a href="#cb10-15" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT</span></span>
+<span id="cb10-16"><a href="#cb10-16" aria-hidden="true" tabindex="-1"></a><span class="st">    fuel_type,</span></span>
+<span id="cb10-17"><a href="#cb10-17" aria-hidden="true" tabindex="-1"></a><span class="st">    flow,</span></span>
+<span id="cb10-18"><a href="#cb10-18" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(AVG(mw))      AS avg_mw,</span></span>
+<span id="cb10-19"><a href="#cb10-19" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(MAX(mw))      AS peak_mw,</span></span>
+<span id="cb10-20"><a href="#cb10-20" aria-hidden="true" tabindex="-1"></a><span class="st">    ROUND(SUM(mw) / 1e6, 2) AS total_twh   -- MW × hours / 1e6 = TWh</span></span>
+<span id="cb10-21"><a href="#cb10-21" aria-hidden="true" tabindex="-1"></a><span class="st">FROM generation</span></span>
+<span id="cb10-22"><a href="#cb10-22" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY fuel_type, flow</span></span>
+<span id="cb10-23"><a href="#cb10-23" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY avg_mw DESC NULLS LAST</span></span>
+<span id="cb10-24"><a href="#cb10-24" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df())</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">tbl</th>
+<th data-quarto-table-cell-role="th">n_quarters</th>
+<th data-quarto-table-cell-role="th">n_rows</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>demand</td>
+<td>4</td>
+<td>52608</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>generation</td>
+<td>4</td>
+<td>736512</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fuel_type</th>
+<th data-quarto-table-cell-role="th">flow</th>
+<th data-quarto-table-cell-role="th">avg_mw</th>
+<th data-quarto-table-cell-role="th">peak_mw</th>
+<th data-quarto-table-cell-role="th">total_twh</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Hydro Run-of-river and poundage</td>
+<td>generation</td>
+<td>3224.0</td>
+<td>6224.0</td>
+<td>169.60</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Fossil Gas</td>
+<td>generation</td>
+<td>976.0</td>
+<td>3926.0</td>
+<td>51.37</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Wind Onshore</td>
+<td>generation</td>
+<td>893.0</td>
+<td>3498.0</td>
+<td>46.97</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Hydro Pumped Storage</td>
+<td>generation</td>
+<td>595.0</td>
+<td>3185.0</td>
+<td>31.28</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Hydro Water Reservoir</td>
+<td>generation</td>
+<td>518.0</td>
+<td>1754.0</td>
+<td>27.23</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Hydro Pumped Storage</td>
+<td>consumption</td>
+<td>298.0</td>
+<td>2197.0</td>
+<td>15.70</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Solar</td>
+<td>generation</td>
+<td>219.0</td>
+<td>4157.0</td>
+<td>11.50</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Biomass</td>
+<td>generation</td>
+<td>212.0</td>
+<td>336.0</td>
+<td>11.17</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Waste</td>
+<td>generation</td>
+<td>100.0</td>
+<td>100.0</td>
+<td>5.26</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Fossil Hard coal</td>
+<td>generation</td>
+<td>30.0</td>
+<td>492.0</td>
+<td>1.58</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Other</td>
+<td>generation</td>
+<td>22.0</td>
+<td>22.0</td>
+<td>1.16</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>Other renewable</td>
+<td>generation</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>Fossil Oil</td>
+<td>generation</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">13</th>
+<td>Geothermal</td>
+<td>generation</td>
+<td>0.0</td>
+<td>0.0</td>
+<td>0.00</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="6a0927f4" class="cell" data-execution_count="8">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a><span class="co"># variability QA</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"""</span></span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="st">SELECT fuel_type,</span></span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true" tabindex="-1"></a><span class="st">       COUNT(DISTINCT mw)         AS n_unique_values,</span></span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true" tabindex="-1"></a><span class="st">       ROUND(STDDEV(mw), 4)       AS std_mw,</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true" tabindex="-1"></a><span class="st">       ROUND(MIN(mw), 2)          AS min_mw,</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true" tabindex="-1"></a><span class="st">       ROUND(MAX(mw), 2)          AS max_mw</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true" tabindex="-1"></a><span class="st">FROM generation</span></span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true" tabindex="-1"></a><span class="st">WHERE flow = 'generation'</span></span>
+<span id="cb11-10"><a href="#cb11-10" aria-hidden="true" tabindex="-1"></a><span class="st">GROUP BY fuel_type</span></span>
+<span id="cb11-11"><a href="#cb11-11" aria-hidden="true" tabindex="-1"></a><span class="st">ORDER BY n_unique_values</span></span>
+<span id="cb11-12"><a href="#cb11-12" aria-hidden="true" tabindex="-1"></a><span class="st">"""</span>).df()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="8">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">fuel_type</th>
+<th data-quarto-table-cell-role="th">n_unique_values</th>
+<th data-quarto-table-cell-role="th">std_mw</th>
+<th data-quarto-table-cell-role="th">min_mw</th>
+<th data-quarto-table-cell-role="th">max_mw</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>Geothermal</td>
+<td>1</td>
+<td>0.0000</td>
+<td>0.07</td>
+<td>0.07</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>Other renewable</td>
+<td>1</td>
+<td>0.0000</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>Fossil Oil</td>
+<td>1</td>
+<td>0.0000</td>
+<td>0.00</td>
+<td>0.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>Other</td>
+<td>1</td>
+<td>0.0000</td>
+<td>22.00</td>
+<td>22.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>Waste</td>
+<td>1</td>
+<td>0.0000</td>
+<td>100.00</td>
+<td>100.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>Biomass</td>
+<td>277</td>
+<td>61.0503</td>
+<td>52.00</td>
+<td>336.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>Fossil Hard coal</td>
+<td>2468</td>
+<td>78.2620</td>
+<td>0.00</td>
+<td>492.40</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>Solar</td>
+<td>2673</td>
+<td>503.0924</td>
+<td>0.00</td>
+<td>4157.00</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>Wind Onshore</td>
+<td>3322</td>
+<td>835.9869</td>
+<td>4.00</td>
+<td>3498.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">9</th>
+<td>Hydro Water Reservoir</td>
+<td>19989</td>
+<td>334.1808</td>
+<td>6.40</td>
+<td>1753.60</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">10</th>
+<td>Hydro Pumped Storage</td>
+<td>21708</td>
+<td>763.8824</td>
+<td>0.00</td>
+<td>3185.00</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">11</th>
+<td>Fossil Gas</td>
+<td>27149</td>
+<td>908.2027</td>
+<td>0.00</td>
+<td>3926.30</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">12</th>
+<td>Hydro Run-of-river and poundage</td>
+<td>34518</td>
+<td>976.6289</td>
+<td>1336.80</td>
+<td>6223.50</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</section>
+<section id="build-ghg-emissions" class="level2">
+<h2 class="anchored" data-anchor-id="build-ghg-emissions">4 · Build GHG emissions</h2>
+<div id="76f8e049" class="cell" data-execution_count="9">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb12"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># GHG emissions from Eurostat env_air_gge</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a><span class="co"># raw CSV is wide (one column per year) and stuffs the full CRF (Common Reporting Format)</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a><span class="co"># sector hierarchy into two units. build_ghg keeps Mt CO2-eq (MIO_T), the top-level sectors</span></span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a><span class="co"># + the two national totals, and reshapes to long via UNPIVOT — DuckDB's SQL twin of pandas .melt().</span></span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"ghg_emissions: </span><span class="sc">{</span>clean<span class="sc">.</span>build_ghg(con, RAW <span class="op">/</span> <span class="st">'eurostat_ghg_AT.csv'</span>)<span class="sc">:,}</span><span class="ss"> rows"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>ghg_emissions: 280 rows</code></pre>
+</div>
+</div>
+</section>
+<section id="build-esr-non-ets-emissions" class="level2">
+<h2 class="anchored" data-anchor-id="build-esr-non-ets-emissions">5 · Build ESR non-ETS emissions</h2>
+<div id="66e46560" class="cell" data-execution_count="10">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># inspect the EEA Effort Sharing workbook</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a><span class="co"># EEA xlsx files often carry title/metadata rows above the real header, and may split</span></span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="co"># emissions / AEAs (Annual Emission Allocations) / targets across sheets — so we look before we load.</span></span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>esr_xlsx <span class="op">=</span> EXTERNAL <span class="op">/</span> <span class="st">"eea_esr_effort_sharing.xlsx"</span></span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a>xls <span class="op">=</span> pd.ExcelFile(esr_xlsx)  <span class="co"># needs openpyxl</span></span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="st">"Sheets:"</span>, xls.sheet_names, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> sheet <span class="kw">in</span> xls.sheet_names:</span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a>    raw <span class="op">=</span> pd.read_excel(xls, sheet_name<span class="op">=</span>sheet, header<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="ss">f"SHEET: </span><span class="sc">{</span>sheet<span class="sc">!r}</span><span class="ss">   shape = </span><span class="sc">{</span>raw<span class="sc">.</span>shape<span class="sc">}</span><span class="ss">"</span>)</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"="</span> <span class="op">*</span> <span class="dv">80</span>)</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>    <span class="cf">with</span> pd.option_context(<span class="st">"display.max_columns"</span>, <span class="va">None</span>, <span class="st">"display.width"</span>, <span class="dv">220</span>):</span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a>        <span class="bu">print</span>(raw.head(<span class="dv">12</span>).to_string())</span>
+<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a>    <span class="co"># locate Austria so we can see how the country axis is keyed</span></span>
+<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>    hits <span class="op">=</span> [(<span class="bu">int</span>(r), <span class="bu">int</span>(c)) <span class="cf">for</span> r, c <span class="kw">in</span> <span class="bu">zip</span>(<span class="op">*</span>raw.<span class="bu">apply</span>(</span>
+<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a>        <span class="kw">lambda</span> col: col.astype(<span class="bu">str</span>).<span class="bu">str</span>.contains(<span class="st">"Austria|^AT$"</span>, case<span class="op">=</span><span class="va">False</span>, regex<span class="op">=</span><span class="va">True</span>, na<span class="op">=</span><span class="va">False</span>)</span>
+<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>    ).to_numpy().nonzero())][:<span class="dv">6</span>]</span>
+<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a>    <span class="bu">print</span>(<span class="st">"</span><span class="ch">\n</span><span class="st">  'Austria'/'AT' appears at (row, col):"</span>, hits, <span class="st">"</span><span class="ch">\n</span><span class="st">"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>Sheets: ['Metadata', 'GHG_ESD', 'ESD ESR emissions', 'Proxy ESR'] 
+
+================================================================================
+SHEET: 'Metadata'   shape = (15, 10)
+================================================================================
+     0                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       1                                                                         2                                         3   4   5   6   7   8               9
+0  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN                                                                       NaN                                       NaN NaN NaN NaN NaN NaN             NaN
+1  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN                                                                   Dataset                                       NaN NaN NaN NaN NaN NaN             NaN
+2  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN                                        Effort Sharing Regulation 2018/842                                       NaN NaN NaN NaN NaN NaN  Reporting year
+3  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN  Greenhouse gas emissions under the Effort Sharing Legislation, 2005-2024                                       NaN NaN NaN NaN NaN NaN            2025
+4  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN                                                                       NaN                                       NaN NaN NaN NaN NaN NaN             NaN
+5  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                Abstract                                                                       NaN                                       NaN NaN NaN NaN NaN NaN             NaN
+6  NaN  Greenhouse gas (GHG) emissions under the Effort Sharing Legislation dataset compiles Member State data on effort sharing emissions for the sectors domestic transport, buildings, agriculture, small industry and waste. It contains data on emissions from 2005 - 2024.\n\nThe EEA coordinates the Effort Sharing Legislation review of Member States’ greenhouse gas inventories, so that the European Commission can determine compliance with the annual Effort Sharing Legislation targets on the basis of accurate, reliable and verified emission data. Review reports and final Effort Sharing Legislation emissions are published by the European Commission.                                                                       NaN                                       NaN NaN NaN NaN NaN NaN             NaN
+7  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     Contents of dataset                                                                       NaN                                       NaN NaN NaN NaN NaN NaN             NaN
+8  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN                                                                       NaN                                       NaN NaN NaN NaN NaN NaN             NaN
+9  NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN                                                                   GHG_ESD     Provides the long format for the data NaN NaN NaN NaN NaN             NaN
+10 NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN                                                         ESD ESR Emissions  Provides the tabular format for the data NaN NaN NaN NaN NaN             NaN
+11 NaN                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     NaN                                                                       NaN                                       NaN NaN NaN NaN NaN NaN             NaN
+
+  'Austria'/'AT' appears at (row, col): [] 
+
+================================================================================
+SHEET: 'GHG_ESD'   shape = (601, 6)
+================================================================================
+          0     1             2        3         4            5
+0   Country  Year  ValueNumeric  ESD_ESR      Unit  Data_source
+1   Austria  2005     55.884169      ESD  MtCO2 eq          EEA
+2   Austria  2006     54.468189      ESD  MtCO2 eq          EEA
+3   Austria  2007      52.34984      ESD  MtCO2 eq          EEA
+4   Austria  2008     51.778029      ESD  MtCO2 eq          EEA
+5   Austria  2009     50.062162      ESD  MtCO2 eq          EEA
+6   Austria  2010     51.266733      ESD  MtCO2 eq          EEA
+7   Austria  2011     49.478505      ESD  MtCO2 eq          EEA
+8   Austria  2012     49.029171      ESD  MtCO2 eq          EEA
+9   Austria  2013     50.097324      ESD  MtCO2 eq          EEA
+10  Austria  2014     48.194334      ESD  MtCO2 eq          EEA
+11  Austria  2015     49.295422      ESD  MtCO2 eq          EEA
+
+  'Austria'/'AT' appears at (row, col): [(1, 0), (2, 0), (3, 0), (4, 0), (5, 0), (6, 0)] 
+
+================================================================================
+SHEET: 'ESD ESR emissions'   shape = (45, 38)
+================================================================================
+     0                       1                                                                                                                       2     3     4     5     6     7     8     9     10    11    12    13    14    15    16                                                                   17    18    19    20    21    22    23    24               25    26    27    28    29    30    31    32    33     34    35    36         37
+0   NaN  Emission source sector                                                                            Effort Sharing Legislation (ESD/ESR) sectors   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN   NaN        NaN
+1   NaN          Greenhouse gas                                                                                 All greenhouse gases - (CO2 equivalent)   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN   NaN        NaN
+2   NaN                Measures                                                                                                               Emissions   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN   NaN        NaN
+3   NaN           Emission Unit                                                                               Million tonnes CO2 equivalent (Mt CO2 eq)   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN   NaN        NaN
+4   NaN                  Source                                                                                                                     EEA   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN   NaN        NaN
+5   NaN                    Date                                                                                                     2025-11-04 00:00:00   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN   NaN        NaN
+6   NaN              Updated by                                                                                                             Claire Qoul   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN   NaN        NaN
+7   NaN                 Comment  EEA estimates for 2005-2012; 2013-2020 reviews under ESD; ESR 2021-2023 reviews under ESR, approximated inventory 2024   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN   NaN        NaN
+8   NaN                     NaN                                                                         corrected estimate after Effort Sharing reviews   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN              NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN    NaN   NaN  1000        NaN
+9   NaN                 ESD_ESR                                                                                                                     NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN                                                                  ESD   ESD   ESD   ESD   ESD   ESD   ESD   ESD              ESD   ESD   ESD   ESD   ESD   ESD   ESD   ESD   ESR    ESR   ESR   ESR        NaN
+10  NaN                     NaN                                                                                                       ESD baseyear 2005   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN   NaN  Estimate from GHG inventory 2022, ETS data and ETS scope correction   NaN   NaN   NaN   NaN   NaN   NaN   NaN  From ESD review   NaN   NaN   NaN   NaN   NaN   NaN   NaN   ESR  Proxy   NaN   NaN        NaN
+11  NaN       Geographic entity                                                                                                                     NaN  1991  1992  1993  1994  1995  1996  1997  1998  1999  2000  2001  2002  2003  2004                                                                 2005  2006  2007  2008  2009  2010  2011  2012             2013  2014  2015  2016  2017  2018  2019  2020  2021   2022  2023  2024  2024-2023
+
+  'Austria'/'AT' appears at (row, col): [(12, 0), (12, 1)] 
+
+================================================================================
+SHEET: 'Proxy ESR'   shape = (31, 9)
+================================================================================
+                    0       1         2       3    4      5             6                   7                    8
+0                 NaN  filter       NaN     NaN  NaN    NaN           NaN                 NaN                  NaN
+1   AT_2023_ESR_Total      AT   Austria  2023.0  ESR  Total  4.372511e+04  Sectors/Totals_ESD  Total ESD emissions
+2   BE_2023_ESR_Total      BE   Belgium  2023.0  ESR  Total  6.386647e+04  Sectors/Totals_ESD  Total ESD emissions
+3   BG_2023_ESR_Total      BG  Bulgaria  2023.0  ESR  Total  2.342215e+04  Sectors/Totals_ESD  Total ESD emissions
+4   CY_2023_ESR_Total      HR   Croatia  2023.0  ESR  Total  1.627645e+04  Sectors/Totals_ESD  Total ESD emissions
+5   CZ_2023_ESR_Total      CY    Cyprus  2023.0  ESR  Total  4.464817e+03  Sectors/Totals_ESD  Total ESD emissions
+6   DE_2023_ESR_Total      CZ   Czechia  2023.0  ESR  Total  6.123465e+04  Sectors/Totals_ESD  Total ESD emissions
+7   DK_2023_ESR_Total      DK   Denmark  2023.0  ESR  Total  3.031648e+04  Sectors/Totals_ESD  Total ESD emissions
+8   EE_2023_ESR_Total      EE   Estonia  2023.0  ESR  Total  6.023922e+03  Sectors/Totals_ESD  Total ESD emissions
+9   ES_2023_ESR_Total    EU27     EU-27  2023.0  ESR  Total  2.034734e+06  Sectors/Totals_ESD  Total ESD emissions
+10  FI_2023_ESR_Total      FI   Finland  2023.0  ESR  Total  2.512669e+04  Sectors/Totals_ESD  Total ESD emissions
+11  FR_2023_ESR_Total      FR    France  2023.0  ESR  Total  2.978303e+05  Sectors/Totals_ESD  Total ESD emissions
+
+  'Austria'/'AT' appears at (row, col): [(1, 1), (1, 2)] 
+</code></pre>
+</div>
+</div>
+<div id="4c5ba91a" class="cell" data-execution_count="11">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># ESR (Effort Sharing Regulation) non-ETS emissions — EEA Effort-Sharing workbook</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a><span class="co"># build_esr reads sheet 'GHG_ESD' (tidy long, already Mt CO2 eq), keeps the Austria</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a><span class="co"># slice, and stores the ESD_ESR regime flag: ESD = AR4 Global Warming Potentials (2013-2020),</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a><span class="co"># ESR = AR5 GWPs (2021-2030) — kept so RQ6 can handle the accounting change at 2021.</span></span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(<span class="ss">f"esr_emissions: </span><span class="sc">{</span>clean<span class="sc">.</span>build_esr(con, EXTERNAL <span class="op">/</span> <span class="st">'eea_esr_effort_sharing.xlsx'</span>)<span class="sc">:,}</span><span class="ss"> rows"</span>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-stdout">
+<pre><code>esr_emissions: 20 rows</code></pre>
+</div>
+</div>
+</section>
+<section id="confirm-the-nine-tables-close" class="level2">
+<h2 class="anchored" data-anchor-id="confirm-the-nine-tables-close">6 · Confirm the nine tables &amp; close</h2>
+<div id="fe7d610e" class="cell" data-execution_count="12">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb18"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a>con.sql(<span class="st">"SHOW TABLES"</span>).df()  <span class="co"># expect 9 tables</span></span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+<div class="cell-output cell-output-display" data-execution_count="12">
+<div>
+
+
+<table class="dataframe caption-top table table-sm table-striped small" data-border="1">
+<thead>
+<tr class="header">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">name</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">0</th>
+<td>demand</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">1</th>
+<td>demand_15min</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">2</th>
+<td>esr_emissions</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">3</th>
+<td>generation</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">4</th>
+<td>generation_15min</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">5</th>
+<td>ghg_emissions</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">6</th>
+<td>owid_energy_at</td>
+</tr>
+<tr class="even">
+<th data-quarto-table-cell-role="th">7</th>
+<td>prices</td>
+</tr>
+<tr class="odd">
+<th data-quarto-table-cell-role="th">8</th>
+<td>weather</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+<div id="e9475e7b" class="cell" data-execution_count="13">
+<details class="code-fold">
+<summary>Code</summary>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># close the connection</span></span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>con.close()</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+</details>
+</div>
+</section>
+<section id="database-built" class="level2">
+<h2 class="anchored" data-anchor-id="database-built">Database built</h2>
+<p><code>data/processed/austria_energy.duckdb</code> now holds all nine tables.</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 33%">
+<col style="width: 33%">
+<col style="width: 33%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Table</th>
+<th>Grain</th>
+<th>Source</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><code>generation</code></td>
+<td>hourly × (fuel_type, flow)</td>
+<td>ENTSO-E (resampled from 15-min)</td>
+</tr>
+<tr class="even">
+<td><code>demand</code></td>
+<td>hourly</td>
+<td>ENTSO-E (resampled from 15-min)</td>
+</tr>
+<tr class="odd">
+<td><code>prices</code></td>
+<td>hourly</td>
+<td>ENTSO-E day-ahead</td>
+</tr>
+<tr class="even">
+<td><code>weather</code></td>
+<td>hourly</td>
+<td>Open-Meteo / ERA5 (Vienna)</td>
+</tr>
+<tr class="odd">
+<td><code>generation_15min</code>, <code>demand_15min</code></td>
+<td>15-min staging</td>
+<td>ENTSO-E (retained for reproducibility)</td>
+</tr>
+<tr class="even">
+<td><code>owid_energy_at</code></td>
+<td>annual</td>
+<td>Our World in Data</td>
+</tr>
+<tr class="odd">
+<td><code>ghg_emissions</code></td>
+<td>annual</td>
+<td>Eurostat <code>env_air_gge</code> (reshaped wide→long via <code>UNPIVOT</code>)</td>
+</tr>
+<tr class="even">
+<td><code>esr_emissions</code></td>
+<td>annual</td>
+<td>EEA Effort Sharing (non-ETS)</td>
+</tr>
+</tbody>
+</table>
+<p>All timestamps stored as UTC <code>TIMESTAMPTZ</code>; conversion to <code>Europe/Vienna</code> happens only at the display layer. Resampling: <code>AVG(mw)</code> over <code>time_bucket(INTERVAL 1 HOUR, ts_utc)</code>.</p>
+<p>Notable: hydro dominates Austria’s mix; coal phased out April 2020; solar peak-to-average ratio ~19× drives the duck-curve dynamics explored in notebook 03.</p>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp('/' + window.location.host + '/');
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+            // target, if specified
+            link.setAttribute("target", "_blank");
+            if (link.getAttribute("rel") === null) {
+              link.setAttribute("rel", "noopener");
+            }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>Austria Energy &amp; Climate Analysis · built with Quarto</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
